@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load render_bundle from webpack_loader %}
+{% block css %}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+{% render_bundle 'main' %}
+
+{% endblock %}
+

@@ -1,0 +1,51 @@
+{
+  "name": "liquid_dl",
+  "version": "1.0.0",
+  "description": "A front-end  downloader for liquid-dl",
+  "main": "src.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "jquery": "^3.2.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-hot-loader": "^1.3.1",
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^2.7.0",
+    "webpack-bundle-tracker": "^0.2.0",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "create-react-class": "^15.6.0",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "font-awesome": "^4.7.0",
+    "material-ui": "^0.18.7",
+    "react-dom": "^15.6.1",
+    "react-materialize": "^1.0.8",
+    "react-notification-system": "^0.2.15",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2",
+    "react-select": "^1.0.0-rc.5",
+    "react-tap-event-plugin": "^2.0.1",
+    "reapop": "^1.1.2",
+    "reapop-theme-wybo": "^0.4.1",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.3.0",
+    "redux-thunk": "^2.2.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^2.3.3"
+  }
+}

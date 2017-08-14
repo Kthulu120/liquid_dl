@@ -1,0 +1,108 @@
+#main-container > div > div > div > div.col-md-3 > nav > ul > li {
+    margin: 0 0 4px 0;
+}
+
+#main-container > div > div > div > div.col-md-3 > nav {
+    min-height: 100vh;
+    margin-bottom: 0;
+}
+
+#main-container > div > div > div > div.col-md-3 {
+    max-height: 100vh;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+li {
+    margin: 0 15px 0 0;
+
+}
+
+.nav.navbar-nav {
+    padding-top: 5px;
+
+}
+
+a.active {
+    color: #ee6e73;
+    background-color: transparent;
+}
+
+nav.navbar.navbar-inverse > .nav.navbar-nav > li > a.active {
+    color: #ee6e73;
+    background-color: transparent;
+}
+
+.nav-icon {
+    font-size: x-large;
+}
+
+.nav-text {
+    padding-left: 5px;
+}
+
+.main-content {
+    padding-top: 15px;
+}
+
+.validate.valid {
+    font-size: 2rem;
+}
+
+.row.container-row {
+    margin-bottom: 0;
+
+}
+
+.container.main-content {
+    padding-top: 10%;
+    padding-right: 40px;
+    margin-right: 0;
+}
+
+.input-field label:not(.label-icon).active {
+    font-size: 1.3rem;
+}
+
+input[type=text].validate, input[type=text] {
+    font-size: 2rem;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.caret {
+    border-top: 0px solid !important;
+
+}
+
+html, body {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    overflow-x: hidden !important;
+}
+.logo-title {
+    padding-left: 5%;
+}
