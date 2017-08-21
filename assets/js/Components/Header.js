@@ -13,7 +13,7 @@ const Header = () => (
                     className="nav-text">Soundcloud</span></NavLink></li>
 
                 <li><NavLink to='/youtube-dl' activeClassName="active" className={"navlink"}><i
-                    className="fa fa-youtube-play"/><span className="nav-text">  Youtube-dl</span></NavLink></li>
+                    className="fa fa-youtube-play nav-icon"/><span className="nav-text">  Youtube-dl</span></NavLink></li>
 
                 <li><NavLink to='/wget' activeClassName="active"><i className="fa fa-archive nav-icon"/><span
                     className="nav-text">Wget</span></NavLink></li>
@@ -22,10 +22,10 @@ const Header = () => (
                     className="fa fa-reddit-alien nav-icon"/><span
                     className="nav-text"> Subreddit-Scraper</span></NavLink></li>
 
-                <li><NavLink to='/imgur' activeClassName="active"><i className="fa fa-image"/><span
+                <li><NavLink to='/imgur' activeClassName="active"><i className="fa fa-image nav-icon"/><span
                     className="nav-text"> Imgur</span></NavLink></li>
 
-                <li><NavLink to='/ffmpeg' activeClassName="active"><i className="fa fa-shekel"/><span
+                <li><NavLink to='/ffmpeg' activeClassName="active"><i className="fa fa-shekel nav-icon"/><span
                     className="nav-text"> FFMPEG</span></NavLink></li>
             </ul>
         </nav>

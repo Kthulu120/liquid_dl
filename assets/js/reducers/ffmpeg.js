@@ -60,9 +60,9 @@ const ffmpeg = (state = initialState, action) => {
         case 'UPDATE_CONVERT_FOLDER':
             return action.filter;
         case 'UPDATE_DELETE_OLD_FILES':
-            return action.filter;
+            return Object.assign({}, state, {deleteoldfiles: action.deleteoldfiles});
         case 'UPDATE_INPUT_TYPE':
-            return Object.assign({}, state, {inputFormat: action.format});
+
         case 'UPDATE_INPUT_CATEGORY':
             return Object.assign({}, state, {inputFormatCategory: action.category});
         case 'UPDATE_OUTPUT_TYPE':

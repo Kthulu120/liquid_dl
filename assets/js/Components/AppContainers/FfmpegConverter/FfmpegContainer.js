@@ -6,7 +6,7 @@ import FfmpegForm from "./FfmpegForm";
 import {FFMPEGExportList} from "../../../utility/ListValidation";
 import {
     updateFileStructure, updateInputCat, updateInputFormat, updateOutputCat,
-    updateOutputFormat
+    updateOutputFormat, updateInputPath, updateDeleteOldFiles
 } from "../../../actions/ffmpeg/ffmpeg";
 
 
@@ -23,15 +23,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onChangeValue: (isInputPath, value) => {
-            if (isInputPath) {
-                console.log("INPUT PATH");
-                console.log(value);
-            }
-            else {
-                console.log("OUTPUT PATH");
-                console.log(value)
-            }
+        onChangeInput: (value) => {
+            dispatch(updateInputPath(value))
         },
         onChangeInputFormat: (format) => {
             let inputCategory = format.split('-')[0];
@@ -52,6 +45,9 @@ const mapDispatchToProps = dispatch => {
             let isSingleFile = (bool === "true");
             console.log(isSingleFile);
             dispatch(updateFileStructure(isSingleFile))
+        },
+        onChangeDeleteOldFiles: (bool) => {
+            dispatch(updateDeleteOldFiles(!bool))
         }
     }
 };

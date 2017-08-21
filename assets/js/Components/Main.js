@@ -22,7 +22,7 @@ const Main = () => (
                 <Route path='/soundcloud' component={Soundcloud}/>
                 <Route path='/imgur' component={Imgur}/>
                 <Route path="/ffmpeg" component={FFMPEG}/>
-                <Route path={'/imgur'} compoenet={}/>
+                <Route path={'/imgur'} compoenet={Home}/>
             </Switch>
 
         </div>

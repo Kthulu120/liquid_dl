@@ -106,3 +106,17 @@ html, body {
 .logo-title {
     padding-left: 5%;
 }
+.btn-floating i {
+    width: inherit;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    padding-bottom: 10px;
+    font-size: 1.7rem;
+    margin-top: 0;
+    margin-left: -15px;
+    line-height: 1;
+}
+.btn ,.btn-floating{
+    border-radius: 50%;
+}

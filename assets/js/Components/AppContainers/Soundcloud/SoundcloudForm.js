@@ -10,30 +10,31 @@ const SoundcloudForm = ({soundcloud}) =>
         <div className="appContainer">
             <Row><Input s={6} label="Output Path"/></Row>
             <Row>
-                <Input name='group1' type='checkbox' value='Download all Artist Songs'
+                <Input name='soundcloud-options' type='radio' value='Download all Artist Songs'
                        label='Download the stream of a user (token needed)'/>
 
-                <Input name='group1' type='checkbox' value='Download Songs '
+                <Input name='soundcloud-options' type='radio' value='Download Songs '
                        label='Download all tracks of a user (including repost)' defaultValue='checked'/>
-                <Input name='group1' type='checkbox' value='Download Songs ' label='Download all uploads of a user'
+                <Input name='soundcloud-options' type='radio' value='Download Songs ' label='Download all uploads of a user'
                        defaultValue='checked'/>
             </Row>
             <Row>
-                <Input name='group1' type='checkbox' value='Download Songs ' label='Download all favorites of a user'
+                <Input name='soundcloud-options' type='radio' value='Download Songs ' label='Download all favorites of a user'
                        defaultValue='checked'/>
-                <Input name='group1' type='checkbox' value='Download Songs ' label='Download all playlists of a user'
+                <Input name='soundcloud-options' type='radio' value='Download Songs ' label='Download all playlists of a user'
                        defaultValue='checked'/>
-                <Input name='group1' type='checkbox' value='Download Songs '
+                <Input name='soundcloud-options' type='radio' value='Download Songs '
                        label='Download all liked and owned playlists of a user' defaultValue='checked'/>
             </Row>
             <Row>
-                <Input name='group1' type='checkbox' value='Download Songs ' label='Continue if a music already exist'
+                <Input name='soundcloud-options' type='radio' value='Download Songs ' label='Continue if a music already exist'
                        defaultValue='checked'/>
 
-                <Input name='group1' type='checkbox' value='Download Songs ' label='Begin with a custom offset'
+                <Input name='soundcloud-options' type='radio' value='Download Songs ' label='Begin with a custom offset'
                        defaultValue='checked'/>
-                <Input name='group1' type='checkbox' value='Download Songs ' label=' Use a custom path for this time'
+                <Input name='soundcloud-options' type='radio' value='Download Songs ' label=' Use a custom path for this time'
                        defaultValue='checked'/>
+
                 <Input name='group1' type='checkbox' value='addtofile'
                        label='Add the artist name to the filename if it isnt in the filename already'
                        defaultValue='checked'/>

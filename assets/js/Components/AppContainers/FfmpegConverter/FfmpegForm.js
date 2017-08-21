@@ -4,23 +4,27 @@
 import React, {Component} from 'react'
 import {Row, Input, Card, Col, Button} from 'react-materialize'
 import 'react-select/dist/react-select.css';
-import FFMPEGExportList from '../../../utility/ListValidation'
+import FFMPEGExportList, {FFMPEGSubmisison} from '../../../utility/ListValidation'
 
 
 const FfmpegForm = ({
                         ffmpeg, fileFormats, conversionOptions, output,
-                        onChangeValue, onChangeInputFormat, onChangeOutputFormat, onChangeFileStructure
+                        onChangeInput, onChangeInputFormat, onChangeOutputFormat, onChangeFileStructure,
+                        onChangeDeleteOldFiles
                     }) =>
     (
 
         <div className="appContainer">
             <div className="row">
-                <Input s={8} label="Input Path(Be precise)" validate defaultValue='' onChange={(e) => {
+                <Input s={8} label="Input Path(Be precise)" validate defaultValue={""} onChange={(e) => {
                     e.persist();
-                    onChangeValue(true, e.target.value)
+                    onChangeInput(e.target.value)
                 }}/>
-                <Input s={4} name='group1' type='checkbox' value={ffmpeg.deleteoldfiles} label=' Clean The Old Files?'
-                       defaultValue='checked'/>
+                <Input s={4} name='group1' type='checkbox' value={ffmpeg.deleteoldfiles.toString()}
+                       label=' Clean The Old Files?'
+                       defaultValue='checked' onChange={(e) => {
+                    onChangeDeleteOldFiles(ffmpeg.deleteoldfiles)
+                } }/>
             </div>
             <div className="row">
                 <div className="col-md-12">
@@ -76,7 +80,7 @@ const FfmpegForm = ({
 
             </div>
             <div className="row">
-                <Button waves='light' onclick={"ddd"}>Submit</Button>
+                <Button waves='light' onClick={FFMPEGSubmisison}>Submit</Button>
             </div>
         </div>
     );

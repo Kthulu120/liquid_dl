@@ -21,9 +21,10 @@ export const updateConFolder = () => {
         type: 'UPDATE_CONVERT_FOLDER',
     }
 };
-export const updateDeleteOldFiles = () => {
+export const updateDeleteOldFiles = (bool) => {
     return {
         type: 'UPDATE_DELETE_OLD_FILES',
+        deleteoldfiles: bool
     }
 };
 export const updateInputCat = (value) => {
