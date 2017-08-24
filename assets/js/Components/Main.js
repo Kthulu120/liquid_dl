@@ -10,13 +10,14 @@ import {Route} from 'react-router'
 import Soundcloud from "./Apps/Soundcloud";
 import Imgur from "./Apps/Imgur";
 import FFMPEG from "./Apps/FFMPEG";
-
+import theme from 'reapop-theme-wybo';
+import NotificationsSystem from 'reapop';
 
 const Main = () => (
 
     <div className="col-md-9 col-sm-12">
         <div className="container main-content">
-
+            <NotificationsSystem theme={theme}/>
             <Switch>
                 <Route exact path='/' component={Home}>YESSSSS</Route>
                 <Route path='/soundcloud' component={Soundcloud}/>

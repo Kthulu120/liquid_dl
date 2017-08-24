@@ -54,7 +54,7 @@ const initialState = {
 const ffmpeg = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE_INPUT_PATH':
-            return Object.assign({}, state, {inputFormat: action.format});
+            return Object.assign({}, state, {input_path: action.path});
         case 'UPDATE_OUTPUT_PATH':
             return action.filter;
         case 'UPDATE_CONVERT_FOLDER':
@@ -62,7 +62,7 @@ const ffmpeg = (state = initialState, action) => {
         case 'UPDATE_DELETE_OLD_FILES':
             return Object.assign({}, state, {deleteoldfiles: action.deleteoldfiles});
         case 'UPDATE_INPUT_TYPE':
-
+            return Object.assign({}, state, {inputFormat: action.format});
         case 'UPDATE_INPUT_CATEGORY':
             return Object.assign({}, state, {inputFormatCategory: action.category});
         case 'UPDATE_OUTPUT_TYPE':

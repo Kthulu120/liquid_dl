@@ -6,12 +6,15 @@ import '../css/materialize.css'
 import '../css/main.css'
 
 
+
+
 const App = () => (
     <div className="container-fluid">
         <div className="row container-row">
             <div className="row container-row">
 
                 <Header/>
+
                 <Main />
             </div>
         </div>

@@ -1,8 +1,7 @@
-/**
- * Created by Troy on 7/26/2017.
- */
+
 import store from '../store/globalstore'
-import {addNotification as notify} from 'reapop';
+import {addNotification as notify} from 'reapop'
+
 /**
  *
  * @param {string} message The message for the Error Notification

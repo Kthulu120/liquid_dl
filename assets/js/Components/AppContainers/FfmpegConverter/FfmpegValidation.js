@@ -2,10 +2,11 @@
  * Created by Troy on 8/13/2017.
  */
 import React from 'react';
-import store from '../store/globalstore'
+import store from '../../../store/globalstore'
 import {addNotification as notify} from 'reapop';
-import {ErrorNotificationFactory, SucessNotificationFactory} from './NotificationFactories'
+import {ErrorNotificationFactory, SucessNotificationFactory} from '../../../utility/NotificationFactories'
 import $ from 'jquery'
+import {getOS} from '../../../utility/util'
 
 
 const getValidFormatTypes = (formatType) => {
@@ -64,11 +65,12 @@ export const FFMPEGSubmisison = () => {
         url: 'http://127.0.0.1:8000/ffmpeg-submit',
         type: 'GET',
         data: {
-            inputFormat: state.ffmpeg.inputFormat,
+            operating_system: getOS(),
+            input_format: state.ffmpeg.inputFormat,
             input_path: state.ffmpeg.input_path,
-            folderConversion: state.ffmpeg.folderConversion,
-            deleteoldfiles: state.ffmpeg.deleteoldfiles,
-            outputFormat: state.ffmpeg.outputFormat
+            folder_conversion: state.ffmpeg.folderConversion,
+            delete_old_files: state.ffmpeg.deleteoldfiles,
+            output_format: state.ffmpeg.outputFormat
         },
         dataType: 'json',
         success: function (response) {

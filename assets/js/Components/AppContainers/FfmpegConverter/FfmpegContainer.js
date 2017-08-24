@@ -3,7 +3,7 @@
  */
 import {connect} from 'react-redux'
 import FfmpegForm from "./FfmpegForm";
-import {FFMPEGExportList} from "../../../utility/ListValidation";
+import {FFMPEGExportList} from "./FfmpegValidation";
 import {
     updateFileStructure, updateInputCat, updateInputFormat, updateOutputCat,
     updateOutputFormat, updateInputPath, updateDeleteOldFiles

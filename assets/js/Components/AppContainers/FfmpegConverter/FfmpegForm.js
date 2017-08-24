@@ -4,7 +4,7 @@
 import React, {Component} from 'react'
 import {Row, Input, Card, Col, Button} from 'react-materialize'
 import 'react-select/dist/react-select.css';
-import FFMPEGExportList, {FFMPEGSubmisison} from '../../../utility/ListValidation'
+import {FFMPEGSubmisison} from './FfmpegValidation'
 
 
 const FfmpegForm = ({
