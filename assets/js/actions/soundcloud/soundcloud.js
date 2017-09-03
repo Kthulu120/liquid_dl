@@ -1,26 +1,29 @@
 import React from 'react';
 
-
-export const soundcloud = (path) => {
+export const updateLinkPath = (path) => {
     return {
-        type: 'UPDATE_INPUT_PATH',
+        type: 'UPDATE_SCDL_LINK_PATH',
         path: path
     }
 };
+
 export const updateOutputPath = (path) => {
     return {
-        type: 'UPDATE_OUTPUT_PATH',
+        type: 'UPDATE_SCDL_OUTPUT_PATH',
         path: path
     }
 };
-export const updateConFolder = () => {
+
+export const updateDownloadOption = (option) => {
     return {
-        type: 'UPDATE_CONVERT_FOLDER',
+        type: 'SET_SCDL_DOWNLOAD_OPTION',
+        selected_option: option
     }
 };
-export const updateDeleteOldFiles = (bool) => {
+
+export const updateConfigOptions = (option) => {
     return {
-        type: 'UPDATE_DELETE_OLD_FILES',
-        deleteoldfiles: bool
+        type: 'SET_SCDL_CONFIG_OPTIONS',
+        selected_option: option
     }
 };

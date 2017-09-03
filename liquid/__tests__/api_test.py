@@ -1,3 +1,5 @@
+import json
+
 from django.http import JsonResponse
 from django.test import TestCase, SimpleTestCase
 import os
@@ -9,7 +11,7 @@ from rest_framework.test import APIRequestFactory
 from rest_framework.test import APIClient
 
 
-class FFmpegConversion(TestCase):
+class FFmpegConversionTest(TestCase):
     def setUp(self):
         """
         Creates a temporary directory that works on Windows and Linux then proceeds to load in a jpg image that we can manipulate the two images our converter asserting out different responses
@@ -78,3 +80,74 @@ class FFmpegConversion(TestCase):
                        , format='json')
         self.assertIsInstance(p, JsonResponse)
         TestCase.assertContains(self, response=p, text="{\"success\": \"Conversion of Files was successful\"}")
+
+
+class SoundcloudTest(TestCase):
+    def setUp(self):
+        """
+        Creates a temporary directory that works on Windows and Linux then proceeds to use the given urls to test our methods
+        """
+        self.test_dir = tempfile.mkdtemp(dir='/tmp')
+        os.chdir(self.test_dir)
+        self.url1 = "https://soundcloud.com/intenzone-ghg"
+        self.url2 = "https://soundcloud.com/ghg6"
+        self.playlist_url = "https://soundcloud.com/the-dj-roar-ree/sets/chill-a-2-track-playlist"
+
+    def tearDown(self):
+        """
+        Remove the directory after the test after 10 seconds so you can visually observe change
+        :return: 
+        """
+        import time
+        # Uncomment to observe changes in file viewer
+        time.sleep(5)
+        os.chdir('/')
+        shutil.rmtree(self.test_dir)
+
+    def test_download_artist_success(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/soundcloud-submit',
+                       {
+                           #  Our config options
+                           u'url': self.url2, u'output_path': self.test_dir, u'is_playlist_or_song': u'false',
+                           u'continue_if_exists': u'true', u'only_mp3': u'false', u'add_artist_to_files': u'false',
+                           #  What type of download do we want to do if not playlist or song
+                           u'download_all_tracks_and_reposts': u'false',
+                           u'download_user_uploads': u'true',
+                           u'download_favorites': u'false', u'download_playlist': u'false',
+                           u'download_like_and_owned_playlists': u'false', u'downloaded_commented_tracks': u'false'}
+                       , format='json')
+        self.assertIsInstance(p, JsonResponse)
+        TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
+
+    def test_download_playlist_with_mp3_only_success(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/soundcloud-submit',
+                       {
+                           #  Our config options
+                           u'url': self.playlist_url, u'output_path': self.test_dir, u'is_playlist_or_song': u'true',
+                           u'continue_if_exists': u'true', u'only_mp3': u'true', u'add_artist_to_files': u'false',
+                           #  What type of download do we want to do if not playlist or song
+                           u'download_all_tracks_and_reposts': u'false',
+                           u'download_user_uploads': u'false',
+                           u'download_favorites': u'false', u'download_playlist': u'false',
+                           u'download_like_and_owned_playlists': u'false', u'downloaded_commented_tracks': u'false'}
+                       , format='json')
+        self.assertIsInstance(p, JsonResponse)
+        TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
+
+    def test_config_options_success(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/soundcloud-submit',
+                       {
+                           #  Our config options
+                           u'url': self.playlist_url, u'output_path': self.test_dir, u'is_playlist_or_song': u'true',
+                           u'continue_if_exists': u'true', u'only_mp3': u'true', u'add_artist_to_files': u'true',
+                           #  What type of download do we want to do if not playlist or song
+                           u'download_all_tracks_and_reposts': u'false',
+                           u'download_user_uploads': u'false',
+                           u'download_favorites': u'false', u'download_playlist': u'false',
+                           u'download_like_and_owned_playlists': u'false', u'downloaded_commented_tracks': u'false'}
+                       , format='json')
+        self.assertIsInstance(p, JsonResponse)
+        TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
