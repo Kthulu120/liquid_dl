@@ -18,7 +18,6 @@ const getValidFormatTypes = (formatType) => {
 
 
 const filterByCategory = (formatTypes, listOfFormatChoices) => {
-    console.log(listOfFormatChoices);
     let approvedChoices = [];
     for (let i = 0; i < listOfFormatChoices.length; i++) {
         if ((formatTypes.includes(listOfFormatChoices[i]['category']))) {

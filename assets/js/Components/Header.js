@@ -16,14 +16,7 @@ const Header = () => (
                     className="fa fa-youtube-play nav-icon"/><span className="nav-text">  Youtube-dl</span></NavLink></li>
 
                 <li><NavLink to='/wget' activeClassName="active"><i className="fa fa-archive nav-icon"/><span
-                    className="nav-text">Wget</span></NavLink></li>
-
-                <li><NavLink to='/subreddit-scraper' activeClassName="active"><i
-                    className="fa fa-reddit-alien nav-icon"/><span
-                    className="nav-text"> Subreddit-Scraper</span></NavLink></li>
-
-                <li><NavLink to='/imgur' activeClassName="active"><i className="fa fa-image nav-icon"/><span
-                    className="nav-text"> Imgur</span></NavLink></li>
+                    className="nav-text"> Wget</span></NavLink></li>
 
                 <li><NavLink to='/ffmpeg' activeClassName="active"><i className="fa fa-shekel nav-icon"/><span
                     className="nav-text"> FFMPEG</span></NavLink></li>

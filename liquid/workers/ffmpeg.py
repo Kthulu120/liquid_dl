@@ -1,6 +1,7 @@
 import os
 
-class LINUX_FFMPEG_CONVERTER(object):
+
+class LinuxFfmpegConversionWorker(object):
     """
     A  batch converter that relies on a boolean as the final argument to determine if we should run the method.
     """
@@ -36,7 +37,7 @@ class LINUX_FFMPEG_CONVERTER(object):
                     folder_path,
                     input_format,
                     output_fomat)
-                print (command)
+
                 process_result = os.system(command)
                 if process_result is not 0:
                     raise OSError(
@@ -80,7 +81,7 @@ class LINUX_FFMPEG_CONVERTER(object):
             raise Exception(e)
 
 
-class WINDOWS_FFMPEG_CONVERTER(object):
+class WindowsFfmpegConversionWorker(object):
     """
     A  batch converter that relies on a boolean as the final argument to determine if we should run the method.
     """
@@ -112,7 +113,7 @@ class WINDOWS_FFMPEG_CONVERTER(object):
         try:
             if convert:
                 for filename in os.listdir(folder_path):
-                    if filename.endswith("."+ input_format):
+                    if filename.endswith("." + input_format):
                         command = r"cd {0} && ffmpeg -i {1} ".format(
                             folder_path, filename) + "\"{1}.{0}\"".format(
                             output_fomat, os.path.splitext(filename)[0])
@@ -149,12 +150,10 @@ class WINDOWS_FFMPEG_CONVERTER(object):
         try:
             if convert:
                 file_name = folder_path.split('\\')
-                #file_name = file_name[len(file_name) - 1]
+                # file_name = file_name[len(file_name) - 1]
                 base = os.path.basename(folder_path)
                 del file_name[-1]
                 folder_path = "/".join(file_name)
-                print (folder_path + '/' + base)
-                print (output_fomat)
                 command = r"cd {0} && ffmpeg -i {1} ".format(
                     folder_path, base) + "\"{1}.{0}\"".format(
                     output_fomat, os.path.splitext(base)[0])

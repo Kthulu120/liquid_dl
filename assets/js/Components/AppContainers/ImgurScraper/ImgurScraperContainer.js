@@ -1,6 +1,3 @@
-/**
- * Created by Troy on 7/15/2017.
- */
 import {connect} from 'react-redux'
 import ImgurScraperForm from "./ImgurScraperForm";
 

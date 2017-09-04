@@ -50,13 +50,13 @@ const SoundcloudForm = ({soundcloud, updateDownloadOption, updateConfigurationOp
                 <Input name='soundcloud-options' type='checkbox' value='continue_if_exists'
                        label='Continue if a music already exist'
                        defaultValue='checked' onClick={(e) => {
-                           updateConfigurationOptions(e.target.value)
-                       }}/>
+                    updateConfigurationOptions(e.target.value)
+                }}/>
                 <Input name='group1' type='checkbox' value='add_artist_to_filename'
                        label='Add the artist name to the filename if it isnt in the filename already'
                        defaultValue='checked' onClick={(e) => {
-                           updateConfigurationOptions(e.target.value)
-                       }}/>
+                    updateConfigurationOptions(e.target.value)
+                }}/>
             </Row>
             <Row>
                 <Button waves='light' onClick={SoundcloudSubmission}>Submit</Button>

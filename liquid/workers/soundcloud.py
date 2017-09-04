@@ -1,7 +1,7 @@
 import os
 
 
-class SOUNDCLOUD_DL(object):
+class SoundcloudDLWorker(object):
     def __init__(self, url, output_path, is_playlist_or_song, continue_if_exists, only_mp3, add_artist_to_files,
                  download_all_tracks_and_reposts, download_user_uploads,
                  download_favorites, download_playlist, download_like_and_owned_playlists, downloaded_commented_tracks):
