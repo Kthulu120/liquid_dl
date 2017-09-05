@@ -35,7 +35,7 @@ sudo pip install --upgrade youtube_dl
 
 To install first download or git clone this directory (will be the most stable and frequently updated for bug fixes)
 ```
-git clone https://github.com/Kthulu120/liquid_dl.git
+No real code here just download the latest release and unzip it fam
 ```
  Finally we need to cd inside the directory && run the server (though you may have to modify this command dependng on OS)
 ```
