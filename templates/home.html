@@ -5,7 +5,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock %}
 {% block body %}
-
+    <!-- Our production build-->
+    <!--  <script src="{% static 'distro/newest_prod_build.js' %}"></script>  -->
+    <!-- Our Development Build -->
     {% render_bundle 'main' %}
 
 {% endblock %}

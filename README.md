@@ -31,6 +31,10 @@ pip install scdl
 sudo pip install --upgrade youtube_dl
 ```
 
+* Installing Dependencies
+  *  You have two options download the dependencies on your global pip or launch the manage.py command to be in the virtualenv I have set up
+  * If you take the global dependency route then pip install from the requirements.txt file and you should be good to go
+  * Finally if troubleshooting fails open an issue
 ## Installation
 
 To install first download or git clone this directory (will be the most stable and frequently updated for bug fixes)
