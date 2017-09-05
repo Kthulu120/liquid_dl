@@ -2,6 +2,7 @@
 
 Liquid-dl is a simple tool for utlities such as FFMPEG, youtube-dl, and scdl. It provides a simple framework with simple point and click options allowing users
 to just click on what they need and use the bare minimum commands to get the results needed.
+
 ![gif of Demo](https://media.giphy.com/media/xT9IghSXnGESMJj1WU/giphy.gif)
 
 ## Motivation And Notes
