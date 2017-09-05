@@ -51,7 +51,7 @@ Though you can change the port aka the '8000' to any needed port (try to keep th
 
 Feel free to **do pull requests**, open issues with **features you want** and the many bugs that may arise.
 
-#### I forgot to comment out {% render_bundle %} in the latest release and uncomment out the script for the 'newest_prod_build' therefore your going to have to do it yourself if you download this before version 1.0.3 is released(which will be released around 9PM CST.
+#### I forgot to comment out {% render_bundle %} in the latest release and uncomment out the script for the 'newest_prod_build' therefore your going to have to do it yourself if you download this before version 1.0.3 is released(which will be released around 9PM CST).
 
 ## Help
 
