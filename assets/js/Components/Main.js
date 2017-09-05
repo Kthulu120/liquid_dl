@@ -7,6 +7,7 @@ import FFMPEG from "./Apps/FFMPEG";
 import theme from "reapop-theme-wybo";
 import NotificationsSystem from "reapop";
 import Wget from "./Apps/Wget";
+import YoutubeDL from "./Apps/YoutubeDL";
 
 const Main = () => (
 
