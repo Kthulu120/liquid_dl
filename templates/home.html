@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
 
-    <script src="{% static 'distro/newest_prod_build.js' %}"></script>
+    {% render_bundle 'main' %}
 
 {% endblock %}
 

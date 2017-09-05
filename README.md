@@ -2,6 +2,7 @@
 
 Liquid-dl is a simple tool for utlities such as FFMPEG, youtube-dl, and scdl. It provides a simple framework with simple point and click options allowing users
 to just click on what they need and use the bare minimum commands to get the results needed.
+![gif of Demo](https://media.giphy.com/media/xT9IghSXnGESMJj1WU/giphy.gif)
 
 ## Motivation And Notes
 
@@ -23,7 +24,7 @@ sudo apt-get install wget
 ```
 pip install scdl
 ```
-* Imgur-dl will be included natively in the next commit or two until then it is unsupported
+
 * Install youtube-dl (if you have it downloaded already still run this command often as youtube-dl is constantly updated)
 ```
 sudo pip install --upgrade youtube_dl
@@ -35,7 +36,7 @@ To install first download or git clone this directory (will be the most stable a
 ```
 git clone https://github.com/Kthulu120/liquid_dl.git
 ```
- Finally we need to cd inside the directory && run the server
+ Finally we need to cd inside the directory && run the server (though you may have to modify this command dependng on OS)
 ```
 sudo nohup python manage.py runserver your-ip:8000
 ```

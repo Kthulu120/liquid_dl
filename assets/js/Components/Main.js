@@ -18,7 +18,7 @@ const Main = () => (
                 <Route path='/soundcloud' component={Soundcloud}/>
                 <Route path='/wget' component={Wget}/>
                 <Route path="/ffmpeg" component={FFMPEG}/>
-
+                <Route path='/youtube-dl' component={YoutubeDL}/>
             </Switch>
 
         </div>
