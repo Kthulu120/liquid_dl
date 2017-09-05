@@ -32,7 +32,7 @@ sudo pip install --upgrade youtube_dl
 ```
 
 * Installing Dependencies
-  *  You have two options download the dependencies on your global pip or launch the manage.py command to be in the virtualenv I have set up
+  *  You have two options download the dependencies on your global pip or launch the manage.py command to be in the virtualenv I have set up (you still must execute a 'sudo python pip install -r requirements.txt.' even in the virtualenv for some reason) 
   * If you take the global dependency route then pip install from the requirements.txt file and you should be good to go
   * Finally if troubleshooting fails open an issue
 ## Installation
@@ -51,6 +51,8 @@ Though you can change the port aka the '8000' to any needed port (try to keep th
 
 Feel free to **do pull requests**, open issues with **features you want** and the many bugs that may arise.
 
+#### I forgot to comment out {% render_bundle %} in the latest release and uncomment out the script for the 'newest_prod_build' therefore your going to have to do it yourself if you download this before version 1.0.3 is released(which will be released around 9PM CST.
+
 ## Help
 
 * This is a hackey way of running the server without gunicorn soon the scripts will be included to run a simple bash script that does the leg work for you
@@ -60,6 +62,9 @@ Feel free to **do pull requests**, open issues with **features you want** and th
 * Not optimized for mobile currently but does work
 * Finally just open a issue anytime I'll try and get back to you in a day or two
 
+## Updating
+
+Cool thing about this is you can just download the latest release and overwrite the existing release since there's no persistence for this application
 
 ## Contributors
 
