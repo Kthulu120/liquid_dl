@@ -1,6 +1,3 @@
-/**
- * Created by Troy on 8/12/2017.
- */
 const initialState = {
     url: '',
     output_paths: [],
@@ -12,14 +9,13 @@ const initialState = {
 };
 
 
-
 const imgurscraper = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter;
-    default:
-      return state
-  }
+    switch (action.type) {
+        case 'SET_VISIBILITY_FILTER':
+            return action.filter;
+        default:
+            return state
+    }
 };
 
 export default imgurscraper

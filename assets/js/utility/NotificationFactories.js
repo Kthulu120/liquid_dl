@@ -1,6 +1,5 @@
-
-import store from '../store/globalstore'
-import {addNotification as notify} from 'reapop'
+import store from "../store/globalstore";
+import {addNotification as notify} from "reapop";
 
 /**
  *
@@ -8,7 +7,7 @@ import {addNotification as notify} from 'reapop'
  * @constructor constructs Error Notification
  */
 export const ErrorNotificationFactory = (message) => {
-   return store.dispatch(notify({
+    return store.dispatch(notify({
         title: 'CAUTION',
         message: '' + message,
         status: 'error',

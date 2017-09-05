@@ -1,14 +1,9 @@
-import json
-from django.http import JsonResponse
-from django.test import TestCase, SimpleTestCase
 import os
-import shutil, tempfile
-import requests
-import shutil, tempfile
-from os import path
-from rest_framework.test import APIRequestFactory
-from rest_framework.test import APIClient
+import shutil
+import tempfile
 import time
+
+from django.test import TestCase
 
 from liquid.workers.wget import WgetDLWorker
 
@@ -36,12 +31,12 @@ class WgetWorkerTest(TestCase):
     def test_wget_basic_download(self):
         wget_dl = WgetDLWorker(url=self.link, output_path=self.test_dir, depth_level=0, recursive=False, no_parent=True,
                                no_clobber=True, robots=False, mirror=False, check_certificate=False, accept=[],
-                               reject=[])
+                               reject=[], accept_values=[], reject_values=[])
         wget_dl.make_command()
 
     def test_wget_basic__with_accept_params(self):
         wget_dl = WgetDLWorker(url=self.link, output_path=self.test_dir, depth_level=0, recursive=False, no_parent=True,
                                no_clobber=True, robots=False, mirror=False, check_certificate=False,
                                accept=["html", "gif"],
-                               reject=[])
+                               reject=[], accept_values=[], reject_values=[])
         wget_dl.make_command()

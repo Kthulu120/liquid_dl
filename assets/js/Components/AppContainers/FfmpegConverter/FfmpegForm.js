@@ -1,10 +1,7 @@
-/**
- * Created by Troy on 8/12/2017.
- */
-import React, {Component} from 'react'
-import {Row, Input, Card, Col, Button} from 'react-materialize'
-import 'react-select/dist/react-select.css';
-import {FFMPEGSubmisison} from './FfmpegValidation'
+import React from "react";
+import {Button, Input} from "react-materialize";
+import "react-select/dist/react-select.css";
+import {FFMPEGSubmisison} from "./FfmpegValidation";
 
 
 const FfmpegForm = ({

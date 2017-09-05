@@ -1,11 +1,8 @@
-/**
- * Created by Troy on 8/13/2017.
- */
-import React from 'react';
-import store from '../store/globalstore'
-import {addNotification as notify} from 'reapop';
-import {ErrorNotificationFactory, SucessNotificationFactory} from './NotificationFactories'
-import $ from 'jquery'
+import React from "react";
+import store from "../store/globalstore";
+import {addNotification as notify} from "reapop";
+import {ErrorNotificationFactory, SucessNotificationFactory} from "./NotificationFactories";
+import $ from "jquery";
 
 
 const getValidFormatTypes = (formatType) => {

@@ -5,7 +5,12 @@ export const QuestionAndAnswers = [
         " we simply send the request the to the server ip(or localhost aka '127.0.0.1' and port if your issues are alleviated then put in an issue on github and I'll respond."
     },
     {
-        question: "For some reasno commands are not found",
+        question: "Hey I looked at the commands being executed and you've formatted them wrong and/or improperly configured them",
+        answer: "To be honest this very likely the case as this application has only been tested on one machine, therefore put in a issue with the proper implementation of the command" +
+        "needed along with a screenshot or log of the command that seems to be an issue or not exist and we'll get on it"
+    },
+    {
+        question: "For some reason commands are not found",
         answer: "Well wget must be downloaded for Windows since its standard on most Linux architectures, make sure you have youtube-dl and FFmpeg downloaded." +
         " These must be in the path so Liquid-DL can execute them; like what Chip Kelly did to the Eagles"
     },

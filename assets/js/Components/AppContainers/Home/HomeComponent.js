@@ -1,13 +1,6 @@
-/**
- * Created by Troy on 8/12/2017.
- */
-import React from 'react'
-import {
-    Row, Input, Card, Col, Button, CollectionItem, Collapsible, CollapsibleItem,
-    Collection
-} from 'react-materialize'
-import {NavLink} from "react-router-dom";
-import {QuestionAndAnswers} from '../../../utility/QuestionsAndAnswers'
+import React from "react";
+import {Button, Collapsible, CollapsibleItem, Collection, CollectionItem, Input, Row} from "react-materialize";
+import {QuestionAndAnswers} from "../../../utility/QuestionsAndAnswers";
 
 const HomeComponent = ({server_os, server_port, server_ip, updateOperatingSystem, updateServerPort, updateServerIP}) =>
     (
@@ -16,9 +9,10 @@ const HomeComponent = ({server_os, server_port, server_ip, updateOperatingSystem
             <div className="row">
                 <div className="col-md-6">
                     <Collection>
-                        <CollectionItem><NavLink to='/help'>Tips and Help</NavLink></CollectionItem>
-                        <CollectionItem>Star On GitHub</CollectionItem>
-                        <CollectionItem>Suggest Features (I'll get back to you in a day or two)</CollectionItem>
+                        <CollectionItem><a target="_blank" href="https://github.com/Kthulu120/liquid_dl/">Star On
+                            GitHub</a></CollectionItem>
+                        <CollectionItem><a target="_blank" href="https://github.com/Kthulu120/liquid_dl/issues">Suggest
+                            Features (I'll get back to you in a day or two)</a></CollectionItem>
                     </Collection>
                 </div>
                 <div className="col-md-6">

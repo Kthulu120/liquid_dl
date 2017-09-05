@@ -1,7 +1,4 @@
-/**
- * Created by Troy on 8/13/2017.
- */
-import React from 'react';
+import React from "react";
 
 
 export const updateInputPath = (path) => {
@@ -42,7 +39,7 @@ export const updateInputFormat = (value) => {
 export const updateOutputCat = (value) => {
     return {
         type: 'UPDATE_OUTPUT_CATEGORY',
-                format: value
+        format: value
 
     }
 };

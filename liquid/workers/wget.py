@@ -3,7 +3,7 @@ import os
 
 class WgetDLWorker(object):
     def __init__(self, url, output_path, depth_level, recursive, no_parent, no_clobber, robots, mirror, accept, reject,
-                 check_certificate):
+                 accept_values, reject_values, check_certificate):
 
         self.url = url
         self.output_path = output_path
@@ -15,10 +15,13 @@ class WgetDLWorker(object):
         self.mirror = mirror
         self.accept = accept
         self.reject = reject
+        self.accept_values = accept_values
+        self.reject_values = reject_values
         self.check_certificate = check_certificate
 
     def make_command(self):
         command = "cd {0} && wget {1} --level={2} ".format(self.output_path, self.url, self.depth_level)
+        print(command)
         if self.robots:
             command += "-e robots=off "
         if self.recursive:
@@ -33,15 +36,17 @@ class WgetDLWorker(object):
             command += "--no-check-certificate "
         if self.accept:
             command += "--accept="
-            for file_type in self.accept:
+            for file_type in self.accept_values:
                 command += str(file_type) + ","
             command += " "
         if self.reject:
             command += "--reject="
-            for file_type in self.reject:
+            for file_type in self.reject_values:
                 command += str(file_type) + ","
             command += " "
+        print(command)
         try:
+
             process_result = os.system(command)
             if process_result is not 0:
                 raise OSError("Could not download files")

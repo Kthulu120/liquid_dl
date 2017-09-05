@@ -1,6 +1,3 @@
-/**
- * Created by Troy on 8/12/2017.
- */
 const fileformats = {
         video: [
             {category: "video", format: 'avi'},

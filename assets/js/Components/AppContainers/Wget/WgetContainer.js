@@ -1,9 +1,13 @@
-/**
- * Created by Troy on 7/15/2017.
- */
-import {connect} from 'react-redux'
+import {connect} from "react-redux";
 import WgetForm from "./WgetForm";
-import {updateWgetDownloadOption, updateWgetLinkPath, updateWgetOutputPath} from "../../../actions/wget/wget";
+import {
+    updateWgetAcceptValues,
+    updateWgetDepthLevel,
+    updateWgetDownloadOption,
+    updateWgetLinkPath,
+    updateWgetOutputPath,
+    updateWgetRejectValues
+} from "../../../actions/wget/wget";
 
 
 const mapStateToProps = state => {
@@ -23,6 +27,15 @@ const mapDispatchToProps = dispatch => {
         },
         updateWgetDownloadOption: (download_option) => {
             dispatch(updateWgetDownloadOption(download_option))
+        },
+        updateWgetDepthLevel: (value) => {
+            dispatch(updateWgetDepthLevel(value))
+        },
+        updateWgetRejectValues: (value) => {
+            dispatch(updateWgetRejectValues(value))
+        },
+        updateWgetAcceptValues: (value) => {
+            dispatch(updateWgetAcceptValues(value))
         }
     }
 };

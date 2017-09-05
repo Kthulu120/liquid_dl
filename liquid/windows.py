@@ -1,6 +1,7 @@
+# PLAYGROUND FOR WINDOWS COMMANDS
+import subprocess
 
-
-test = "/TJ/Home"
+test = "/some/Home"
 test2 = "avi"
 hm = '%'
 print (hm)
@@ -9,7 +10,5 @@ selectiveEscape = r"cd {0} && for file in *.{1}; do ffmpeg -i \"$file\" \"${{fil
 p = {}
 s = {}
 t = 2
-if isinstance(p and s and t, dict):
-    if isinstance(p,dict):
-        print(p)
-print(selectiveEscape)
+a = subprocess.check_output(['cmd', '/c', 'cd C:\ && dir'])
+print(a)

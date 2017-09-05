@@ -1,12 +1,8 @@
-/**
- * Created by Troy on 8/12/2017.
- */
 const initialState = {
     url: '',
     output_path: '',
     depth_level: 0,
     download_options: {
-        depth_level: false,
         recursive: false,
         no_parent: false,
         check_certificate: false,
@@ -16,6 +12,8 @@ const initialState = {
         accept: false,
         reject: false,
     },
+    accept_values: [],
+    reject_values: [],
 };
 
 
@@ -33,6 +31,10 @@ const wget = (state = initialState, action) => {
             return Object.assign({}, state, {url: action.path});
         case 'UPDATE_WGET_DEPTH_LEVEL':
             return Object.assign({}, state, {depth_level: action.depth_level});
+        case 'UPDATE_WGET_ACCEPT_VALUES':
+            return Object.assign({}, state, {accept_values: action.values});
+        case 'UPDATE_WGET_REJECT_VALUES':
+            return Object.assign({}, state, {reject_values: action.values});
 
         default:
             return state

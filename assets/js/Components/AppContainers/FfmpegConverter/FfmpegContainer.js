@@ -1,12 +1,14 @@
-/**
- * Created by Troy on 7/15/2017.
- */
-import {connect} from 'react-redux'
+import {connect} from "react-redux";
 import FfmpegForm from "./FfmpegForm";
 import {FFMPEGExportList} from "./FfmpegValidation";
 import {
-    updateFileStructure, updateInputCat, updateInputFormat, updateOutputCat,
-    updateOutputFormat, updateInputPath, updateDeleteOldFiles
+    updateDeleteOldFiles,
+    updateFileStructure,
+    updateInputCat,
+    updateInputFormat,
+    updateInputPath,
+    updateOutputCat,
+    updateOutputFormat
 } from "../../../actions/ffmpeg/ffmpeg";
 
 

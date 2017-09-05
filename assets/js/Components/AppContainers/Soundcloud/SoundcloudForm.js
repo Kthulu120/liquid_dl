@@ -1,9 +1,5 @@
-/**
- * Created by Troy on 8/12/2017.
- */
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {Row, Input, Card, Col, Button} from 'react-materialize'
+import React from "react";
+import {Button, Card, Col, Input, Row} from "react-materialize";
 import {SoundcloudSubmission} from "./SoundCloudValidation";
 
 const SoundcloudForm = ({soundcloud, updateDownloadOption, updateConfigurationOptions, updateLinkPath, updateOutputPath}) =>

@@ -1,14 +1,11 @@
-import React from 'react';
-import {Switch} from 'react-router-dom'
-import Roster from "./Roster";
+import React from "react";
+import {Switch} from "react-router-dom";
 import Home from "./Home";
-import {Schedule} from "./Api";
-import {Route} from 'react-router'
+import {Route} from "react-router";
 import Soundcloud from "./Apps/Soundcloud";
-import Imgur from "./Apps/Imgur";
 import FFMPEG from "./Apps/FFMPEG";
-import theme from 'reapop-theme-wybo';
-import NotificationsSystem from 'reapop';
+import theme from "reapop-theme-wybo";
+import NotificationsSystem from "reapop";
 import Wget from "./Apps/Wget";
 
 const Main = () => (

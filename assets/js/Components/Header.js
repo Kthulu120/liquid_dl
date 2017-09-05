@@ -1,5 +1,5 @@
-import {Link, NavLink} from 'react-router-dom'
-import React from 'react';
+import {NavLink} from "react-router-dom";
+import React from "react";
 
 
 const Header = () => (
@@ -13,7 +13,8 @@ const Header = () => (
                     className="nav-text">Soundcloud</span></NavLink></li>
 
                 <li><NavLink to='/youtube-dl' activeClassName="active" className={"navlink"}><i
-                    className="fa fa-youtube-play nav-icon"/><span className="nav-text">  Youtube-dl</span></NavLink></li>
+                    className="fa fa-youtube-play nav-icon"/><span className="nav-text">  Youtube-dl</span></NavLink>
+                </li>
 
                 <li><NavLink to='/wget' activeClassName="active"><i className="fa fa-archive nav-icon"/><span
                     className="nav-text"> Wget</span></NavLink></li>

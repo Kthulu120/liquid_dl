@@ -1,13 +1,10 @@
-import json
-
-from django.http import JsonResponse
-from django.test import TestCase, SimpleTestCase
 import os
-import shutil, tempfile
+import shutil
+import tempfile
+
 import requests
-import shutil, tempfile
-from os import path
-from rest_framework.test import APIRequestFactory
+from django.http import JsonResponse
+from django.test import TestCase
 from rest_framework.test import APIClient
 
 
@@ -33,7 +30,6 @@ class FFmpegConversionTest(TestCase):
         Remove the directory after the test after 10 seconds so you can visually observe change
         :return: 
         """
-        import time
         # Uncomment to observe changes in file viewer
         # time.sleep(5)
         os.chdir('/')
@@ -148,6 +144,61 @@ class SoundcloudTest(TestCase):
                            u'download_user_uploads': u'false',
                            u'download_favorites': u'false', u'download_playlist': u'false',
                            u'download_like_and_owned_playlists': u'false', u'downloaded_commented_tracks': u'false'}
+                       , format='json')
+        self.assertIsInstance(p, JsonResponse)
+        TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
+
+
+class WgetTest(TestCase):
+    def setUp(self):
+        """
+        Creates a temporary directory that works on Windows and Linux then proceeds to use the given urls to test our methods
+        """
+        self.test_dir = tempfile.mkdtemp(dir='/tmp')
+        os.chdir(self.test_dir)
+        self.google = "https://www.google.com"
+        self.url2 = "https://soundcloud.com/ghg6"
+        self.playlist_url = "https://soundcloud.com/the-dj-roar-ree/sets/chill-a-2-track-playlist"
+
+    def tearDown(self):
+        """
+        Remove the directory after the test after 10 seconds so you can visually observe change
+        :return: 
+        """
+        import time
+        # Uncomment to observe changes in file viewer
+        time.sleep(5)
+        os.chdir('/')
+        shutil.rmtree(self.test_dir)
+
+    def test_basic_download(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/wget-submit',
+                       {
+                           #  Our config options
+                           u'url': self.google, u'output_path': self.test_dir, u'depth_level': u'0',
+                           u'recursive': u'true', u'no_parent': u'false', u'check_certificate': u'false',
+                           #  What type of download do we want to do if not playlist or song
+                           u'no_clobber': u'false',
+                           u'robots': u'true',
+                           u'mirror': u'false', u'accept': u'false',
+                           u'reject': u'false', }
+                       , format='json')
+        self.assertIsInstance(p, JsonResponse)
+        TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
+
+    def test_download_no_clobber(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/wget-submit',
+                       {
+                           #  Our config options
+                           u'url': self.google, u'output_path': self.test_dir, u'depth_level': u'0',
+                           u'recursive': u'true', u'no_parent': u'true', u'check_certificate': u'false',
+                           #  What type of download do we want to do if not playlist or song
+                           u'no_clobber': u'true',
+                           u'robots': u'true',
+                           u'mirror': u'false', u'accept': u'false',
+                           u'reject': u'false', }
                        , format='json')
         self.assertIsInstance(p, JsonResponse)
         TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")

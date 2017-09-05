@@ -1,9 +1,11 @@
-/**
- * Created by Troy on 7/15/2017.
- */
-import {connect} from 'react-redux'
+import {connect} from "react-redux";
 import SoundcloudForm from "./SoundcloudForm";
-import {updateConfigOptions, updateDownloadOption, updateLinkPath, updateOutputPath} from "../../../actions/soundcloud/soundcloud";
+import {
+    updateConfigOptions,
+    updateDownloadOption,
+    updateLinkPath,
+    updateOutputPath
+} from "../../../actions/soundcloud/soundcloud";
 
 
 const mapStateToProps = state => {

@@ -1,12 +1,9 @@
-/**
- * Created by Troy on 8/13/2017.
- */
-import React from 'react';
-import store from '../../../store/globalstore'
-import {addNotification as notify} from 'reapop';
-import {ErrorNotificationFactory, SucessNotificationFactory} from '../../../utility/NotificationFactories'
-import $ from 'jquery'
-import {getOS} from '../../../utility/util'
+import React from "react";
+import store from "../../../store/globalstore";
+import {addNotification as notify} from "reapop";
+import {ErrorNotificationFactory, SucessNotificationFactory} from "../../../utility/NotificationFactories";
+import $ from "jquery";
+import {getOS} from "../../../utility/util";
 
 
 const getValidFormatTypes = (formatType) => {
@@ -37,7 +34,7 @@ export const FFMPEGExportList = (list, formatChoice) => {
 
 const validateFFMPEG = (state) => {
     console.log(((state.ffmpeg.inputFormat || state.ffmpeg.input_path) === ('' || '/')));
-    if ((['','/'].indexOf(state.ffmpeg.input_path) > -1)) {
+    if ((['', '/'].indexOf(state.ffmpeg.input_path) > -1)) {
         ErrorNotificationFactory("Can't use root ( aka  '/' ) or empty string as input path");
         throw new EvalError("Can't use root ( aka  '/' ) or empty string as input path")
     }

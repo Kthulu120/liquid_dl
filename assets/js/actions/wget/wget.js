@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const updateWgetLinkPath = (path) => {
     return {
@@ -24,5 +24,17 @@ export const updateWgetDepthLevel = (value) => {
     return {
         type: 'UPDATE_WGET_DEPTH_LEVEL',
         depth_level: value
+    }
+};
+export const updateWgetAcceptValues = (value) => {
+    return {
+        type: 'UPDATE_WGET_ACCEPT_VALUES',
+        values: value
+    }
+};
+export const updateWgetRejectValues = (value) => {
+    return {
+        type: 'UPDATE_WGET_REJECT_VALUES',
+        values: value
     }
 };

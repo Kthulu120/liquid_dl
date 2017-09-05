@@ -1,12 +1,8 @@
-/**
- * Created by Troy on 9/2/2017.
- */
-import React from 'react';
-import store from '../../../store/globalstore'
-import {addNotification as notify} from 'reapop';
-import {ErrorNotificationFactory, SucessNotificationFactory} from '../../../utility/NotificationFactories'
-import $ from 'jquery'
-import {getOS} from '../../../utility/util'
+import React from "react";
+import store from "../../../store/globalstore";
+import {ErrorNotificationFactory, SucessNotificationFactory} from "../../../utility/NotificationFactories";
+import $ from "jquery";
+import {getOS} from "../../../utility/util";
 
 
 const testUrlPath = (url) => {
