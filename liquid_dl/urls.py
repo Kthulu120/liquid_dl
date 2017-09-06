@@ -20,5 +20,6 @@ from liquid.views import schedule
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^liquid-dl', schedule, name='home'),
+    url(r'^$', schedule, name='home'),
     url(r'^', include('liquid.urls')),
 ]
