@@ -5,6 +5,7 @@ import imgurscraper from "./imgurscraper";
 import ffmpeg from "./ffmpeg";
 import global from './global'
 import wget from "./wget";
+import youtube_dl from "./youtubedl"
 
 const todoApp = combineReducers({
     notifications: notificationsReducer(),
@@ -12,7 +13,8 @@ const todoApp = combineReducers({
     imgur: imgurscraper,
     ffmpeg: ffmpeg,
     global: global,
-    wget: wget
+    wget: wget,
+    youtube_dl: youtube_dl
 });
 
 export default todoApp

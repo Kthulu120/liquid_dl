@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import json
-
+import traceback
 from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -10,6 +10,7 @@ from django.shortcuts import render
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
 from liquid.workers.soundcloud import SoundcloudDLWorker
 from liquid.workers.wget import WgetDLWorker
+from liquid.workers.youtube_dl import YoutubeDLWorker
 
 
 def schedule(request):
@@ -121,7 +122,6 @@ def imgur_submit(request):
 def wget_submit(request):
     try:
         response = request.GET
-        # print (response)
         variable_dictionary = {
             "url": response.get('url'),
             "output_path": response.get('output_path'),
@@ -163,3 +163,25 @@ def youtube_dl_submit(request):
     print (request.GET)
     context = {}
     return JsonResponse({})
+
+
+@ajax_request
+def youtube_dl_get_formats(request):
+    try:
+        response = request.GET
+        print(response)
+        variable_dictionary = {
+            "url": response.get('url'),
+            "output_path": response.get('output_path'),
+            "new_folder_name": response.get('new_folder_name'),
+            "make_folder": response.get('make_folder') in ['true'],
+            "is_playlist": response.get('is_playlist') in ['true'],
+        }
+        print(variable_dictionary)
+        return JsonResponse(YoutubeDLWorker.get_formats(self=None, url=variable_dictionary["url"],
+                                                        folder_path=variable_dictionary["output_path"],
+                                                        make_folder=variable_dictionary["make_folder"],
+                                                        new_folder_name=variable_dictionary["new_folder_name"]))
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({'error': e.message})

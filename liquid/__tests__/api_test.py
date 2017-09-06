@@ -202,3 +202,39 @@ class WgetTest(TestCase):
                        , format='json')
         self.assertIsInstance(p, JsonResponse)
         TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
+
+
+class YoutubeDL(TestCase):
+    def setUp(self):
+        """
+        Creates a temporary directory that works on Windows and Linux then proceeds to use the given urls to test our methods
+        """
+        self.test_dir = tempfile.mkdtemp(dir='/tmp')
+        os.chdir(self.test_dir)
+        self.link = "https://www.youtube.com/watch?v=A2_pboioWf0"
+        self.failed_link = "https://www.whomsttube.com/watch?v=A2_pboioWf0"
+        self.playlist_link = "https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz"
+
+    def tearDown(self):
+        """
+        Remove the directory after the test after 10 seconds so you can visually observe change
+        :return: 
+        """
+        import time
+        # Uncomment to observe changes in file viewer
+        time.sleep(5)
+        os.chdir('/')
+        shutil.rmtree(self.test_dir)
+
+    def test_basic_download(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/youtubedl-get-formats',
+                       {
+                           u'url': u'https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz',
+                           u'output_path': u'C:/tmp/toot',
+                           u'make_folder': u'true',
+                           u'new_folder_name': u'toot',
+                           u'is_playlist': u'false'}
+                       , format='json')
+        self.assertIsInstance(p, JsonResponse)
+        TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
