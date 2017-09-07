@@ -59,7 +59,7 @@ export const FFMPEGSubmisison = () => {
     }));
     $.ajax({
 
-        url: 'http://127.0.0.1:8000/ffmpeg-submit',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/ffmpeg-submit',
         type: 'GET',
         data: {
             operating_system: getOS(),

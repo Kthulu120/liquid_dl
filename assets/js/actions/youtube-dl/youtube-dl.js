@@ -36,10 +36,22 @@ export const updateYoutubeDLIsPlaylist = (value) => {
         values: value
     }
 };
-export const updateYoutubeDLChosenFormat = (video_name, chosen_format) => {
+export const updateYoutubeDLVideos = (value) => {
+    return {
+        type: 'UPDATE_YOUTUBE_DL_VIDEOS',
+        values: value
+    }
+};
+export const updateYoutubeDLChosenFormat = (video_id, chosen_format) => {
     return {
         type: 'UPDATE_VIDEO_CHOSEN_FORMAT',
-        video_name: video_name,
+        id: video_id,
         chosen_format: chosen_format
+    }
+};
+export const setYoutubeDLChosenFormat = (values) => {
+    return {
+        type: 'UPDATE_VIDEO_SET_CHOSEN_FORMAT',
+        values: values
     }
 };

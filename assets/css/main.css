@@ -64,7 +64,7 @@ nav.navbar.navbar-inverse > .nav.navbar-nav > li > a.active {
 .container.main-content {
     padding-top: 10%;
     padding-right: 40px;
-    margin-right: 0;
+    /*margin-right: 0; */
 }
 
 .input-field label:not(.label-icon).active {

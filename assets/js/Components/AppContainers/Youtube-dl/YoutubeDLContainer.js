@@ -1,16 +1,17 @@
 import {connect} from "react-redux";
 import YoutubeDLForm from "./YoutubeDLForm";
 import {
-    updateYoutubeDLChosenFormat,
+    updateYoutubeDLChosenFormat, updateYoutubeDLIsPlaylist, updateYoutubeDLIsTested,
     updateYoutubeDLMakeFolder, updateYoutubeDLNewFolderName, updateYoutubeDLOutputPath,
     updateYoutubeDLUrl
 } from "../../../actions/youtube-dl/youtube-dl";
 
 
+
 const mapStateToProps = state => {
     return {
         youtube_dl: state.youtube_dl,
-        videos: state.youtube_dl.videos
+        videos: state.youtube_dl.videos,
     }
 };
 
@@ -35,9 +36,15 @@ const mapDispatchToProps = dispatch => {
         updateYoutubeDLIsPlaylist: (is_playlist) => {
             dispatch(updateYoutubeDLIsPlaylist(is_playlist))
         },
-        updateYoutubeDLChosenFormat: (video, chosen_format) => {
-            dispatch(updateYoutubeDLChosenFormat(video, chosen_format))
+        updateYoutubeDLChosenFormat: (value) => {
+            console.log(value);
+            value = value.split("{split_here}");
+            let id = value[0];
+            let chosen_format = value[1];
+            dispatch(updateYoutubeDLChosenFormat(id, chosen_format))
         }
+
+
     }
 };
 

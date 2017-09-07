@@ -19,7 +19,7 @@ export const SoundcloudSubmission = () => {
     testUrlPath(state.soundcloud.url);
     $.ajax({
 
-        url: 'http://127.0.0.1:8000/soundcloud-submit',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/soundcloud-submit',
         type: 'GET',
         data: {
             operating_system: getOS(),
