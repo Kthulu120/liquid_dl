@@ -10,10 +10,8 @@ WORKDIR /app
 RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main > /etc/apk/repositories; \
     echo http://dl-2.alpinelinux.org/alpine/v3.6/community >> /etc/apk/repositories
 
-RUN apk --update --no-cache add ffmpeg wget nodejs nodejs-npm
+RUN apk --update --no-cache add ffmpeg wget
 RUN pip install scdl youtube-dl
 RUN pip install -r requirements.txt
-RUN npm install webpack -g
-RUN webpack
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
