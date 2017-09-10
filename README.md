@@ -32,7 +32,7 @@ sudo pip install --upgrade youtube_dl
 ```
 
 * Installing Dependencies
-  *  You have two options download the dependencies on your global pip or launch the manage.py command to be in the virtualenv I have set up (you still must execute a 'sudo python pip install -r requirements.txt.' even in the virtualenv for some reason) 
+  *  You have two options download the dependencies on your global pip or launch the manage.py command to be in the virtualenv I have set up (you still must execute a 'sudo python pip install -r requirements.txt.' even in the virtualenv for some reason)
   * If you take the global dependency route then pip install from the requirements.txt file and you should be good to go
   * Finally if troubleshooting fails open an issue
 ## Installation
@@ -52,6 +52,16 @@ Though you can change the port aka the '8000' to any needed port (try to keep th
 Feel free to **do pull requests**, open issues with **features you want** and the many bugs that may arise.
 
 #### I forgot to comment out {% render_bundle %} in the latest release in templates/home.html file and uncomment out the script for the 'newest_prod_build' therefore your going to have to do it yourself if you download this before version 1.0.3 is released(which will be released around 9PM CST).
+
+## Docker
+
+Replace `<local_directory_for_downloads>` with the directory on your local machine. In the UI, use /downloads as the download directory.
+
+`docker run -v <local_directory_for_downloads>:/downloads  -p 8000:8000 kthulu120/liquid_dl`
+
+## Unraid
+
+Add `https://github.com/Kthulu120/liquid_dl` to `Template Repositories` at the bottom of the Docker page. Then Add image and select the liquid-dl template from the dropdown.
 
 ## Help
 
