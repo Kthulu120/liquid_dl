@@ -61,7 +61,7 @@ Replace `<local_directory_for_downloads>` with the directory on your local machi
 
 ## Unraid
 
-Add `https://github.com/Kthulu120/liquid_dl` to `Template Repositories` at the bottom of the Docker page. Then Add image and select the liquid-dl template from the dropdown.
+Add `https://github.com/lordchewie/liquid-dl-unraid` to `Template Repositories` at the bottom of the Docker page. Then Add image and select the liquid-dl template from the dropdown.
 
 ## Help
 
