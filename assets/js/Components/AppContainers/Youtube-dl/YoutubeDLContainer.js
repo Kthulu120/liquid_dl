@@ -7,7 +7,6 @@ import {
 } from "../../../actions/youtube-dl/youtube-dl";
 
 
-
 const mapStateToProps = state => {
     return {
         youtube_dl: state.youtube_dl,
@@ -43,7 +42,6 @@ const mapDispatchToProps = dispatch => {
             let chosen_format = value[1];
             dispatch(updateYoutubeDLChosenFormat(id, chosen_format))
         }
-
 
     }
 };

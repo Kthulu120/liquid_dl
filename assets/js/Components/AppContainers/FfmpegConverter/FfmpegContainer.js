@@ -14,6 +14,7 @@ import {
 
 const mapStateToProps = state => {
     let AllfileFormats = state.ffmpeg.fileformats.audio.concat(state.ffmpeg.fileformats.image).concat(state.ffmpeg.fileformats.video);
+    console.log(AllfileFormats);
     return {
         ffmpeg: state.ffmpeg,
         fileFormats: AllfileFormats,

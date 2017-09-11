@@ -1,7 +1,10 @@
 import json
 import os
 import platform
+import shutil
 import uuid
+import tempfile
+
 
 
 class YoutubeDLWorker(object):
@@ -19,11 +22,10 @@ class YoutubeDLWorker(object):
         :param new_folder_name:
         :return: 
         """
-        if make_folder:
-            folder_path += '/' + new_folder_name
-            if not os.path.exists(folder_path):
-                os.makedirs(folder_path)
-        command = "cd {0} && youtube-dl {1} --write-info-json --skip-download".format(folder_path, url)
+        test_dir = tempfile.mkdtemp(dir='/tmp')
+        # folder_path = self.test_dir
+        os.chdir(test_dir)
+        command = "youtube-dl {1} --write-info-json --skip-download".format(folder_path, url)
         json_files = []
         try:
             os.system(command)
@@ -32,8 +34,7 @@ class YoutubeDLWorker(object):
             print(e)
             return {'error': e}
         all_formats_for_videos = {'formats': []}
-        os.chdir(folder_path)
-        for filename in os.listdir(folder_path):
+        for filename in os.listdir(test_dir):
             if filename.endswith(".info.json"):
                 # print(os.path.join(directory, filename))
                 with open(filename) as data_file:
@@ -45,9 +46,11 @@ class YoutubeDLWorker(object):
                             'format': this_format.get('format', "Error"),
                             'format_note': this_format.get('format_note', "Error"),
                             'extension': this_format.get('ext', "Error"),
-                            'id': data.get('id')
+                            'id': data.get('webpage_url')
                         })
                 all_formats_for_videos.get('formats').append(video)
             else:
                 continue
+        os.chdir('/')
+        shutil.rmtree(test_dir)
         return all_formats_for_videos

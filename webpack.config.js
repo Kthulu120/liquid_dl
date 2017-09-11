@@ -38,6 +38,11 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
+                test: /\.js$/,
+                use: ["source-map-loader"],
+                enforce: "pre"
+            },
+            {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 loader: 'file-loader',
                 options: {
@@ -64,4 +69,4 @@ module.exports = {
         modules: ['node_modules', 'bower_components'],
         extensions: ['.js', '.jsx']
     },
-}
+};

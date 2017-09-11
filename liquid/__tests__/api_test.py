@@ -204,7 +204,7 @@ class WgetTest(TestCase):
         TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
 
 
-class YoutubeDL(TestCase):
+class YoutubeDLTest(TestCase):
     def setUp(self):
         """
         Creates a temporary directory that works on Windows and Linux then proceeds to use the given urls to test our methods
@@ -213,7 +213,7 @@ class YoutubeDL(TestCase):
         os.chdir(self.test_dir)
         self.link = "https://www.youtube.com/watch?v=A2_pboioWf0"
         self.failed_link = "https://www.whomsttube.com/watch?v=A2_pboioWf0"
-        self.playlist_link = "https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz"
+        self.playlist_link = "https://www.youtube.com/playlist?list=PLqFbOPVSb976JzWOBzkKRp3gOpyOUkJAq"
 
     def tearDown(self):
         """

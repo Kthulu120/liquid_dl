@@ -24,6 +24,12 @@ const SoundcloudForm = ({soundcloud, updateDownloadOption, updateConfigurationOp
                        defaultValue='checked' onClick={(e) => {
                     updateDownloadOption(e.target.value)
                 }}/>
+                <Input s={12} m={12} type='select' label="What File Structure We Dealing With?"
+                       defaultValue={'dknlsdn'}
+                >
+                    <option value={'false'}>Single File</option>
+                    <option value={'true'}>Folder</option>
+                </Input>
             </Row>
             <Row>
                 <Input name='soundcloud-options' type='radio' value='download_favorites'

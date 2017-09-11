@@ -4,7 +4,7 @@ import tempfile
 import time
 from django.test import TestCase
 from liquid.workers.wget import WgetDLWorker
-from liquid.workers.youtube_dl import YoutubeDLWorker
+from liquid.workers.youtube_dl_worker import YoutubeDLWorker
 
 
 class WgetWorkerTest(TestCase):

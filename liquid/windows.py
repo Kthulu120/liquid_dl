@@ -15,17 +15,17 @@ t = 2
 # del a[0:6]
 # print(a)
 
-m = []
-try:
-    popp = subprocess.check_output(['cmd', '/c',
-                                    'cd C:/tmp/toot && youtube-dl -f 139  https://www.youtube.com/watch?v=A2_pboioWf0 --write-info-json  --simulate '])
-    popp = (list(popp.split('\n')))
-    del popp[0:6]
-    for x in popp:
-        yum = (' '.join(x.split()))
-        m.append(yum)
-
-    print (m)
-except Exception as e:
-    print(e)
-# print(popp)
+# m = []
+# try:
+#    popp = subprocess.check_output(['cmd', '/c',
+#                                    'cd C:/tmp/toot && youtube-dl -f 139  https://www.youtube.com/watch?v=A2_pboioWf0 --write-info-json  --simulate '])
+#    popp = (list(popp.split('\n')))
+#    del popp[0:6]
+#    for x in popp:
+#        yum = (' '.join(x.split()))
+#        m.append(yum)
+#
+#    print (m)
+# except Exception as e:
+#    print(e)
+## print(popp)

@@ -3,8 +3,6 @@ import {Col, Collapsible, CollapsibleItem, Collection, CollectionItem, Input, Ro
 
 const YoutubeVideoOptions = (videos, onChangeFormat) => (
     <Collapsible popout defaultActiveKey={1} className={'youtube-dl-collapsible'}>
-        {console.log(videos)}
-        {console.log("------------------------")}
         {videos.videos.map(vid => {
             return (
                 <CollapsibleItem header={vid.video_name}>

@@ -1,7 +1,7 @@
 import React from "react";
 import "react-select/dist/react-select.css";
 import {Button, Col, Collapsible, CollapsibleItem, CollectionItem, Input, Row} from "react-materialize";
-import {YoutubeDLGetFormats} from "./YoutubeDLValidation";
+import {YoutubeDLCommitDownloads, YoutubeDLGetFormats} from "./YoutubeDLValidation";
 import YoutubeVideoOptions from "./YoutubeVideoOptions";
 
 
@@ -20,17 +20,20 @@ const YoutubeDLForm = ({
                 }}/>
             </Row>
             <div className="row">
-                <Row>
-                    <Input s={3} name='on' type='switch' value='1' onLabel={"Make Folder for video(s)"}
+                <Row><Col s={3}>
+                    <Input name='on' type='switch' value='1' onLabel={"Make Folder for video(s)"}
                            onChange={(e) => {
                                updateYoutubeDLMakeFolder(!youtube_dl.make_folder)
-                           }}/>
-                    <Col s={5}>{youtube_dl.make_folder ? <Input s={5} label="New Folder Name" onChange={(e) => {
+                           }}/></Col>
+                    <Col s={3}>{youtube_dl.make_folder ? <Input s={12} label="New Folder Name" onChange={(e) => {
                         updateYoutubeDLNewFolderName(e.target.value)
                     }}/> : null}</Col>
-                    <Col s={4}><Button waves='light' node='a' onClick={(e) => {
+                    <Col s={3}><Button waves='light' node='a' onClick={(e) => {
                         YoutubeDLGetFormats()
-                    }}> Test </Button></Col>
+                    }}> Get Formats </Button></Col>
+                    <Col s={3}><Button waves='light' node='a' onClick={(e) => {
+                        YoutubeDLCommitDownloads()
+                    }}>Download Chosen Formats</Button></Col>
                 </Row>
             </div>
             <Row>

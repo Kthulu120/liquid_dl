@@ -103,9 +103,11 @@ html, body {
     padding: 0px !important;
     overflow-x: hidden !important;
 }
+
 .logo-title {
     padding-left: 5%;
 }
+
 .btn-floating i {
     width: inherit;
     display: inline-block;
@@ -117,6 +119,12 @@ html, body {
     margin-left: -15px;
     line-height: 1;
 }
-.btn ,.btn-floating{
+
+.btn, .btn-floating {
     border-radius: 50%;
+}
+
+.youtube-dl-collapsible.collapsible.popout {
+    max-height: 60vh;
+    overflow-y: auto;
 }

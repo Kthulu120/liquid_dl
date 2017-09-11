@@ -1,1 +1,11 @@
-{"status":"done","chunks":{"main":[{"name":"main-75072b5ac9902344f390.js","path":"C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\bundles\\main-75072b5ac9902344f390.js"}]},"error":"ModuleBuildError","message":"Module build failed: Error: ENOENT: no such file or directory, open 'C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\js\\Components\\AppContainers\\Youtube-dl\\YoutubeVideoOptions.js'\n    at Error (native)"}
+{
+  "status": "done",
+  "chunks": {
+    "main": [
+      {
+        "name": "main-01036843f9e1bf6cc21c.js",
+        "path": "C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\bundles\\main-01036843f9e1bf6cc21c.js"
+      }
+    ]
+  }
+}

@@ -69,10 +69,9 @@ export const YoutubeDLCommitDownloads = () => {
                 ErrorNotificationFactory(response["error"]);
             }
             else {
-                SucessNotificationFactory('Files are downloaded');
+                SucessNotificationFactory('Files are downloading');
                 let array_of_videos = [];
                 let res = response.formats;
-                console.log(res);
                 for (let i = 0; i < res.length; i++) {
                     let id = res[i]["formats"][0]["id"];
                     array_of_videos.push({id: id, chosen_format: "bestaudio+bestvideo"})

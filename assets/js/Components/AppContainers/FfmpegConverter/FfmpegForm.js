@@ -19,7 +19,7 @@ const FfmpegForm = ({
                 }}/>
                 <Input s={4} name='group1' type='checkbox' value={ffmpeg.deleteoldfiles.toString()}
                        label=' Clean The Old Files?'
-                       defaultValue='checked' onChange={(e) => {
+                       onChange={(e) => {
                     onChangeDeleteOldFiles(ffmpeg.deleteoldfiles)
                 } }/>
             </div>

@@ -7,10 +7,11 @@ from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from liquid.workers.download_worker import youtube_dl_multiprocessor
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
 from liquid.workers.soundcloud import SoundcloudDLWorker
 from liquid.workers.wget import WgetDLWorker
-from liquid.workers.youtube_dl import YoutubeDLWorker
+from liquid.workers.youtube_dl_worker import YoutubeDLWorker
 
 
 def schedule(request):
@@ -160,9 +161,27 @@ def wget_submit(request):
 
 @ajax_request
 def youtube_dl_submit(request):
-    print (request.GET)
-    context = {}
-    return JsonResponse({})
+    try:
+        response = request.GET
+        print(response)
+        variable_dictionary = {
+            "url": response.get('url'),
+            "output_path": response.get('output_path'),
+            "new_folder_name": response.get('new_folder_name'),
+            'chosen_formats': response.get('chosen_formats'),
+            "make_folder": response.get('make_folder') in ['true'],
+            "is_playlist": response.get('is_playlist') in ['true'],
+        }
+        youtube_dl_multiprocessor(download_dir=variable_dictionary["output_path"],
+                                  make_dir={
+                                      'make_dir': variable_dictionary["make_folder"],
+                                      'directory_name': variable_dictionary["new_folder_name"]},
+                                  info_dict=variable_dictionary,
+                                  links=variable_dictionary['chosen_formats'])
+        return JsonResponse({})
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({'error': e.message})
 
 
 @ajax_request
@@ -185,3 +204,7 @@ def youtube_dl_get_formats(request):
     except Exception as e:
         traceback.print_exc()
         return JsonResponse({'error': e.message})
+
+
+def update_video(request):
+    pass
