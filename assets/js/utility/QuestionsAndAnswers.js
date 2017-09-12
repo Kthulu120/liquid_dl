@@ -37,6 +37,14 @@ export const QuestionAndAnswers = [
         "improve what you can even if it's syntax or to increase the verbosity of the variables so it's more readable"
     },
     {
+        question: "Why doesn't youtube-dl support non-youtube sites?",
+        answer: "We're addressing that in upcoming commits since each sites response for getting the formats is a little different meaning we have to write custom solutions for these sites"
+    },
+    {
+        question: "Youtube-dl is not working nor are my files downloading",
+        answer: "Well chances are that this is due to us going the multi-thread route due to just wanting to test it out, create an isue with any output logs you may have and we'll help resolve the issue and also address it in upcoming commits"
+    },
+    {
         question: "Can we donate to this project for being dope as hell?",
         answer: "Nah, honestly donate it to actual important things affecting actual people's lives"
     },

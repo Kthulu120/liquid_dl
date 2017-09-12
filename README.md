@@ -51,8 +51,10 @@ Though you can change the port aka the '8000' to any needed port (try to keep th
 
 Feel free to **do pull requests**, open issues with **features you want** and the many bugs that may arise.
 
-#### I forgot to comment out {% render_bundle %} in the latest release in templates/home.html file and uncomment out the script for the 'newest_prod_build' therefore your going to have to do it yourself if you download this before version 1.0.3 is released(which will be released around 9PM CST).
-
+#### If you're git cloning from the master branch and not from the latest release then you will need to run webpack from terminal, this includes dockers and unraid
+```
+./node_modules/.bin/webpack --config webpack.config.js -p
+```
 ## Docker
 
 Replace `<local_directory_for_downloads>` with the directory on your local machine. In the UI, use /downloads as the download directory.
