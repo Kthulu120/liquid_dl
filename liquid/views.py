@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+import ast
 import json
 import traceback
 from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
-
-from liquid.workers.download_worker import youtube_dl_multiprocessor
+from liquid_dl import settings as liquid_dl_settings
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
+from liquid.workers.multiprocessor_download_worker import youtube_dl_multiprocessor
+from liquid.workers.single_thread_download_worker import youtube_dl_single_thread
 from liquid.workers.soundcloud import SoundcloudDLWorker
 from liquid.workers.wget import WgetDLWorker
 from liquid.workers.youtube_dl_worker import YoutubeDLWorker
@@ -113,13 +114,6 @@ def soundcloud_submit(request):
 
 
 @ajax_request
-def imgur_submit(request):
-    print (request.GET)
-    context = {}
-    return JsonResponse({})
-
-
-@ajax_request
 def wget_submit(request):
     try:
         response = request.GET
@@ -163,22 +157,24 @@ def wget_submit(request):
 def youtube_dl_submit(request):
     try:
         response = request.GET
-        print(response)
         variable_dictionary = {
             "url": response.get('url'),
             "output_path": response.get('output_path'),
             "new_folder_name": response.get('new_folder_name'),
-            'chosen_formats': response.get('chosen_formats'),
+            'chosen_formats': ast.literal_eval(str(response.get('chosen_formats'))),
             "make_folder": response.get('make_folder') in ['true'],
             "is_playlist": response.get('is_playlist') in ['true'],
         }
-        youtube_dl_multiprocessor(download_dir=variable_dictionary["output_path"],
-                                  make_dir={
-                                      'make_dir': variable_dictionary["make_folder"],
-                                      'directory_name': variable_dictionary["new_folder_name"]},
-                                  info_dict=variable_dictionary,
-                                  links=variable_dictionary['chosen_formats'])
-        return JsonResponse({})
+        if isinstance(variable_dictionary['chosen_formats'], list):
+            print(variable_dictionary['chosen_formats'])
+            if liquid_dl_settings.YOUTUBE_DL_MULTIPROCESSING:
+                youtube_dl_multiprocessor(download_dir=variable_dictionary["output_path"],
+                                          make_dir={
+                                              'make_dir': variable_dictionary["make_folder"],
+                                              'directory_name': variable_dictionary["new_folder_name"]},
+                                          info_dict=variable_dictionary,
+                                          links=variable_dictionary['chosen_formats'])
+                return JsonResponse({"success": "Files Finished Downloading, probably should verify though"})
     except Exception as e:
         traceback.print_exc()
         return JsonResponse({'error': e.message})
@@ -188,7 +184,6 @@ def youtube_dl_submit(request):
 def youtube_dl_get_formats(request):
     try:
         response = request.GET
-        print(response)
         variable_dictionary = {
             "url": response.get('url'),
             "output_path": response.get('output_path'),
@@ -196,7 +191,6 @@ def youtube_dl_get_formats(request):
             "make_folder": response.get('make_folder') in ['true'],
             "is_playlist": response.get('is_playlist') in ['true'],
         }
-        print(variable_dictionary)
         return JsonResponse(YoutubeDLWorker.get_formats(self=None, url=variable_dictionary["url"],
                                                         folder_path=variable_dictionary["output_path"],
                                                         make_folder=variable_dictionary["make_folder"],

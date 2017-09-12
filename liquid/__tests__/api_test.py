@@ -232,9 +232,21 @@ class YoutubeDLTest(TestCase):
                        {
                            u'url': u'https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz',
                            u'output_path': u'C:/tmp/toot',
-                           u'make_folder': u'true',
+                           u'make_folder': u'false',
                            u'new_folder_name': u'toot',
                            u'is_playlist': u'false'}
                        , format='json')
         self.assertIsInstance(p, JsonResponse)
         TestCase.assertContains(self, response=p, text="{\"success\": \"Downloaded Files successfully\"}")
+
+    def test_submit(self):
+        client = APIClient()
+        p = client.get('http://127.0.0.1/youtubedl-submit',
+                       {
+                           u'url': u'https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz',
+                           u'output_path': u'C:/tmp/toot',
+                           u'make_folder': u'false',
+                           u'new_folder_name': u'toot',
+                           u'is_playlist': u'false',
+                           u'chosen_formats': u"[{u'id': u'https://www.youtube.com/watch?v=10a7Xz0DzIQ', u'chosen_format': u'139'},{u'id': u'https://www.youtube.com/watch?v=adzEHy8-dus', u'chosen_format': u'137'},{u'id': u'https://www.youtube.com/watch?v=FC8ZCOrpFA0', u'chosen_format': u'18'}]"
+                       }, format='json')

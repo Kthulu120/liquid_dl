@@ -69,17 +69,7 @@ export const YoutubeDLCommitDownloads = () => {
                 ErrorNotificationFactory(response["error"]);
             }
             else {
-                SucessNotificationFactory('Files are downloading');
-                let array_of_videos = [];
-                let res = response.formats;
-                for (let i = 0; i < res.length; i++) {
-                    let id = res[i]["formats"][0]["id"];
-                    array_of_videos.push({id: id, chosen_format: "bestaudio+bestvideo"})
-                }
-                store.dispatch(setYoutubeDLChosenFormat(array_of_videos));
-                // make state.videos = formats from response
-                // map the formaats of the map....
-                store.dispatch(updateYoutubeDLVideos(response.formats))
+                SucessNotificationFactory('Files are done Finished');
             }
         },
         error: function (request, error) {
