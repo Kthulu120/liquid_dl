@@ -7,7 +7,6 @@ import django
 django.setup()
 from time import time
 import youtube_dl
-from liquid.models import Video
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +49,6 @@ def youtube_dl_single_thread(download_dir, make_dir, info_dict, links=None):
             os.mkdir(make_dir.get('directory_name'))
             download_dir = download_dir + '/' + make_dir.get('directory_name')
 
-    videm = Video.objects.all()
     os.chdir(download_dir)
     if links is None:
         links = []

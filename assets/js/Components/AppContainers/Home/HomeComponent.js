@@ -13,6 +13,8 @@ const HomeComponent = ({server_os, server_port, server_ip, updateOperatingSystem
                             GitHub</a></CollectionItem>
                         <CollectionItem><a target="_blank" href="https://github.com/Kthulu120/liquid_dl/issues">Suggest
                             Features (I'll get back to you in a day or two)</a></CollectionItem>
+                        <CollectionItem><Button onClick={console.log("PUSH!!!")}>Update Youtube-dl &
+                            SCDL</Button></CollectionItem>
                     </Collection>
                 </div>
                 <div className="col-md-6">

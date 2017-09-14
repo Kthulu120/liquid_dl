@@ -6,6 +6,8 @@ import traceback
 from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
+
+from liquid.workers.utility import update_requirement_dependencies
 from liquid_dl import settings as liquid_dl_settings
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
 from liquid.workers.multiprocessor_download_worker import youtube_dl_multiprocessor
@@ -200,5 +202,58 @@ def youtube_dl_get_formats(request):
         return JsonResponse({'error': e.message})
 
 
+@ajax_request
+def download_manager_get_downloads(request):
+    return JsonResponse({
+        "videos": [
+            {
+                "url": "https://www.youtube.com/watch?v=WgydZwHE3yA",
+                "download_status": "finished",
+                "download_speed": "3.2 MB/s",
+                "download_percentage": "100%",
+                "total_size": "4.98 MB",
+                "filename": "Building a GraphQL Server [Part 1] - What Is GraphQL?",
+                "eta": "0s",
+                "front_end_visible": True
+            }
+        ]
+    })
+
+
+@ajax_request
+def download_manager_get_subscriptions(request):
+    return JsonResponse({
+        "subscriptions": [
+            {
+                "url": "https://www.youtube.com/channel/UC6-ymYjG0SU0jUWnWh9ZzEQ",
+                "folder_path": "C:/tmp/toot",
+                "provider": "youtube",
+                "subscription_name": "Wisecrack",
+                "number_downloaded": "23",
+                "total_number_files": "76",
+                "front_end_visible": True,
+
+            },
+            {
+                "url": "https://www.youtube.com/channel/UC6-ymYjG0SU0jUWnWh9ZzEQ",
+                "folder_path": "C:/tmp/toot/toot",
+                "provider": "youtube",
+                "subscription_name": "Chrome Dev Channel",
+                "number_downloaded": "16",
+                "total_number_files": "251",
+                "front_end_visible": True,
+
+            }
+        ]
+    })
+
+
+@ajax_request
+def update_dependencies(request):
+    update_requirement_dependencies()
+    return JsonResponse({"success": "Successfully Updated"})
+
+
+@ajax_request
 def update_video(request):
     pass

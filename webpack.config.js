@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
+//var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     context: __dirname,

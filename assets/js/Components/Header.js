@@ -8,7 +8,13 @@ const Header = () => (
 
         <nav className="navbar navbar-inverse" role="navigation">
             <ul className="nav navbar-nav">
+
                 <NavLink to='/' activeClassName="active"><h3 className="logo-title">Liquid-DL</h3></NavLink>
+
+                <li><NavLink to='/download-manager' activeClassName="active"><i
+                    className="fa fa-download nav-icon"/><span
+                    className="nav-text"> Download Manager</span></NavLink></li>
+
                 <li><NavLink to='/soundcloud' activeClassName="active"><i className="fa fa-cloud nav-icon"/> <span
                     className="nav-text">Soundcloud</span></NavLink></li>
 
@@ -21,6 +27,7 @@ const Header = () => (
 
                 <li><NavLink to='/ffmpeg' activeClassName="active"><i className="fa fa-shekel nav-icon"/><span
                     className="nav-text"> FFMPEG</span></NavLink></li>
+
             </ul>
         </nav>
     </div>

@@ -2,6 +2,7 @@ import logging
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'liquid_dl.settings')
 import django
+from liquid.models import YoutubedlVideo
 django.setup()
 from time import time
 from queue import Queue
@@ -29,7 +30,23 @@ class MultiProcessorLogger(object):
         print("HMMMMM")
 
     def my_hook(self, info):
+        assert isinstance(info, dict)
         if info['status'] == 'downloading':
+            print(info)
+            v, s = YoutubedlVideo.objects.update_or_create(url=self.video_id, defaults={
+                "filename": info.get("filename"),
+                "download_status": info.get("status", "N/A"),
+                "download_speed": info.get("_speed_str", "N/A"),
+                "download_percentage": info.get("_percent_str", "N/A"),
+                "total_size": info.get("_total_bytes_str", "N/A"),
+                "eta": info.get("_eta_str", "N/A")
+            })
+        if info['status'] == 'finished':
+            v, s = YoutubedlVideo.objects.update_or_create(url=self.video_id, defaults={
+                "filename": info.get("filename"),
+                "download_status": info.get("status", "finished"),
+            })
+
             pass
 
 
@@ -55,12 +72,13 @@ class DownloadWorker(Thread):
 
 def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
     """
+    Sets up multiple threads to download youtube videos in case of rate limiting or other factors that would limit the main thread
     
-    :param download_dir: 
-    :param make_dir: 
-    :param info_dict: 
-    :param links: 
-    :return: 
+    :param download_dir: the main folder where files will be downloaded or the parent folder of the directory we are going to create
+    :param make_dir: determines if we must create a new directory
+    :param info_dict: dictionary of values that determines
+    :param links: list of objects with id (for url) and and chosen_formt
+    :return:
     """
     if make_dir.get('make_dir'):
         if not os.path.exists(download_dir + '/' + make_dir.get('directory_name')):
@@ -82,6 +100,10 @@ def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
         worker.start()
     # Put the tasks into the queue as a tuple
     for link in links:
+        v, s = YoutubedlVideo.objects.update_or_create(url=link['id'], defaults={
+            "download_status": "queued"
+        })
+        all = YoutubedlVideo.objects.all()
         print(link)
         logger.info('Queueing {0}'.format(link))
         queue.put((download_dir, link, info_dict))

@@ -8,6 +8,7 @@ import theme from "reapop-theme-wybo";
 import NotificationsSystem from "reapop";
 import Wget from "./Apps/Wget";
 import YoutubeDL from "./Apps/YoutubeDL";
+import DownloadManager from "./Apps/DownloadManager";
 
 const Main = () => (
 
@@ -20,6 +21,7 @@ const Main = () => (
                 <Route path='/wget' component={Wget}/>
                 <Route path="/ffmpeg" component={FFMPEG}/>
                 <Route path='/youtube-dl' component={YoutubeDL}/>
+                <Route path='/download-manager' component={DownloadManager}/>
             </Switch>
 
         </div>
