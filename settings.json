@@ -1,0 +1,20 @@
+{
+  "liquid-dl": {
+    "port": "8000",
+    "ip": "127.0.0.1",
+    "username": "admin",
+    "password": "admin"
+  },
+  "youtube-dl": {
+    "output_template": "%(title)s-%(id)s.%(ext)s",
+    "write_auto_sub": false,
+    "sub_format": "srt/ass/best",
+    "sub_lang": "en",
+    "embed_thumbnail": false,
+    "embed_subs": false,
+    "ignore_errors": true
+  },
+  "cloudcmd": {
+    "port": "8033"
+  }
+}

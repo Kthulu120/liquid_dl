@@ -5,7 +5,8 @@
 const initialState = {
     operating_system: 'Linux',
     server_port: "" + window.location.host.split(":")[1],
-    server_ip: window.location.host.split(":")[0]
+    server_ip: window.location.host.split(":")[0],
+    settings_choice: 'liquid-dl'
 
 };
 
@@ -25,6 +26,8 @@ const global = (state = initialState, action) => {
             new_global_state = Object.assign({}, state, {server_ip: action.ip_address});
             window.localStorage.setItem("settings", new_global_state);
             return new_global_state;
+        case 'UPDATE_SETTING_CHOICE':
+            return Object.assign({}, state, {settings_choice: action.choice});
         default:
             return state
     }

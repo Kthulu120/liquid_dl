@@ -18,3 +18,9 @@ export const updateServerIP = (ip_address) => {
         ip_address: ip_address
     }
 };
+export const updateSettingsChoice = (settings_choice) => {
+    return {
+        type: 'UPDATE_SETTING_CHOICE',
+        choice: settings_choice
+    }
+};

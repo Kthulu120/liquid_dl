@@ -7,6 +7,7 @@ from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from liquid.auth.usermanagement import update_password
 from liquid.workers.utility import update_requirement_dependencies
 from liquid_dl import settings as liquid_dl_settings
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
@@ -17,14 +18,22 @@ from liquid.workers.wget import WgetDLWorker
 from liquid.workers.youtube_dl_worker import YoutubeDLWorker
 
 
+
 def schedule(request):
     context = {}
+    cmd = "node node_modules/cloudcmd/bin/cloudcmd"
     return render(request, 'home.html', context=context)
 
 
 @ajax_request
 def FFMPEG_submit(request):
-    clean_result = 0
+    """
+    Soon to be refactored due to messy conventions and hackey manner of doing things
+    
+    Submission form for Ffmpeg
+    :param request: 
+    :return: 
+    """
     try:
         response = request.GET
         variable_dictionary = {
@@ -67,8 +76,8 @@ def FFMPEG_submit(request):
                                                               delete=variable_dictionary["delete_old_files"])
 
     except Exception as e:
-        d = (e.message)
-        return JsonResponse({'error': str(d)})
+        print (e.message)
+        return JsonResponse({'error': str(e.message)})
     return JsonResponse({"success": "Conversion of Files was successful"})
 
 
@@ -117,6 +126,11 @@ def soundcloud_submit(request):
 
 @ajax_request
 def wget_submit(request):
+    """
+    Submission of the wget form for processing
+    :param request: 
+    :return: 
+    """
     try:
         response = request.GET
         variable_dictionary = {
@@ -157,6 +171,11 @@ def wget_submit(request):
 
 @ajax_request
 def youtube_dl_submit(request):
+    """
+    Submission of the youtube-dl form for processing
+    :param request: ajax request of form
+    :return: 
+    """
     try:
         response = request.GET
         variable_dictionary = {
@@ -184,6 +203,11 @@ def youtube_dl_submit(request):
 
 @ajax_request
 def youtube_dl_get_formats(request):
+    """
+    Create a dictionary and sends the the dictionary values to a YoutubeDL worker that grabs the formats
+    :param request: ajax request
+    :return: JsonResponse of available formats
+    """
     try:
         response = request.GET
         variable_dictionary = {
@@ -204,6 +228,12 @@ def youtube_dl_get_formats(request):
 
 @ajax_request
 def download_manager_get_downloads(request):
+    """
+    Request all the current 'front-end visible' downloads in the database and return the serialized version of all of 
+    those objects
+    :param request: 
+    :return: JsonResponse of serialized YoutubeDLVideo objects
+    """
     return JsonResponse({
         "videos": [
             {
@@ -249,11 +279,53 @@ def download_manager_get_subscriptions(request):
 
 
 @ajax_request
+def download_manager_change_subscription(request):
+    """
+    Update a Subscription typically just a folder path
+    :param request: Ajax request
+    :return: 
+    """
+    pass
+
+
+@ajax_request
+def download_manager_add_subscription(request):
+    """
+    Add Subscription
+    :param request: Ajax request
+    :return: 
+    """
+    response = request.GET
+    variable_dictionary = {
+        "url": response.get('url'),
+        "download_dir": response.get('download_dir'),
+        "format": response.get('format'),
+        "output_template": response.get('output_template')
+    }
+    pass
+
+
+@ajax_request
 def update_dependencies(request):
+    """
+    Updates the dependencies for the entire application (youtube-dl and scdl)
+    :param request: Ajax request
+    :return: 
+    """
     update_requirement_dependencies()
     return JsonResponse({"success": "Successfully Updated"})
 
 
 @ajax_request
-def update_video(request):
+def update_video_download(request):
+    """
+    Updates a video download
+    :param request: 
+    :return: 
+    """
     pass
+
+
+def auth_password(request):
+    password = request.GET.get('ps')
+    update_password(password)

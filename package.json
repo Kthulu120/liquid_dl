@@ -28,6 +28,7 @@
   "dependencies": {
     "babel-core": "^6.25.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "cloudcmd": "^7.7.0",
     "create-react-class": "^15.6.0",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
@@ -39,6 +40,7 @@
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "react-select": "^1.0.0-rc.5",
+    "react-skylight": "^0.4.2",
     "react-tap-event-plugin": "^2.0.1",
     "reapop": "^1.1.2",
     "reapop-theme-wybo": "^0.4.1",

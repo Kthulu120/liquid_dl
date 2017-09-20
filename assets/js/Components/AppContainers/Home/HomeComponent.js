@@ -1,79 +1,35 @@
 import React from "react";
-import {Button, Collapsible, CollapsibleItem, Collection, CollectionItem, Input, Row} from "react-materialize";
+import {
+    Button, Col, Collapsible, CollapsibleItem, Collection, CollectionItem, Input, Row, Tab,
+    Tabs
+} from "react-materialize";
 import {QuestionAndAnswers} from "../../../utility/QuestionsAndAnswers";
+import ApplicationSettingsMain from "./ApplicationSettings/ApplicationSettingsMain";
+import ApplicationSettingsHeader from "./ApplicationSettings/ApplicationSettingsHeader";
+import ApplicationSettingsMainContainer from "./ApplicationSettings/ApplicationSettingsMainContainer";
 
 const HomeComponent = ({server_os, server_port, server_ip, updateOperatingSystem, updateServerPort, updateServerIP}) =>
     (
         <div className="appContainer">
             <h2>Welcome To Liquid-dl</h2>
-            <div className="row">
-                <div className="col-md-6">
-                    <Collection>
-                        <CollectionItem><a target="_blank" href="https://github.com/Kthulu120/liquid_dl/">Star On
-                            GitHub</a></CollectionItem>
-                        <CollectionItem><a target="_blank" href="https://github.com/Kthulu120/liquid_dl/issues">Suggest
-                            Features (I'll get back to you in a day or two)</a></CollectionItem>
-                        <CollectionItem><Button onClick={console.log("PUSH!!!")}>Update Youtube-dl &
-                            SCDL</Button></CollectionItem>
-                    </Collection>
-                </div>
-                <div className="col-md-6">
-                    <Collapsible accordion>
-                        <CollapsibleItem header='Settings' icon='filter_drama'>
-                            <Row> <label> Always Set these when accessing on new browser since it uses localStorage on
-                                the browser your using</label> </Row>
-                            <Row>
-                                <Input s={12} m={12} type='select' label="Server Operating System"
-                                       id={"what-is-server-os"}
-                                       onChange={(e) => {
-                                           updateOperatingSystem(e.target.value)
-                                       }} value={server_os}>
-                                    <option value={'Linux'}>Linux</option>
-                                    <option value={'Windows'}>Windows</option>
-                                </Input>
-                            </Row>
-                            <Row>
-                                <Input s={6} label="Server Port Liquid is running on" onChange={(e) => {
-                                    updateServerPort(e.target.value)
-                                }} value={server_port}/>
-                            </Row>
-                            <Row>
-                                <Input s={6} label="IP Address we running this on" onChange={(e) => {
-                                    updateServerIP(e.target.value)
-                                }} value={server_ip}/>
-                            </Row>
-                        </CollapsibleItem>
-                        <CollapsibleItem header='Help' icon='place'>
-                            <Collapsible accordion>
-                                {
-                                    QuestionAndAnswers.map(QandA => {
-                                        return (
-                                            <CollapsibleItem header={QandA.question}>
-                                                <p>
-                                                    {QandA.answer}
-                                                </p>
-                                            </CollapsibleItem>
-                                        )
-                                    })
-                                }
-                            </Collapsible>
-                        </CollapsibleItem>
-                        <CollapsibleItem header='Planned Features' icon='whatshot'>
-                            <Row>Youtube-dl is almost finished!!!</Row>
-                            <Row>Almost all commands of Soundcloud-dl is supported and integrated</Row>
-                            <Row> We're taking application requests</Row>
-                            <Row> Working on and finishing batch download support</Row>
-                        </CollapsibleItem>
-                    </Collapsible>
-                </div>
-            </div>
-            <Button floating fab='horizontal' faicon='fa fa-archive nav-icon' className='red' large
-                    style={{bottom: '45px', right: '24px'}}>
-                <Button floating className='red'><i className="fa fa-archive"/></Button>
-                <Button floating icon='format_quote' className='yellow darken-1'/>
-                <Button floating icon='publish' className='green'/>
-                <Button floating icon='attach_file' className='blue'/>
-            </Button>
+            <Tabs className='tab-demo z-depth-1 .purple-text.text-darken-4'>
+
+                <Tab title="Settings" active>
+                    <Row>
+                        <Col s={4}>
+                            <ApplicationSettingsHeader/>
+                        </Col>
+                        <div className="card">
+                            <Col s={8}>
+                                <ApplicationSettingsMainContainer/>
+                            </Col>
+
+                        </div>
+                    </Row>
+                </Tab>
+                <Tab title="Help"/>
+            </Tabs>
+
         </div>
     );
 
