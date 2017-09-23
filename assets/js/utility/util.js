@@ -4,6 +4,8 @@
  */
 import $ from 'jquery';
 import {ErrorNotificationFactory, SucessNotificationFactory} from "./NotificationFactories";
+import store from "../store/globalstore";
+
 export const getOS = () => {
     let userAgent = window.navigator.userAgent,
         platform = window.navigator.platform,
@@ -30,17 +32,63 @@ export const getOS = () => {
 /**
  *
  */
-export const submitNewSubbscription = (subscription) => {
+export const submitNewSubscription = (subscription) => {
+    let state = store.getState();
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/ffmpeg-submit',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/subscriptions/create',
         type: 'GET',
         data: {
-            input_format: subscription.ffmpeg.inputFormat,
-            input_path: state.ffmpeg.input_path,
-            folder_conversion: state.ffmpeg.folderConversion,
-            delete_old_files: state.ffmpeg.deleteoldfiles,
-            output_format: state.ffmpeg.outputFormat
+            url: subscription.url,
+            provider: subscription.provider,
+            folder_path: subscription.folder_path,
+            subscription_name: subscription.subscription_name,
+            output_template: subscription.example + ".%(ext)s",
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (!(response["error"] === undefined)) {
+                ErrorNotificationFactory(response["error"]);
+            }
+            else {
+                SucessNotificationFactory(response["success"]);
+                getListOfSubscriptions()
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+        }
+    });
+};
+
+export const getListOfSubscriptions = () => {
+    let state = store.getState();
+    $.ajax({
+
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/subscriptions/list',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (!(response["error"] === undefined)) {
+                ErrorNotificationFactory(response["error"]);
+            }
+            else {
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+        }
+    });
+};
+
+export const makeSubscriptionNotVisible = (link) => {
+    let state = store.getState();
+    $.ajax({
+
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/subscriptions/change-visibility',
+        type: 'GET',
+        data: {
+            url: link,
         },
         dataType: 'json',
         success: function (response) {

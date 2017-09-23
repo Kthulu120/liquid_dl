@@ -57,7 +57,7 @@ export const FFMPEGSubmisison = () => {
     }));
     $.ajax({
 
-        url: 'http://127.0.0.1:8000/ffmpeg-submit',
+        url: 'http://127.0.0.1:8000/liquid-dl/ffmpeg-submit',
         type: 'GET',
         data: {
             inputFormat: state.ffmpeg.inputFormat,

@@ -22,14 +22,14 @@ class SingleThreadLogger(object):
         pass
 
     def error(self, msg):
-        print()
+        print(msg)
 
     def progress(self, msg):
-        print("HMMMMM")
+        pass
 
     def my_hook(self, info):
         if info['status'] == 'downloading':
-            pass
+            print (info)
         if info['status'] == 'finished':
             pass
 
@@ -65,4 +65,10 @@ def youtube_dl_single_thread(download_dir, make_dir, info_dict, links=None):
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([link.get('id')])
 
-# youtube_dl_multiprocessor(some_path, make, d, our_url)
+# some_path = "C:/tmp/toot"
+# make = {
+#    "make_dir": False
+# }
+# d = {}
+# our_url = [{"id":"https://www.youtube.com/watch?v=A2_pboioWf0", "chosen_format": "best"}]
+# youtube_dl_single_thread(some_path, make, d, our_url)

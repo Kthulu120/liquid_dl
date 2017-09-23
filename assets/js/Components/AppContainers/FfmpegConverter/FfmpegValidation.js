@@ -59,7 +59,7 @@ export const FFMPEGSubmisison = () => {
     }));
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/ffmpeg-submit',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/ffmpeg-submit',
         type: 'GET',
         data: {
             operating_system: getOS(),

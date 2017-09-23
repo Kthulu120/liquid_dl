@@ -13,7 +13,7 @@ export const YoutubeDLGetFormats = () => {
     SucessNotificationFactory('Sent Commands');
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/youtubedl-get-formats',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/youtubedl-get-formats',
         type: 'GET',
         data: {
             url: state.youtube_dl.url,
@@ -53,7 +53,7 @@ export const YoutubeDLCommitDownloads = () => {
     SucessNotificationFactory("Sent Commands, you'll be notified when they're finished");
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/youtubedl-submit',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/youtubedl-submit',
         type: 'GET',
         data: {
             url: state.youtube_dl.url,

@@ -29,9 +29,9 @@ class CloudCmdSettings extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Button floating large className='indigo darken-1' waves='light'>Start Cloud Cmd</Button>
+                        <Button large className='indigo darken-1' waves='light'>Start Cloud Cmd</Button>
 
-                        <Button floating large className='indigo darken-1' waves='light'>Save</Button>
+                        <Button large className='indigo darken-1' waves='light'>Save</Button>
                     </Row>
 
 

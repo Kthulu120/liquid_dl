@@ -6,7 +6,7 @@ import $ from "jquery";
 export const WgetSubmission = () => {
     const state = store.getState();
     $.ajax({
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/wget-submit',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/wget-submit',
         type: 'GET',
         data: {
             url: state.wget.url,

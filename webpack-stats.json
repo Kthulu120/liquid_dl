@@ -1,11 +1,1 @@
-{
-  "status": "done",
-  "chunks": {
-    "main": [
-      {
-        "name": "main-3149dda66e61df6b97f1.js",
-        "path": "C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\bundles\\main-3149dda66e61df6b97f1.js"
-      }
-    ]
-  }
-}
+{"status":"done","chunks":{"main":[{"name":"main-6359d0d57a2641d2f2bd.js","path":"C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\bundles\\main-6359d0d57a2641d2f2bd.js"}]}}

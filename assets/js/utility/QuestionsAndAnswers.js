@@ -49,3 +49,56 @@ export const QuestionAndAnswers = [
         answer: "Nah, honestly donate it to actual important things affecting actual people's lives"
     },
 ];
+
+/**
+ * List of providers which we currently have googled logos for (like legit), this list is passed into the
+ * SubscriptionCreationModal.
+ * @type {[*]}
+ */
+export const SubscriptionProvders = [
+    {label: "Youtube", value: "youtube"},
+    {label: "Adult Swim", value: "adultswim"},
+    {label: "Aljazeera", value: "aljezeera"},
+    {label: "AMC Netowrks", value: "amcnetworks"},
+    {label: "Bandcamp", value: "bandcamp"},
+    {label: "BBC", value: "bbc"},
+    {label: "CNN", value: "cnn"},
+    {label: "Comedy Central", value: "comedycentral"},
+    {label: "Crunchyroll", value: "crunchyroll"},
+    {label: "C-SPAN", value: "cspan"},
+    {label: "CW-TV", value: "cwtv"},
+    {label: "Dailymail", value: "dailymail"},
+    {label: "Dailymotion", value: "Dailymotion"},
+    {label: "Discovery", value: "discovery"},
+    {label: "Disney", value: "disney"},
+    {label: "Facebook", value: "facebook"},
+    {label: "Fox Sports", value: "foxsports"},
+    {label: "FX", value: "fx"},
+    {label: "Game Informer", value: "gameinformer"},
+    {label: "Gfycat", value: "gfycat"},
+    {label: "go90", value: "go90"},
+    {label: "GodTube", value: "godtube"},
+    {label: "HBO", value: "hbo"},
+    {label: "HellPorno", value: "hellporno"},
+    {label: "Historic Films", value: "historicfilms"},
+    {label: "Hot New Hiphop", value: "hotnewhiphop"},
+    {label: "HowStuffWorks", value: "howstuffworks"},
+    {label: "IGN", value: "ign"},
+    {label: "IMDB", value: "imdb"},
+    {label: "Instagram", value: "instagram"},
+    {label: "KeezMovies", value: "keezmovies"},
+    {label: "Khan Academy", value: "Khan Academy"},
+    {label: "Kickstarter", value: "kickstarter"},
+    {label: "Liveleak", value: "liveleak"},
+    {label: "Library of Congress", value: "loc"},
+    {label: "Love HomePorn", value: "lovehomeporn"},
+    {label: "Lynda", value: "lynda"},
+    {label: "MLB", value: "mlb"},
+    {label: "Morningstar", value: "morningstar"},
+    {label: "MTV", value: "mtv"},
+    {label: "MVA", value: "mva"},
+    {label: "MySpace", value: "myspace"},
+    {label: "Vice", value: "vice"}
+
+
+];

@@ -27,7 +27,19 @@ const HomeComponent = ({server_os, server_port, server_ip, updateOperatingSystem
                         </div>
                     </Row>
                 </Tab>
-                <Tab title="Help"/>
+                <Tab title="Help"><Collapsible accordion>
+                    {
+                        QuestionAndAnswers.map(QandA => {
+                            return (
+                                <CollapsibleItem header={QandA.question}>
+                                    <p>
+                                        {QandA.answer}
+                                    </p>
+                                </CollapsibleItem>
+                            )
+                        })
+                    }
+                </Collapsible></Tab>
             </Tabs>
 
         </div>

@@ -6,7 +6,7 @@ from queue import Queue
 from threading import Thread
 import multiprocessing
 import youtube_dl
-
+from liquid_dl.settings import BASE_DIR
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'liquid_dl.settings')
 django.setup()
 
@@ -117,4 +117,4 @@ def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
         worker.start()
     # Causes the main thread to wait for the queue to finish processing all the tasks
     queue.join()
-    os.chdir('/')
+    os.chdir(BASE_DIR)

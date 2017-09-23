@@ -3,11 +3,15 @@ from __future__ import unicode_literals
 import ast
 import json
 import traceback
+
+import youtube_dl
 from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.core import serializers
 
 from liquid.auth.usermanagement import update_password
+from liquid.models import VideoSubscription
 from liquid.workers.utility import update_requirement_dependencies
 from liquid_dl import settings as liquid_dl_settings
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
@@ -16,7 +20,6 @@ from liquid.workers.single_thread_download_worker import youtube_dl_single_threa
 from liquid.workers.soundcloud import SoundcloudDLWorker
 from liquid.workers.wget import WgetDLWorker
 from liquid.workers.youtube_dl_worker import YoutubeDLWorker
-
 
 
 def schedule(request):
@@ -252,6 +255,9 @@ def download_manager_get_downloads(request):
 
 @ajax_request
 def download_manager_get_subscriptions(request):
+    subscriptions = VideoSubscription.objects.filter(front_end_visible=True)
+    data = serializers.serialize("json", subscriptions)
+    print(data)
     return JsonResponse({
         "subscriptions": [
             {
@@ -291,17 +297,31 @@ def download_manager_change_subscription(request):
 @ajax_request
 def download_manager_add_subscription(request):
     """
-    Add Subscription
+    Adds Subscription using YoutubeDLWorker
     :param request: Ajax request
     :return: 
     """
     response = request.GET
+    # TODO: Get rid of unnecessary variable dictionary
     variable_dictionary = {
         "url": response.get('url'),
-        "download_dir": response.get('download_dir'),
-        "format": response.get('format'),
-        "output_template": response.get('output_template')
+        "provider": response.get('provider'),
+        "folder_path": response.get("folder_path"),
+        "subscription_name": response.get('subscription_name'),
+        "output_template": json.loads(response.get('output_template', None)),
     }
+    params = {
+        'folder_path': variable_dictionary["folder_path"],
+        'provider': variable_dictionary["provider"],
+        'subscription_name': variable_dictionary[
+            "subscription_name"],
+        'output_template': variable_dictionary[
+            "output_template"]
+    }
+    subscription = YoutubeDLWorker(url=variable_dictionary["url"], params=params)
+    subscription = subscription.create_subscription()
+    YoutubeDLWorker.download_subscription_in_directory(subscription)
+
     pass
 
 
