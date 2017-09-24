@@ -132,6 +132,7 @@ class YoutubeDLWorker(object):
 
 
 class SubscriptionLogger(object):
+    # TODO: Wrtie Tests
     def __init__(self, subscription):
         self.subscription = subscription
         pass
@@ -142,7 +143,7 @@ class SubscriptionLogger(object):
             try:
                 found = re.findall(r'\d+', msg)
                 self.subscription.number_downloaded, self.subscription.total_number_files = (
-                int(found[0]), int(found[1]))
+                    int(found[0]), int(found[1]))
                 self.subscription.save()
             except AttributeError:
                 # AAA, ZZZ not found in the original string

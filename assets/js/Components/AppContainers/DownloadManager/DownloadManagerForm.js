@@ -4,13 +4,44 @@ import {Button, Col, Collection, CollectionItem, Icon, MediaBox, ProgressBar, Ro
 import SubscriptionCreationModal from "../ModalContainer/SubscriptionCreationModal";
 import SkyLight from "react-skylight";
 import FloatingMenuItem from "../../UtitlityComponents/FloatingMenuItem"
+import {ErrorNotificationFactory} from "../../../utility/NotificationFactories";
+import store from "../../../store/globalstore";
+import $ from 'jquery';
+import {updateDownloadManagerSubs} from "../../../actions/download_manager/download_manager";
+
 
 class DownloadManagerForm extends React.Component {
     constructor(props) {
         super(props);
+        this.updateSubscriptions();
+        setInterval(() => {
+            this.updateSubscriptions()
+        }, 8000);
 
     }
 
+    updateSubscriptions = () => {
+        {
+            let state = store.getState();
+            $.ajax({
+                url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/subscriptions/list',
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    if (!(response["error"] === undefined)) {
+                        ErrorNotificationFactory(response["error"]);
+                    }
+                    else {
+                        store.dispatch(updateDownloadManagerSubs(JSON.parse(response["subscriptions"])));
+                    }
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(request));
+                }
+            });
+        }
+
+    };
 
     render() {
         let dislogStyle = {
@@ -20,6 +51,7 @@ class DownloadManagerForm extends React.Component {
             marginTop: '-300px',
             marginLeft: '-35%',
         };
+
         return (
         <div className="appContainer">
             <Row>
@@ -34,19 +66,20 @@ class DownloadManagerForm extends React.Component {
                                             <CollectionItem>
 
                                                 <Col s={2}><MediaBox
-                                                    src={"http://127.0.0.1:8000/static/img/icons/png/" + subscription.provider + ".png"}
-                                                    caption={subscription.provider + "-" + subscription.subscription_name}
+                                                    src={"http://127.0.0.1:8000/static/img/icons/png/" + subscription.fields.provider + ".png"}
+                                                    caption={subscription.fields.provider + "-" + subscription.fields.subscription_name}
                                                     width="50"/></Col>
                                                 <Col s={4}><p
-                                                    className="media-heading">{subscription.subscription_name}</p>
+                                                    className="media-heading">{subscription.fields.subscription_name}</p>
                                                 </Col>
                                                 <Col s={1}><p
-                                                    className="media-heading">{subscription.number_downloaded}/{subscription.total_number_files}</p>
+                                                    className="media-heading">{subscription.fields.number_downloaded}/{subscription.fields.total_number_files}</p>
                                                 </Col>
                                                 <Col s={2}> <Button
-                                                    onClick={console.log(subscription.url)}>Edit</Button></Col>
+                                                    onClick={console.log(subscription.url)}>Info</Button></Col>
                                                 <Col s={2}><Button
-                                                    onClick={console.log(subscription.url)}>Refresh</Button></Col>
+                                                    onClick={(e) => {
+                                                    }}>Refresh</Button></Col>
                                                 <Col s={1}><Icon>clear</Icon></Col>
                                             </CollectionItem>
                                         </Row>

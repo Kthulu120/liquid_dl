@@ -259,28 +259,7 @@ def download_manager_get_subscriptions(request):
     data = serializers.serialize("json", subscriptions)
     print(data)
     return JsonResponse({
-        "subscriptions": [
-            {
-                "url": "https://www.youtube.com/channel/UC6-ymYjG0SU0jUWnWh9ZzEQ",
-                "folder_path": "C:/tmp/toot",
-                "provider": "youtube",
-                "subscription_name": "Wisecrack",
-                "number_downloaded": "23",
-                "total_number_files": "76",
-                "front_end_visible": True,
-
-            },
-            {
-                "url": "https://www.youtube.com/channel/UC6-ymYjG0SU0jUWnWh9ZzEQ",
-                "folder_path": "C:/tmp/toot/toot",
-                "provider": "youtube",
-                "subscription_name": "Chrome Dev Channel",
-                "number_downloaded": "16",
-                "total_number_files": "251",
-                "front_end_visible": True,
-
-            }
-        ]
+        "subscriptions": data
     })
 
 
@@ -308,7 +287,7 @@ def download_manager_add_subscription(request):
         "provider": response.get('provider'),
         "folder_path": response.get("folder_path"),
         "subscription_name": response.get('subscription_name'),
-        "output_template": json.loads(response.get('output_template', None)),
+        "output_template": response.get('output_template'),
     }
     params = {
         'folder_path': variable_dictionary["folder_path"],

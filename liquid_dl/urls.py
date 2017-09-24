@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+
+import liquid
 from liquid.views import schedule
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^liquid-dl', schedule, name='home'),
     url(r'^$', schedule, name='home'),
-    url(r'^liquid-dl$', include('liquid.urls')),
+    url(r'^liquid-dl/', include('liquid.urls')),
+
 ]

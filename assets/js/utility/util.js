@@ -34,6 +34,7 @@ export const getOS = () => {
  */
 export const submitNewSubscription = (subscription) => {
     let state = store.getState();
+    console.log(subscription);
     $.ajax({
 
         url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/subscriptions/create',

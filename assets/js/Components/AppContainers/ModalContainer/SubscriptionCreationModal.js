@@ -15,8 +15,19 @@ class SubscriptionCreationModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.getInitialState();
+
     }
 
+    handleOnChange = (value, item) => {
+        const {multi} = this.state;
+        if (multi) {
+            console.log(value);
+            this.setState({[item]: value});
+        } else {
+            this.setState({value});
+        }
+
+    };
 
     getInitialState = () => {
         return {
@@ -24,6 +35,7 @@ class SubscriptionCreationModal extends React.Component {
             folder_path: '',
             subscription_name: '',
             output_template: '',
+            provider: '',
             options: {
                 output_title_options: [{value: '%(id)s', label: 'id'}, {value: '%(title)s', label: 'title'}, {
                     value: '%(upload_date)s', label: 'upload_date'
@@ -61,21 +73,12 @@ class SubscriptionCreationModal extends React.Component {
     };
 
 
-    handleOnChange = (value, item) => {
-        const {multi} = this.state;
-        if (multi) {
-            console.log(value);
-            this.setState({[item]: value});
-        } else {
-            this.setState({value});
-        }
 
-    };
     handleExampleChange = () => {
         let ex = "";
         if (this.state.output_title.length > 0) {
             for (let i = 0; i < this.state.output_title.length; i++) {
-                ex += "%(" + this.state.output_title[i].value + ")s"
+                ex += "" + this.state.output_title[i].value + ""
             }
             this.state.example = ex;
             return ex;
@@ -92,19 +95,25 @@ class SubscriptionCreationModal extends React.Component {
             <div>
                 <Row>
                     <Col s={12}>
-                        <Input label="URL" className={"modal-input"}/>
+                        <Input label="URL" className={"modal-input"} onChange={(e) => {
+                            this.handleOnChange(e.target.value, "url")
+                        }}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col s={12}>
                         <Input className={"modal-input"}
-                               label="Folder Path (use forward slashes...trust us)"/>
+                               label="Folder Path (use forward slashes...trust us)" onChange={(e) => {
+                            this.handleOnChange(e.target.value, "folder_path")
+                        }}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col s={12}>
                         <Input className={"modal-input"}
-                               label="Provider" type='select'>{
+                               label="Provider" type='select' onChange={(e) => {
+                            this.handleOnChange(e.target.value, "provider")
+                        }}>{
                             SubscriptionProvders.map(provider => {
                                 return (
                                     <option value={provider.value} key={provider.value}>{provider.label}</option>
@@ -116,7 +125,9 @@ class SubscriptionCreationModal extends React.Component {
                 <Row>
                     <Col s={12}>
                         <Input className={"modal-input"}
-                               label="Subscription Name"/>
+                               label="Subscription Name" onChange={(e) => {
+                            this.handleOnChange(e.target.value, "subscription_name")
+                        }}/>
                     </Col>
                 </Row>
                 <Row>

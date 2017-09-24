@@ -4,7 +4,7 @@ import React from "react";
 export const updateDownloadManagerSubs = (path) => {
     return {
         type: 'SET_SUBSCRIPTION_MANAGER',
-        path: path
+        downloads: path
     }
 };
 export const removeDownloadManagerSubsciption = (path) => {

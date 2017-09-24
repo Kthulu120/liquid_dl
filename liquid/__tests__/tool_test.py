@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.test import TestCase
 from rest_framework.test import APIClient
 
+from liquid.workers.youtube_dl_worker import YoutubeDLWorker
+
 
 class FFmpegConversionTest(TestCase):
     def setUp(self):
@@ -173,7 +175,7 @@ class WgetTest(TestCase):
 
     def test_basic_download(self):
         client = APIClient()
-        p = client.get('http://127.0.0.1/wget-submit',
+        p = client.get('http://127.0.0.1/liquid-dl/wget-submit',
                        {
                            #  Our config options
                            u'url': self.google, u'output_path': self.test_dir, u'depth_level': u'0',
@@ -222,13 +224,12 @@ class YoutubeDLTest(TestCase):
         """
         import time
         # Uncomment to observe changes in file viewer
-        time.sleep(5)
         os.chdir('/')
         shutil.rmtree(self.test_dir)
 
     def test_basic_download(self):
         client = APIClient()
-        p = client.get('http://127.0.0.1/youtubedl-get-formats',
+        p = client.get('http://127.0.0.1/liquid-dl/youtubedl-get-formats',
                        {
                            u'url': u'https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz',
                            u'output_path': u'C:/tmp/toot',
@@ -241,12 +242,13 @@ class YoutubeDLTest(TestCase):
 
     def test_submit(self):
         client = APIClient()
-        p = client.get('http://127.0.0.1/youtubedl-submit',
+        # sub = YoutubeDLWorker("https://www.youtube.com/channel/UCs8nP5mUR3pwJmgixsul8Hw", {"folder_path": "C:/tmp/toot","subscription_name": "doge","provider": "youtube"})
+        # sub = sub.create_subscription()
+        # YoutubeDLWorker.download_subscription_in_directory(sub)
+        p = client.get('http://127.0.0.1/liquid-dl/download-manager/subscriptions/create',
                        {
-                           u'url': u'https://www.youtube.com/playlist?list=PLBML8SXyfQ6f0HYiKTs3riLBTaQfO-sGz',
-                           u'output_path': u'C:/tmp/toot',
-                           u'make_folder': u'false',
-                           u'new_folder_name': u'toot',
-                           u'is_playlist': u'false',
-                           u'chosen_formats': u"[{u'id': u'https://www.youtube.com/watch?v=10a7Xz0DzIQ', u'chosen_format': u'139'},{u'id': u'https://www.youtube.com/watch?v=adzEHy8-dus', u'chosen_format': u'137'},{u'id': u'https://www.youtube.com/watch?v=FC8ZCOrpFA0', u'chosen_format': u'18'}]"
+                           u'url': u'https://www.youtube.com/channel/UCs8nP5mUR3pwJmgixsul8Hw',
+                           u'folder_path': u'C:/tmp/toot',
+                           u'provider': u'youtube',
+                           u"subscription_name": u"doge"
                        }, format='json')

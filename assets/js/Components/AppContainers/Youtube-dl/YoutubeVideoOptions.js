@@ -10,7 +10,7 @@ const YoutubeVideoOptions = (videos, onChangeFormat) => (
                         <Row>
                             <CollectionItem>
                                 <Input name={'youtube-dl-' + vid.video_name} type='radio'
-                                       value={vid.formats[0]['id'] + '{split_here}' + 'bestaudio+bestvideo'}
+                                       value={vid.formats[0]['id'] + '{split_here}' + 'bestvideo+bestaudio'}
                                        onChange={(e) => {
                                            videos.onChangeFormat(e.target.value)
                                        }}/>
