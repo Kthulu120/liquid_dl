@@ -1,8 +1,7 @@
 export const QuestionAndAnswers = [
     {
         question: "Why isn't Liquid-DL launching commands when I attempt to execute them",
-        answer: "Typically this means that you need to reconfigure your settings since the browser uses localStorage to be safe but currently" +
-        " we simply send the request the to the server ip(or localhost aka '127.0.0.1' and port if your issues are alleviated then put in an issue on github and I'll respond."
+        answer: "Open the developer console and try and check the network to make sure requests are going to the correct port"
     },
     {
         question: "Hey I looked at the commands being executed and you've formatted them wrong and/or improperly configured them",
@@ -20,6 +19,14 @@ export const QuestionAndAnswers = [
         "even better fork and build it yourself so we can merge it to the master branch"
     },
     {
+        question: "These Settings aren't working",
+        answer: "We haven't made them work yet"
+    },
+    {
+        question: "Where's CloudCmd?",
+        answer: "We haven't made it viewable yet, but we're almost done integrating it so expect it September 25th or 26th"
+    },
+    {
         question: "Will you support (insert application here)?",
         answer: "Put in the request and we can try or if you implement and document it your code we'll merge it into the master branch"
     },
@@ -34,7 +41,7 @@ export const QuestionAndAnswers = [
     {
         question: "Can anyone contribute?",
         answer: "Of course, in fact if your a new programmer with a python or react background look at the code its a bit messy but " +
-        "improve what you can even if it's syntax or to increase the verbosity of the variables so it's more readable"
+        "improve what you can even if it's syntax, writing documentation or to increase the verbosity of the variables so it's more readable"
     },
     {
         question: "Why doesn't youtube-dl support non-youtube sites?",
@@ -46,7 +53,7 @@ export const QuestionAndAnswers = [
     },
     {
         question: "Can we donate to this project for being dope as hell?",
-        answer: "Nah, honestly donate it to actual important things affecting actual people's lives"
+        answer: "Nah, honestly donate it to actual important things affecting actual people's lives. But please star on Github I appreciate it alot"
     },
 ];
 
@@ -91,7 +98,7 @@ export const SubscriptionProvders = [
     {label: "Kickstarter", value: "kickstarter"},
     {label: "Liveleak", value: "liveleak"},
     {label: "Library of Congress", value: "loc"},
-    {label: "Love HomePorn", value: "lovehomeporn"},
+    {label: "LoveHomePorn", value: "lovehomeporn"},
     {label: "Lynda", value: "lynda"},
     {label: "MLB", value: "mlb"},
     {label: "Morningstar", value: "morningstar"},

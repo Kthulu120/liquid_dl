@@ -11,7 +11,7 @@ class YoutubedlVideo(models.Model):
     The youtube-dl video model
     """
     url = models.CharField(max_length=512, unique=True, null=True)
-    folder_path = models.CharField(max_length=1024, unique=False)
+    folder_path = models.CharField(max_length=1024, unique=False, null=True, blank=True)
     download_status = models.CharField(max_length=32, default='N/A', null=True, blank=True)
     download_speed = models.CharField(max_length=32, default='N/A', null=True, blank=True)
     download_percentage = models.CharField(max_length=16, default='N/A', null=True, blank=True)

@@ -30,7 +30,7 @@ export const getOS = () => {
 };
 
 /**
- *
+ * Creates a new Subscription with the given data passed in
  */
 export const submitNewSubscription = (subscription) => {
     let state = store.getState();
@@ -62,6 +62,9 @@ export const submitNewSubscription = (subscription) => {
     });
 };
 
+/**
+ * Gets a list of all subscriptions in the database that are visible in the back-end
+ */
 export const getListOfSubscriptions = () => {
     let state = store.getState();
     $.ajax({
@@ -82,14 +85,18 @@ export const getListOfSubscriptions = () => {
     });
 };
 
-export const makeSubscriptionNotVisible = (link) => {
+/**
+ * Hides a download from the list so it's no longer visible on the front-end
+ * @param url the URL of the download as an unique identifier for the download so that we can hide it
+ */
+export const makeDownloadHidden = (url) => {
     let state = store.getState();
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/subscriptions/change-visibility',
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/download-manager/downloads/hide',
         type: 'GET',
         data: {
-            url: link,
+            url: url
         },
         dataType: 'json',
         success: function (response) {
@@ -97,11 +104,69 @@ export const makeSubscriptionNotVisible = (link) => {
                 ErrorNotificationFactory(response["error"]);
             }
             else {
-                SucessNotificationFactory(response["success"])
+                SucessNotificationFactory(response["success"]);
+                getListOfSubscriptions()
             }
         },
         error: function (request, error) {
             alert("Request: " + JSON.stringify(request));
+        }
+    });
+};
+
+
+export const getSettingsForApplication = () => {
+    let state = store.getState();
+    let data = {};
+    $.ajax({
+
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/settings/get-settings',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (!(response["error"] === undefined)) {
+                ErrorNotificationFactory(response["error"]);
+            }
+            else {
+                console.log(response["data"]);
+                data = JSON.parse(response["data"])
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+        }
+    });
+    return data;
+};
+
+export const saveYoutubeDLSettings = (settings) => {
+    let state = store.getState();
+    console.log(settings);
+    $.ajax({
+
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/settings/youtubedl/save',
+        type: 'GET',
+        data: {
+            output_template: settings.output_example,
+            subtitles: settings.subtitles,
+            subtitle_languages: settings.subtitle_languages,
+            write_auto_sub: settings.write_auto_sub,
+            ignore_errors: settings.ignore_errors
+
+
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (!(response["error"] === undefined)) {
+                ErrorNotificationFactory(response["error"]);
+            }
+            else {
+                SucessNotificationFactory(response["success"]);
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+
         }
     });
 };

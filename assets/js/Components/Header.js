@@ -27,6 +27,8 @@ const Header = () => (
 
                 <li><NavLink to='/ffmpeg' activeClassName="active"><i className="fa fa-shekel nav-icon"/><span
                     className="nav-text"> FFMPEG</span></NavLink></li>
+                <li><NavLink to='/cloudcmd' activeClassName="active"><i className="fa fa-folder nav-icon"/><span
+                    className="nav-text"> Cloudcmd</span></NavLink></li>
 
             </ul>
         </nav>

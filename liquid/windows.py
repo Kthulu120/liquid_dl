@@ -1,31 +1,33 @@
-# PLAYGROUND FOR WINDOWS COMMANDS
-import subprocess
+def findPotentialInsiderTraders(datafeed):
+    trades = []
+    stock_changes = []
+    flagged = []
+    s = 0
+    for x in datafeed:
+        if s is not 0:
+            if x.count("|") is 1:
+                stock_changes.append(x.split("|"))
+            else:
+                trades.append(x.split("|"))
+        else:
+            s += 1
+    for trade in trades:
+        # day | Trader | Trade Type | Amt
+        this_trade = (int(trade[0]), trade[1], trade[2], int(trade[3]))
+        our_range = range((this_trade[0]) - 3, (this_trade[0]) + 3)
+        last_amt = (int(stock_changes[0][0]), int(stock_changes[1][1]))
 
-test = "/some/Home"
-test2 = "avi"
-hm = '%'
-print (hm)
-test3 = "webm"
-selectiveEscape = r"cd {0} && for file in *.{1}; do ffmpeg -i \"$file\" \"${{file{3}.{1}}}\".{2}; done".format(test, test2, test3 , '%')
-p = {}
-s = {}
-t = 2
-# a = subprocess.check_output(['cmd', '/c', 'cd C:/tmp/toot && youtube-dl -F https://www.youtube.com/watch?v=F4hNX1oalL8'])
-# a = (list(a.split('\n')))
-# del a[0:6]
-# print(a)
+        for stock_change in stock_changes:
+            # DAY | Stock Price
+            stock_change = (int(stock_change[0]), int(stock_change[1]))
 
-# m = []
-# try:
-#    popp = subprocess.check_output(['cmd', '/c',
-#                                    'cd C:/tmp/toot && youtube-dl -f 139  https://www.youtube.com/watch?v=A2_pboioWf0 --write-info-json  --simulate '])
-#    popp = (list(popp.split('\n')))
-#    del popp[0:6]
-#    for x in popp:
-#        yum = (' '.join(x.split()))
-#        m.append(yum)
-#
-#    print (m)
-# except Exception as e:
-#    print(e)
-## print(popp)
+            if stock_change[0] in our_range:
+                if this_trade[2] == "BUY":
+                    if ((stock_change[1] - last_amt[1]) * this_trade[3]) >= 500000:
+                        flagged.append(str(trade[0]) + "|" + str(trade[1]))
+                if this_trade[2] == "SELL" and ((stock_change[1] - last_amt[1]) * this_trade[3] * -1) >= 500000:
+                    flagged.append(str(trade[0]) + "|" + str(trade[1]))
+    if flagged:
+        return flagged
+    else:
+        return ["ALL CLEAR"]

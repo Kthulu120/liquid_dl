@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import DownloadManagerForm from "./DownloadManagerForm";
-import {updateDownloadManagerSubs} from "../../../actions/download_manager/download_manager";
+import {updateSubscriptionManagerSubs} from "../../../actions/download_manager/download_manager";
 import {ErrorNotificationFactory} from "../../../utility/NotificationFactories";
 import $ from "jquery";
 import store from "../../../store/globalstore";
@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => {
                         ErrorNotificationFactory(response["error"]);
                     }
                     else {
-                        dispatch(updateDownloadManagerSubs(response["subscriptions"]));
+                        dispatch(updateSubscriptionManagerSubs(response["subscriptions"]));
                     }
                 },
                 error: function (request, error) {

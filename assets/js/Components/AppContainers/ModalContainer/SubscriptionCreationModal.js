@@ -73,7 +73,10 @@ class SubscriptionCreationModal extends React.Component {
     };
 
 
-
+    /**
+     * Handles the example change that will be passed to the
+     * @returns {string} the new filename template
+     */
     handleExampleChange = () => {
         let ex = "";
         if (this.state.output_title.length > 0) {

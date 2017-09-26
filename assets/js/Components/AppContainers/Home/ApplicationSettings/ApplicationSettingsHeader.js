@@ -4,7 +4,10 @@ import {Col, Collection, CollectionItem} from "react-materialize";
 import store from '../../../../store/globalstore';
 import {updateSettingsChoice} from "../../../../actions/global/global";
 
-
+/**
+ * Manages which application settings we will be modifying
+ * @constructor Creates ApplicationSettingsHeader
+ */
 const ApplicationSettingsHeader = () => (
 
 
@@ -18,7 +21,6 @@ const ApplicationSettingsHeader = () => (
         <CollectionItem href={null}><h6 onClick={(e) => {
             store.dispatch(updateSettingsChoice("cloudcmd"))
         }}>Cloud Commander</h6></CollectionItem>
-        <CollectionItem href={null}>Alvin</CollectionItem>
     </Collection>
 
 

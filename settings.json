@@ -15,6 +15,9 @@
     "ignore_errors": true
   },
   "cloudcmd": {
-    "port": "8033"
+    "initial_random_password_set": false,
+    "port": "8033",
+    "username": "admin",
+    "password": "admin"
   }
 }

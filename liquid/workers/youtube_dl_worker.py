@@ -20,7 +20,15 @@ from liquid.models import VideoSubscription, YoutubedlVideo
 # https://www.youtube.com/channel/UCs8nP5mUR3pwJmgixsul8Hw
 
 class YoutubeDLWorker(object):
+    """
+    Handles youtube-dl options and downloads videos accordingly
+    """
     def __init__(self, url, params):
+        """
+        
+        :param url: 
+        :param params: Params are the different settings that are passed in with the object
+        """
         self.url = url
         self.params = params
 
@@ -122,6 +130,7 @@ class YoutubeDLWorker(object):
             "nooverwrites": True,
             'format': subscription.format,
             'logger': logger,
+            'outtmpl': subscription.output_template,
             'progress_hooks': [logger.my_hook],
         }
         os.chdir(subscription.folder_path)
@@ -132,6 +141,10 @@ class YoutubeDLWorker(object):
 
 
 class SubscriptionLogger(object):
+    """
+    Logger for Subscriptions, which logs youtube-dl traffic
+    """
+
     # TODO: Wrtie Tests
     def __init__(self, subscription):
         self.subscription = subscription
@@ -139,7 +152,7 @@ class SubscriptionLogger(object):
 
     def debug(self, msg):
         print(msg)
-        if (re.match(r'\[download] Downloading video ', msg)):
+        if re.match(r'\[download] Downloading video ', msg):
             try:
                 found = re.findall(r'\d+', msg)
                 self.subscription.number_downloaded, self.subscription.total_number_files = (

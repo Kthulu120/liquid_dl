@@ -40,6 +40,30 @@ const HomeComponent = ({server_os, server_port, server_ip, updateOperatingSystem
                         })
                     }
                 </Collapsible></Tab>
+                <Tab title="Development Roadmap">
+                    <Row>
+                        <label>Welcome Tech Enthusiasts, Here's some dope things I'm working on!</label>
+                    </Row>
+                    <Row>
+                        <label>Service Worker Creation</label>
+                    </Row>
+                    <Row>
+                        <label>Adding in support for beets</label>
+                    </Row>
+                    <Row>
+                        <label>Adding in support for webtorrent</label>
+                    </Row>
+                    <Row>
+                        <label>Adding in support for RipMe</label>
+                    </Row>
+                    <Row>
+                        <label>Adding in support for Rclone(Pray for my soul)</label>
+                    </Row>
+
+                    <label>Have some Application you created/want? File an issue on github & guess what, we probably can
+                        add it in or build</label>
+
+                </Tab>
             </Tabs>
 
         </div>

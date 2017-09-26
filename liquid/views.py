@@ -2,16 +2,16 @@
 from __future__ import unicode_literals
 import ast
 import json
+import os
 import traceback
 
-import youtube_dl
 from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.core import serializers
 
-from liquid.auth.usermanagement import update_password
-from liquid.models import VideoSubscription
+from liquid.auth.usermanagement import update_password, create_new_cloudcmd_password
+from liquid.models import VideoSubscription, YoutubedlVideo
 from liquid.workers.utility import update_requirement_dependencies
 from liquid_dl import settings as liquid_dl_settings
 from liquid.workers.ffmpeg import LinuxFfmpegConversionWorker, WindowsFfmpegConversionWorker
@@ -24,10 +24,10 @@ from liquid.workers.youtube_dl_worker import YoutubeDLWorker
 
 def schedule(request):
     context = {}
-    cmd = "node node_modules/cloudcmd/bin/cloudcmd"
     return render(request, 'home.html', context=context)
 
 
+# Submission Views for forms
 @ajax_request
 def FFMPEG_submit(request):
     """
@@ -229,6 +229,8 @@ def youtube_dl_get_formats(request):
         return JsonResponse({'error': e.message})
 
 
+# Download Manager Views
+
 @ajax_request
 def download_manager_get_downloads(request):
     """
@@ -237,19 +239,11 @@ def download_manager_get_downloads(request):
     :param request: 
     :return: JsonResponse of serialized YoutubeDLVideo objects
     """
+    subscriptions = YoutubedlVideo.objects.filter(front_end_visible=True)
+    data = serializers.serialize("json", subscriptions)
+    print(data)
     return JsonResponse({
-        "videos": [
-            {
-                "url": "https://www.youtube.com/watch?v=WgydZwHE3yA",
-                "download_status": "finished",
-                "download_speed": "3.2 MB/s",
-                "download_percentage": "100%",
-                "total_size": "4.98 MB",
-                "filename": "Building a GraphQL Server [Part 1] - What Is GraphQL?",
-                "eta": "0s",
-                "front_end_visible": True
-            }
-        ]
+        "downloads": data
     })
 
 
@@ -264,13 +258,17 @@ def download_manager_get_subscriptions(request):
 
 
 @ajax_request
-def download_manager_change_subscription(request):
+def download_manager_delete_subscription(request):
     """
     Update a Subscription typically just a folder path
     :param request: Ajax request
     :return: 
     """
-    pass
+    response = request.GET
+    print(response.get("url"))
+    video = VideoSubscription.objects.get(url=response.get("url"))
+    video.delete()
+    return JsonResponse({"success": "Ended Subscription"})
 
 
 @ajax_request
@@ -287,7 +285,7 @@ def download_manager_add_subscription(request):
         "provider": response.get('provider'),
         "folder_path": response.get("folder_path"),
         "subscription_name": response.get('subscription_name'),
-        "output_template": response.get('output_template'),
+        "output_template": response.get('output_template', "%(title)s-%(id)s.%(ext)s"),
     }
     params = {
         'folder_path': variable_dictionary["folder_path"],
@@ -300,9 +298,10 @@ def download_manager_add_subscription(request):
     subscription = YoutubeDLWorker(url=variable_dictionary["url"], params=params)
     subscription = subscription.create_subscription()
     YoutubeDLWorker.download_subscription_in_directory(subscription)
+    return JsonResponse({"success": "Subscription was successfully created"})
 
-    pass
 
+# Settings Views
 
 @ajax_request
 def update_dependencies(request):
@@ -316,14 +315,142 @@ def update_dependencies(request):
 
 
 @ajax_request
-def update_video_download(request):
+def get_liquid_dl_settings(request):
     """
-    Updates a video download
+    Updates the dependencies for the entire application (youtube-dl and scdl)
+    :param request: Ajax request
+    :return: 
+    """
+
+    with open("settings.json") as some_settings:
+        response = request.GET
+        print (response)
+        new_settings = json.loads(some_settings.read())
+        print(some_settings)
+        some_settings.close()
+
+    return JsonResponse({"success": "Liquid-dl Successfully Updated", "data": json.dumps(new_settings)})
+
+
+@ajax_request
+def update_liquid_dl_settings(request):
+    """
+    Updates the dependencies for the entire application (youtube-dl and scdl)
+    :param request: Ajax request
+    :return: 
+    """
+
+    with open("settings.json") as some_settings:
+        response = request.GET
+        new_settings = json.loads(some_settings.read())
+        print(some_settings)
+        some_settings.close()
+
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+@ajax_request
+def update_cloud_cmd_settings(request):
+    """
+    Updates the dependencies for the entire application (youtube-dl and scdl)
+    :param request: Ajax request
+    :return: 
+    """
+
+    with open("settings.json") as some_settings:
+        response = request.GET
+        new_settings = json.loads(some_settings.read())
+        print(some_settings)
+        some_settings.close()
+
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+@ajax_request
+def update_cloud_cmd_settings(request):
+    """
+    Updates the dependencies for the entire application (youtube-dl and scdl)
+    :param request: Ajax request
+    :return: 
+    """
+
+    with open("settings.json") as some_settings:
+        response = request.GET
+        new_settings = json.loads(some_settings.read())
+        print(some_settings)
+        some_settings.close()
+    cmd = "node node_modules/cloudcmd/bin/cloudcmd"
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+@ajax_request
+def update_youtube_dl_settings(request):
+    """
+    Updates the dependencies for the entire application (youtube-dl and scdl)
+    :param request: Ajax request
+    :return: 
+    """
+
+    with open("settings.json") as some_settings:
+        response = request.GET
+        print (response)
+        new_settings = json.loads(some_settings.read())
+        print(new_settings)
+        some_settings.close()
+
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+# Utility Views
+
+@ajax_request
+def hide_video_download(request):
+    """
+    hides a video download
     :param request: 
     :return: 
     """
-    pass
+    response = request.GET
+    video = YoutubedlVideo.objects.get(filename=response.get("url"))
+    video.front_end_visible = False
+    video.save()
+    return JsonResponse({"success": "Hid Video"})
 
+
+@ajax_request
+def start_cloudcmd(request):
+    """
+    Start Cloudcmd
+    :param request: Ajax request
+    :return: 
+    """
+    cmd = "node node_modules/cloudcmd/bin/cloudcmd --one-panel-mode --auth --port "
+    with open("settings.json") as some_settings:
+        new_settings = json.loads(some_settings.read())
+        if new_settings["cloudcmd"]["initial_random_password_set"] == False:
+            create_new_cloudcmd_password()
+            new_settings["cloudcmd"]["initial_random_password_set"] = True
+        cmd += new_settings["cloudcmd"]["port"]
+        some_settings.close()
+    with open("settings.json", "w") as jsonFile:
+        json.dump(new_settings, jsonFile)
+        jsonFile.close()
+    os.system(cmd)
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+@ajax_request
+def get_cloudcmd_settings(request):
+    """
+    Start Cloudcmd
+    :param request: Ajax request
+    :return: 
+    """
+    with open("settings.json") as some_settings:
+        new_settings = json.loads(some_settings.read())
+        print(new_settings)
+        some_settings.close()
+    return JsonResponse({"port": new_settings["cloudcmd"]["port"], "ps": new_settings["cloudcmd"]["password"]})
 
 def auth_password(request):
     password = request.GET.get('ps')

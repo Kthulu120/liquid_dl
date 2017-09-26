@@ -9,6 +9,7 @@ import NotificationsSystem from "reapop";
 import Wget from "./Apps/Wget";
 import YoutubeDL from "./Apps/YoutubeDL";
 import DownloadManager from "./Apps/DownloadManager";
+import CloudCmd from "./Apps/CloudCmd";
 
 const Main = () => (
 
@@ -22,6 +23,7 @@ const Main = () => (
                 <Route path="/ffmpeg" component={FFMPEG}/>
                 <Route path='/youtube-dl' component={YoutubeDL}/>
                 <Route path='/download-manager' component={DownloadManager}/>
+                <Route path='/cloudcmd' component={CloudCmd}/>
             </Switch>
 
         </div>

@@ -247,6 +247,12 @@ div.floating-menu-item.floating-menu-main {
     width: 100% !important;
 }
 
+.media-heading.download-filename {
+    /* line-height: 1.0; */
+    max-height: 3.5rem;
+    overflow: hidden;
+}
+
 @media only screen and (max-width: 1020px) {
     #main-container > div > div > div > div.col-md-3 > nav {
         min-height: min-content !important;

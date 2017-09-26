@@ -13,13 +13,30 @@ urlpatterns = [
     url(r'^youtubedl-get-formats', liquid_views.youtube_dl_get_formats, name='youtube_dl_get_formats'),
     # Download Manager URLs
     url(r'^download-manager/subscriptions/list', liquid_views.download_manager_get_subscriptions,
-        name='youtube_dl_get_formats'),
+        name='download_manager_get_subscriptions'),
+    url(r'^download-manager/subscriptions/delete', liquid_views.download_manager_delete_subscription,
+        name='download_manager_get_downloads'),
     url(r'^download-manager/downloads/list', liquid_views.download_manager_get_downloads,
-        name='youtube_dl_get_formats'),
+        name='download_manager_get_downloads'),
+    url(r'^download-manager/downloads/hide', liquid_views.hide_video_download,
+        name='hide_video_download'),
     url(r'^download-manager/subscriptions/create', liquid_views.download_manager_add_subscription,
         name='add_subscription'),
 
-    # Utility URLs
-    url(r'^download-manager/subscriptions/create', liquid_views.download_manager_add_subscription,
+    # Settings URLs
+    url(r'^settings/cloudcmd/start-server', liquid_views.update_youtube_dl_settings,
+        name='add_subscription'),
+    url(r'^settings/get-settings', liquid_views.get_liquid_dl_settings,
+        name='add_subscription'),
+    url(r'^settings/cloudcmd/save', liquid_views.update_cloud_cmd_settings,
+        name='add_subscription'),
+    url(r'^settings/cloudcmd/get-cloudcmd', liquid_views.get_cloudcmd_settings,
+        name='add_subscription'),
+
+    url(r'^settings/youtubedl/save', liquid_views.update_youtube_dl_settings,
+        name='add_subscription'),
+    url(r'^settings/liquid-dl/save', liquid_views.update_liquid_dl_settings,
+        name='add_subscription'),
+    url(r'^settings/liquid-dl/update-dependencies', liquid_views.update_dependencies,
         name='add_subscription')
 ]
