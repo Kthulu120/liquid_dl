@@ -7,12 +7,6 @@ import FloatingMenuItem from "../../UtitlityComponents/FloatingMenuItem"
 import {ErrorNotificationFactory, SucessNotificationFactory} from "../../../utility/NotificationFactories";
 import store from "../../../store/globalstore";
 import $ from 'jquery';
-import {
-    updateDownloadManagerSubs,
-    updateSubscriptionManagerSubs
-} from "../../../actions/download_manager/download_manager";
-import {makeDownloadHidden} from "../../../utility/util";
-
 
 class CloudCmdForm extends React.Component {
     constructor(props) {
@@ -27,8 +21,7 @@ class CloudCmdForm extends React.Component {
 
             url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/settings/cloudcmd/get-cloudcmd',
             type: 'GET',
-            data: {}
-            ,
+            data: {},
             dataType: 'json',
             success: function (response) {
                 if (!(response["error"] === undefined)) {
@@ -47,9 +40,31 @@ class CloudCmdForm extends React.Component {
                 alert("Request: " + JSON.stringify(request));
             }
         });
-        //console.log(JSON.parse(state["responseText"]));
-        console.log(info);
         return info;
+    };
+
+
+    startCloudCmdServer = () => {
+        let state = store.getState();
+        state = $.ajax({
+
+            url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/settings/cloudcmd/start-server',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (!(response["error"] === undefined)) {
+                    ErrorNotificationFactory(response["error"]);
+                }
+                else {
+                    SucessNotificationFactory(response["success"]);
+                }
+            },
+            error: function (request, error) {
+                alert("Request: " + JSON.stringify(request));
+            }
+        });
+        this.render()
+
     };
 
 
@@ -58,7 +73,9 @@ class CloudCmdForm extends React.Component {
 
         return (
             <div className="appContainer">
-                <Row><label>Password is: {this.state.ps}</label></Row>
+                <Row><Col s={4}><Button className={"indigo darken-3"} onClick={(e) => {
+                    this.startCloudCmdServer()
+                }}>Start Server</Button></Col><label>Password is: {this.state.ps}</label></Row>
                 <iframe src={"http://127.0.0.1:" + this.state.port} width={"900px"} height={"450px"}/>
             </div>
         )

@@ -36,3 +36,21 @@ class VideoSubscription(models.Model):
     front_end_visible = models.BooleanField(default=True, null=False, blank=False)
     output_template = models.CharField(max_length=256, unique=False, default='%(title)s-%(id)s.%(ext)s')
     format = models.CharField(max_length=64, null=True, blank=True, default="bestvideo+bestaudio")
+
+
+class LiquidTorrent(models.Model):
+    """
+    The torrent model for liquid-torrent
+    """
+    name = models.CharField(max_length=1024, unique=False)
+    folder_path = models.CharField(max_length=2056, unique=False)
+    infohash = models.CharField(max_length=1024, default='N/A', null=True, blank=True)
+    magnet_uri = models.CharField(max_length=1024, default='N/A', null=True, blank=True)
+    ratio = models.CharField(max_length=32, default='N/A', null=True, blank=True)
+    download_status = models.CharField(max_length=32, default='N/A', null=True, blank=True)
+    time_left = models.CharField(max_length=32, default='N/A', null=True, blank=True)
+    amt_uploaded = models.CharField(max_length=32, default='N/A', null=True, blank=True)
+    amt_downloaded = models.CharField(max_length=32, default='N/A', null=True, blank=True)
+    speed_down = models.CharField(max_length=16)
+    speed_up = models.CharField(max_length=16, null=True, blank=True)
+    peers = models.CharField(max_length=32)

@@ -28,11 +28,14 @@
   "dependencies": {
     "babel-core": "^6.25.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "body-parser": "^1.18.2",
     "cloudcmd": "^7.7.0",
     "create-react-class": "^15.6.0",
     "css-loader": "^0.28.4",
+    "express": "^4.15.5",
     "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
+    "react-data-grid": "^2.0.60",
     "react-dom": "^15.6.1",
     "react-materialize": "^1.0.8",
     "react-notification-system": "^0.2.15",
@@ -48,7 +51,9 @@
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^4.3.0",
     "redux-thunk": "^2.2.0",
+    "requestify": "^0.2.5",
     "style-loader": "^0.18.2",
-    "webpack": "^2.3.3"
+    "webpack": "^2.3.3",
+    "webtorrent": "^0.98.19"
   }
 }

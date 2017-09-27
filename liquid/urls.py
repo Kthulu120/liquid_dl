@@ -4,6 +4,7 @@ from django.contrib import admin
 from liquid import views as liquid_views
 
 urlpatterns = [
+    url(r'^webtorrent', liquid_views.webtor, name='webtor'),
     url(r'^ffmpeg$', liquid_views.FFMPEG_submit, name='ffmpeg'),
     # url(r'^soundcloud', liquid_views.FFMPEG_submit, name='ffmpeg'),
     url(r'^ffmpeg-submit', liquid_views.FFMPEG_submit, name='ffmpeg_submit'),
@@ -24,7 +25,7 @@ urlpatterns = [
         name='add_subscription'),
 
     # Settings URLs
-    url(r'^settings/cloudcmd/start-server', liquid_views.update_youtube_dl_settings,
+    url(r'^settings/cloudcmd/start-server', liquid_views.start_cloudcmd,
         name='add_subscription'),
     url(r'^settings/get-settings', liquid_views.get_liquid_dl_settings,
         name='add_subscription'),
@@ -38,5 +39,8 @@ urlpatterns = [
     url(r'^settings/liquid-dl/save', liquid_views.update_liquid_dl_settings,
         name='add_subscription'),
     url(r'^settings/liquid-dl/update-dependencies', liquid_views.update_dependencies,
-        name='add_subscription')
+        name='add_subscription'),
+    url(r'^torrents/torrent/update', liquid_views.update_torrent,
+        name='add_subscription'),
+
 ]

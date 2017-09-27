@@ -27,6 +27,10 @@ def schedule(request):
     return render(request, 'home.html', context=context)
 
 
+def webtor(request):
+    context = {}
+    return render(request, 'webtorrent.html', context=context)
+
 # Submission Views for forms
 @ajax_request
 def FFMPEG_submit(request):
@@ -427,11 +431,11 @@ def start_cloudcmd(request):
     cmd = "node node_modules/cloudcmd/bin/cloudcmd --one-panel-mode --auth --port "
     with open("settings.json") as some_settings:
         new_settings = json.loads(some_settings.read())
-        if new_settings["cloudcmd"]["initial_random_password_set"] == False:
-            create_new_cloudcmd_password()
-            new_settings["cloudcmd"]["initial_random_password_set"] = True
-        cmd += new_settings["cloudcmd"]["port"]
         some_settings.close()
+    if new_settings["cloudcmd"]["initial_random_password_set"] == False:
+        create_new_cloudcmd_password()
+        new_settings["cloudcmd"]["initial_random_password_set"] = True
+    cmd += new_settings["cloudcmd"]["port"]
     with open("settings.json", "w") as jsonFile:
         json.dump(new_settings, jsonFile)
         jsonFile.close()
@@ -455,3 +459,9 @@ def get_cloudcmd_settings(request):
 def auth_password(request):
     password = request.GET.get('ps')
     update_password(password)
+
+
+# Torrent Views
+def update_torrent(request):
+    print (request.GET)
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
