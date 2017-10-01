@@ -2,13 +2,23 @@ import logging
 import os
 import django
 from liquid.models import YoutubedlVideo
-from queue import Queue
+import sys
 from threading import Thread
 import multiprocessing
 import youtube_dl
 from liquid_dl.settings import BASE_DIR
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'liquid_dl.settings')
 django.setup()
+STATIC_QUE = []
+is_py2 = sys.version[0] == '2'
+if is_py2:
+    from Queue import Queue as queue
+
+    STATIC_QUE = queue()
+else:
+    import queue as queue
+
+    STATIC_QUE = queue.Queue()
 
 logger = logging.getLogger(__name__)
 
@@ -33,14 +43,7 @@ class MultiProcessorLogger(object):
         assert isinstance(info, dict)
         if info['status'] == 'downloading':
             # print(info)
-            v, s = YoutubedlVideo.objects.update_or_create(url=self.video_id, defaults={
-                "filename": info.get("filename"),
-                "download_status": info.get("status", "N/A"),
-                "download_speed": info.get("_speed_str", "N/A"),
-                "download_percentage": info.get("_percent_str", "N/A"),
-                "total_size": info.get("_total_bytes_str", "N/A"),
-                "eta": info.get("_eta_str", "N/A")
-            })
+            pass
         if info['status'] == 'finished':
             v, s = YoutubedlVideo.objects.update_or_create(url=self.video_id, defaults={
                 "filename": info.get("filename"),
@@ -51,9 +54,9 @@ class MultiProcessorLogger(object):
 
 
 class DownloadWorker(Thread):
-    def __init__(self, queue):
+    def __init__(self, download_worker_queue):
         Thread.__init__(self)
-        self.queue = queue
+        self.queue = download_worker_queue
 
     def run(self):
         directory, link, info_dict = self.queue.get()
@@ -96,7 +99,7 @@ def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
     if links is None:
         links = []
     # Create a queue to communicate with the worker threads
-    queue = Queue()
+    worker_queue = STATIC_QUE
     """
     We must fill the queue beforehand since the threads activate as soon as we insert our tuples and can give 
     file locking issues on Windows
@@ -108,13 +111,13 @@ def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
         print(link)
         logger.info('Queueing {0}'.format(link))
         # Put the tasks into the queue as a tuple
-        queue.put((download_dir, link, info_dict))
+        worker_queue.put((download_dir, link, info_dict))
     # Create 8 worker threads
     for x in range(multiprocessing.cpu_count()):
-        worker = DownloadWorker(queue)
+        worker = DownloadWorker(worker_queue)
         # Setting daemon to True will let the main thread exit even though the workers are blocking
         worker.daemon = True
         worker.start()
     # Causes the main thread to wait for the queue to finish processing all the tasks
-    queue.join()
+    worker_queue.join()
     os.chdir(BASE_DIR)

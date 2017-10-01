@@ -31,6 +31,7 @@ def webtor(request):
     context = {}
     return render(request, 'webtorrent.html', context=context)
 
+
 # Submission Views for forms
 @ajax_request
 def FFMPEG_submit(request):
@@ -456,6 +457,7 @@ def get_cloudcmd_settings(request):
         some_settings.close()
     return JsonResponse({"port": new_settings["cloudcmd"]["port"], "ps": new_settings["cloudcmd"]["password"]})
 
+
 def auth_password(request):
     password = request.GET.get('ps')
     update_password(password)
@@ -465,3 +467,23 @@ def auth_password(request):
 def update_torrent(request):
     print (request.GET)
     return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+@ajax_request
+def create_torrent_from_frontend(request):
+    pass
+
+
+@ajax_request
+def pause_torrent_from_frontend(request):
+    pass
+
+
+@ajax_request
+def destroy_torrent_from_frontend(request):
+    pass
+
+
+@ajax_request
+def get_torrents_from_flood(request):
+    pass

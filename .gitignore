@@ -91,3 +91,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 !/assets/js/Components/AppContainers/ModalContainer/SubscriptionEditModal.js
+!/assets/js/Components/AppContainers/SlurpFrontEnd/Slurp/Components/ControlPanel/Components/SearchBar.js

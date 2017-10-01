@@ -40,7 +40,12 @@ urlpatterns = [
         name='add_subscription'),
     url(r'^settings/liquid-dl/update-dependencies', liquid_views.update_dependencies,
         name='add_subscription'),
-    url(r'^torrents/torrent/update', liquid_views.update_torrent,
+    # Torrent URLS
+    url(r'^torrents/torrent/receive/torrents', liquid_views.update_torrent,
+        name='add_subscription'),
+    url(r'^torrents/torrent/get/torrents', liquid_views.update_torrent,
+        name='add_subscription'),
+    url(r'^torrents/torrent/get/torrents', liquid_views.update_torrent,
         name='add_subscription'),
 
 ]

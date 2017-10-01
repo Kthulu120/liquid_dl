@@ -35,6 +35,7 @@
     "express": "^4.15.5",
     "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
+    "react-contexify": "^2.1.4",
     "react-data-grid": "^2.0.60",
     "react-dom": "^15.6.1",
     "react-materialize": "^1.0.8",

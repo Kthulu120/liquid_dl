@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
 from django.db import models
 
 
@@ -44,7 +45,7 @@ class LiquidTorrent(models.Model):
     """
     name = models.CharField(max_length=1024, unique=False)
     folder_path = models.CharField(max_length=2056, unique=False)
-    infohash = models.CharField(max_length=1024, default='N/A', null=True, blank=True)
+    infohash = models.CharField(max_length=1024, default='N/A', null=True, blank=True, unique=True)
     magnet_uri = models.CharField(max_length=1024, default='N/A', null=True, blank=True)
     ratio = models.CharField(max_length=32, default='N/A', null=True, blank=True)
     download_status = models.CharField(max_length=32, default='N/A', null=True, blank=True)
@@ -53,4 +54,6 @@ class LiquidTorrent(models.Model):
     amt_downloaded = models.CharField(max_length=32, default='N/A', null=True, blank=True)
     speed_down = models.CharField(max_length=16)
     speed_up = models.CharField(max_length=16, null=True, blank=True)
-    peers = models.CharField(max_length=32)
+    peers = models.CharField(max_length=32, null=True)
+    date_added = models.CharField(max_length=64, default=datetime.now(), null=True)
+    date_created = models.CharField(max_length=64, null=True, blank=True)
