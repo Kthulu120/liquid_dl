@@ -10,6 +10,7 @@ import Wget from "./Apps/Wget";
 import YoutubeDL from "./Apps/YoutubeDL";
 import DownloadManager from "./Apps/DownloadManager";
 import CloudCmd from "./Apps/CloudCmd";
+import Fluid from "./AppContainers/SlurpFrontEnd/Fluid";
 
 const Main = () => (
 
@@ -24,6 +25,8 @@ const Main = () => (
                 <Route path='/youtube-dl' component={YoutubeDL}/>
                 <Route path='/download-manager' component={DownloadManager}/>
                 <Route path='/cloudcmd' component={CloudCmd}/>
+                <Route path='/slurp' component={Fluid}/>
+
             </Switch>
 
         </div>

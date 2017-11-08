@@ -12,7 +12,6 @@ const renderCorrectComponent = (current_state) => {
         case 'liquid-dl':
             return (
                 <LiquidDLSettings onChangeValue={(e) => {
-                    console.log(e)
                 }} system_settings={system_settings}/>
             );
         case 'youtube-dl':

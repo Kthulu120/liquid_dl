@@ -4,13 +4,12 @@ import ast
 import json
 import os
 import traceback
-
 from annoying.decorators import ajax_request
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.core import serializers
-
 from liquid.auth.usermanagement import update_password, create_new_cloudcmd_password
+from liquid.forms import UserCreateForm
 from liquid.models import VideoSubscription, YoutubedlVideo
 from liquid.workers.utility import update_requirement_dependencies
 from liquid_dl import settings as liquid_dl_settings
@@ -20,9 +19,20 @@ from liquid.workers.single_thread_download_worker import youtube_dl_single_threa
 from liquid.workers.soundcloud import SoundcloudDLWorker
 from liquid.workers.wget import WgetDLWorker
 from liquid.workers.youtube_dl_worker import YoutubeDLWorker
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 
+@login_required
 def schedule(request):
+    """
+    The home view which holds settings and the development schedule
+    :param request: 
+    :return: a render of the home page
+    """
     context = {}
     return render(request, 'home.html', context=context)
 
@@ -32,7 +42,64 @@ def webtor(request):
     return render(request, 'webtorrent.html', context=context)
 
 
+def login_user(request):
+    """
+    Checks if the current username is admin and if so then we redirect them to the the UserCreateForm so that we can secure the application
+    :param request: 
+    :return: 
+    """
+    form = AuthenticationForm()
+
+    if User.objects.all().exists() is False:
+        user = User.objects.create_user(username='admin',
+                                        email='jlennon@beatles.com',
+                                        password='liquiddl')
+        user = authenticate(username=u"admin", password=u"liquiddl")
+        login(request, user)
+        return redirect('initialize_user')
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+
+    return render(request, 'login.html', {
+        'form': form
+    })
+
+
+@login_required
+def signup(request):
+    """
+    Creates our initial user and then deletes our old generated user
+    :param request takes in the UserCreateForm and cleans the data as well as doing authentication all in one
+    function. If it fails once again there is a redirect and the middleware catches any unauthorized users
+    """
+    form = UserCreateForm()
+
+    if request.method == 'POST':
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = User.objects.get(username=request.POST['username'])
+
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'])
+            login(request, new_user)
+            if User.objects.filter(username="admin").exists():
+                admin = User.objects.get(username="admin")
+                admin.delete()
+            return redirect('home')
+    return render(request, 'create_user.html', {
+        'form': form
+    })
+
+
 # Submission Views for forms
+@login_required
 @ajax_request
 def FFMPEG_submit(request):
     """
@@ -89,6 +156,7 @@ def FFMPEG_submit(request):
     return JsonResponse({"success": "Conversion of Files was successful"})
 
 
+@login_required
 @ajax_request
 def soundcloud_submit(request):
     try:
@@ -132,6 +200,7 @@ def soundcloud_submit(request):
     return JsonResponse({"success": "Downloaded Files successfully"})
 
 
+@login_required
 @ajax_request
 def wget_submit(request):
     """
@@ -209,6 +278,7 @@ def youtube_dl_submit(request):
         return JsonResponse({'error': e.message})
 
 
+@login_required
 @ajax_request
 def youtube_dl_get_formats(request):
     """
@@ -236,6 +306,7 @@ def youtube_dl_get_formats(request):
 
 # Download Manager Views
 
+@login_required
 @ajax_request
 def download_manager_get_downloads(request):
     """
@@ -252,6 +323,7 @@ def download_manager_get_downloads(request):
     })
 
 
+@login_required
 @ajax_request
 def download_manager_get_subscriptions(request):
     subscriptions = VideoSubscription.objects.filter(front_end_visible=True)
@@ -262,6 +334,7 @@ def download_manager_get_subscriptions(request):
     })
 
 
+@login_required
 @ajax_request
 def download_manager_delete_subscription(request):
     """
@@ -276,6 +349,7 @@ def download_manager_delete_subscription(request):
     return JsonResponse({"success": "Ended Subscription"})
 
 
+@login_required
 @ajax_request
 def download_manager_add_subscription(request):
     """
@@ -308,6 +382,7 @@ def download_manager_add_subscription(request):
 
 # Settings Views
 
+@login_required
 @ajax_request
 def update_dependencies(request):
     """
@@ -319,6 +394,22 @@ def update_dependencies(request):
     return JsonResponse({"success": "Successfully Updated"})
 
 
+@ajax_request
+def update_default_directory(request):
+    with open("settings.json") as some_settings:
+        response = request.GET
+        new_settings = json.loads(some_settings.read())
+        new_settings["liquid-dl"]["default_directory"] = response.get("file_path")
+        print(some_settings)
+        some_settings.close()
+    with open("settings.json", "w") as jsonFile:
+        json.dump(new_settings, jsonFile)
+        jsonFile.close()
+
+    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+
+
+@login_required
 @ajax_request
 def get_liquid_dl_settings(request):
     """
@@ -337,6 +428,7 @@ def get_liquid_dl_settings(request):
     return JsonResponse({"success": "Liquid-dl Successfully Updated", "data": json.dumps(new_settings)})
 
 
+@login_required
 @ajax_request
 def update_liquid_dl_settings(request):
     """
@@ -354,6 +446,7 @@ def update_liquid_dl_settings(request):
     return JsonResponse({"success": "Liquid-dl Successfully Updated"})
 
 
+@login_required
 @ajax_request
 def update_cloud_cmd_settings(request):
     """
@@ -371,6 +464,7 @@ def update_cloud_cmd_settings(request):
     return JsonResponse({"success": "Liquid-dl Successfully Updated"})
 
 
+@login_required
 @ajax_request
 def update_cloud_cmd_settings(request):
     """
@@ -388,6 +482,7 @@ def update_cloud_cmd_settings(request):
     return JsonResponse({"success": "Liquid-dl Successfully Updated"})
 
 
+@login_required
 @ajax_request
 def update_youtube_dl_settings(request):
     """
@@ -408,6 +503,7 @@ def update_youtube_dl_settings(request):
 
 # Utility Views
 
+@login_required
 @ajax_request
 def hide_video_download(request):
     """
@@ -422,6 +518,7 @@ def hide_video_download(request):
     return JsonResponse({"success": "Hid Video"})
 
 
+@login_required
 @ajax_request
 def start_cloudcmd(request):
     """
@@ -441,7 +538,7 @@ def start_cloudcmd(request):
         json.dump(new_settings, jsonFile)
         jsonFile.close()
     os.system(cmd)
-    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+    return JsonResponse({"success": "Cloudcmd Server Started"})
 
 
 @ajax_request
@@ -458,6 +555,7 @@ def get_cloudcmd_settings(request):
     return JsonResponse({"port": new_settings["cloudcmd"]["port"], "ps": new_settings["cloudcmd"]["password"]})
 
 
+@login_required
 def auth_password(request):
     password = request.GET.get('ps')
     update_password(password)

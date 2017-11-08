@@ -5,10 +5,12 @@
 #main-container > div > div > div > div.col-md-3 > nav {
     min-height: 100vh;
     margin-bottom: 0;
+    max-width: 320px;
 }
 
 #main-container > div > div > div > div.col-md-3 {
     max-height: 100vh;
+    max-width: 320px;
 }
 
 .fa {
@@ -251,6 +253,10 @@ div.floating-menu-item.floating-menu-main {
     /* line-height: 1.0; */
     max-height: 3.5rem;
     overflow: hidden;
+}
+
+#liquid-dl {
+    max-width: 100%;
 }
 
 @media only screen and (max-width: 1020px) {

@@ -2,7 +2,7 @@
 const requestify = require('requestify');
 const path = require("path");
 
-let methods = {
+const methods = {
     getRelativePathFromAbsolute: (someFilePath) => {
         return path.relative(process.cwd(), someFilePath);
     },
@@ -13,7 +13,7 @@ let methods = {
             console.log(torrent.path);
 
             torrent.on('download', () => {
-                requestify.get('http://127.0.0.1:8000/liquid-dl/torrents/torrent/update', {
+                requestify.get('http://127.0.0.1:8000/liquid-dl/torrents/torrent/receive/update', {
                     params: {
                         infohash: torrent.infoHash,
                         folder_path: torrent.path,

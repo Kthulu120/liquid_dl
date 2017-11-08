@@ -1,0 +1,62 @@
+.torrent-row:hover {
+    background-color: rgba(24, 24, 88, 0.69);
+    color: white;
+}
+
+.torrent-row {
+    border: 2px solid grey;
+    max-height: 3rem;
+    overflow: hidden;
+}
+
+.row.torrent-row {
+    margin-bottom: 0;
+}
+
+.flood-torrent-header {
+    border-bottom: 2px solid grey;
+}
+
+.torrent-header {
+    border-right: 3px solid grey;
+    margin-bottom: 0;
+}
+
+section > div.skylight-dialog > h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: white;
+}
+
+div.torren-detail-modal > section > div.skylight-dialog {
+    background-color: #34495e !important;
+}
+
+.tabs.torrent-details-tabs {
+    background-color: #34495e;
+}
+
+i.small {
+    font-size: 1.5rem !important;
+}
+
+.no-margins {
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+#XMLID_4_ {
+    font-family: Kavoon;
+    font-size: 170px;
+    overflow: visible;
+    height: 50px;
+}
+
+#Layer_1 {
+    height: 40px;
+}
+
+.tabs.torrent-details-tabs {
+    background-color: #34495e;
+    overflow-x: hidden;
+}

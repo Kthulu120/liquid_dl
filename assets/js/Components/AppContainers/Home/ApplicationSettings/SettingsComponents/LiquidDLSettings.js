@@ -24,12 +24,8 @@ class LiquidDLSettings extends React.Component {
             <Col s={8}>
                 <div className="card">
                     <Row>
-                        <Col s={6}>
-                            <Input type="password" label="Liquid Password"><Icon>account_circle</Icon></Input>
-                        </Col>
-                        <Col s={6}>
-                            <Input label="Liquid Account Name"><Icon>account_circle</Icon></Input>
-                        </Col>
+                        <Row><Input s={6} label="Default Directory" onChange={updateOutputPath}/></Row>
+
                     </Row>
                     <Row>
 
