@@ -259,6 +259,10 @@ div.floating-menu-item.floating-menu-main {
     max-width: 100%;
 }
 
+.card.seetings-container {
+    padding: 20px !important;
+}
+
 @media only screen and (max-width: 1020px) {
     #main-container > div > div > div > div.col-md-3 > nav {
         min-height: min-content !important;

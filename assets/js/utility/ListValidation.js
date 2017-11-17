@@ -4,7 +4,11 @@ import {addNotification as notify} from "reapop";
 import {ErrorNotificationFactory, SucessNotificationFactory} from "./NotificationFactories";
 import $ from "jquery";
 
-
+/**
+ * Checks to see what formats can be converted to given some format type
+ * @param formatType the format type of a selected choice for ffmpeg (for example: mp3 is audio)
+ * @returns {array} containing the valid format types you can convert to
+ */
 const getValidFormatTypes = (formatType) => {
     let format = null;
     let ifVideo = (formatType === 'video') ? format = ['video', 'audio'] : null;
@@ -14,6 +18,12 @@ const getValidFormatTypes = (formatType) => {
 };
 
 
+/**
+ * Filters listOfFormats by the formatTypes
+ * @param formatTypes
+ * @param listOfFormatChoices
+ * @returns {Array}
+ */
 const filterByCategory = (formatTypes, listOfFormatChoices) => {
     let approvedChoices = [];
     for (let i = 0; i < listOfFormatChoices.length; i++) {
@@ -24,23 +34,45 @@ const filterByCategory = (formatTypes, listOfFormatChoices) => {
     return approvedChoices
 };
 
+/**
+ *  Returns a filtered array of objects representing format types
+ * @param list list of all the available formats
+ * @param formatChoice the chosen format
+ * @example FFMPEGExportList( [{name: "mp4", category: "video"},{name: "png", category: "image"}] , "audio")
+ * @returns {Array} Of the things a given format can be converted to
+ */
 export const FFMPEGExportList = (list, formatChoice) => {
     let formatTypes = getValidFormatTypes(formatChoice);
     return (filterByCategory(formatTypes, list))
 
 };
 
+/**
+ * Validates that the Input Path is that the input path is not root or empty and if it is then we go ahead and
+ * see if our default directory is empty too
+ * @param state
+ * @returns {*}
+ */
 const validateFFMPEG = (state) => {
     console.log(((state.ffmpeg.inputFormat || state.ffmpeg.input_path) === ('' || '/')));
-    if ((['','/'].indexOf(state.ffmpeg.input_path) > -1)) {
-        ErrorNotificationFactory("Can't use root ( aka  '/' ) or empty string as input path");
-        throw new EvalError("Can't use root ( aka  '/' ) or empty string as input path")
+    if ((['', '/'].indexOf(state.ffmpeg.input_path) > -1)) {
+        if ((['', '/'].indexOf(state.global.default_directory) > -1)) {
+            ErrorNotificationFactory("Can't use root ( aka  '/' ) or empty string as input path, also" +
+                " goto settings and define a default direcotry");
+            throw new EvalError("Can't use root ( aka  '/' ) or empty string as input path")
+        }
+        else {
+            state.ffmpeg.input_path = state.global.default_directory;
+        }
     }
     return state
 
 };
 
-
+/**
+ *
+ * @constructor
+ */
 export const FFMPEGSubmisison = () => {
     let state = store.getState();
     state = validateFFMPEG(state);

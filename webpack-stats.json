@@ -1,1 +1,13 @@
-{"status":"done","chunks":{"main":[{"name":"main-b56b7760a8cd8be2f096.js","path":"C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\bundles\\main-b56b7760a8cd8be2f096.js"}]}}
+{
+  "status": "done",
+  "chunks": {
+    "main": [
+      {
+        "name": "main-d3100307a71f038f671e.js",
+        "path": "C:\\Users\\Troy\\PycharmProjects\\liquid_dl\\assets\\bundles\\main-d3100307a71f038f671e.js"
+      }
+    ]
+  },
+  "error": "ModuleBuildError",
+  "message": "Module build failed: SyntaxError: C:/Users/Troy/PycharmProjects/liquid_dl/assets/js/utility/util.js: `saveYoutubeDLSettings` has already been exported. Exported identifiers must be unique. (174:13)\n\n  172 | };\n  173 | \n> 174 | export const saveYoutubeDLSettings = (settings) => {\n      |              ^\n  175 |     let state = store.getState();\n  176 |     console.log(settings);\n  177 |     $.ajax({\n"
+}

@@ -24,3 +24,10 @@ export const updateSettingsChoice = (settings_choice) => {
         choice: settings_choice
     }
 };
+
+export const updateDefaultDownloadDirectory = (path) => {
+    return {
+        type: 'UPDATE_DEFAULT_DOWNLOAD_DIRECTORY',
+        path: path
+    }
+};

@@ -4,7 +4,10 @@ import {ErrorNotificationFactory, SucessNotificationFactory} from "../../../util
 import $ from "jquery";
 import {getOS} from "../../../utility/util";
 
-
+/**
+ * Validates a given url
+ * @param url a string which we test to make sure it is an url
+ */
 const testUrlPath = (url) => {
     const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     if(regex.test(url) === false) {
@@ -13,9 +16,33 @@ const testUrlPath = (url) => {
     }
 };
 
+/**
+ * Validates the file path is not empty or not root and if it is then we check if there is a default directory
+ * which we can save to instead otherwise we throw a ErrorNotification in UI and EvalError
+ * @param state
+ * @returns {*}
+ */
+const validate = (state) => {
+    if ((['', '/'].indexOf(state.soundcloud.output_path) > -1)) {
+        if ((['', '/'].indexOf(state.global.default_directory) > -1)) {
+            ErrorNotificationFactory("Can't use root ( aka  '/' ) or empty string as input path, also" +
+                " goto settings and define a default direcotry");
+            throw new EvalError("Can't use root ( aka  '/' ) or empty string as input path")
+        }
+        else {
+            state.ffmpeg.input_path = state.global.default_directory;
+        }
+    }
+    return state
 
+};
+
+/**
+ * Submits the SCDL form to server so that the server can execute commands
+ */
 export const SoundcloudSubmission = () => {
-    const state = store.getState();
+    let state = store.getState();
+    state = validate(state);
     testUrlPath(state.soundcloud.url);
     $.ajax({
 
@@ -43,7 +70,7 @@ export const SoundcloudSubmission = () => {
             }
         },
         error: function (request, error) {
-            alert("Request: " + JSON.stringify(request));
+            ErrorNotificationFactory("Request: " + JSON.stringify(request));
         }
     });
 

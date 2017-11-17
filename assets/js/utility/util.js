@@ -170,3 +170,30 @@ export const saveYoutubeDLSettings = (settings) => {
         }
     });
 };
+
+export const saveLiquidDLSettings = (settings) => {
+    let state = store.getState();
+    console.log(settings);
+    $.ajax({
+
+        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + 'settings/youtubedl/save',
+        type: 'GET',
+        data: {
+            file_path: state.global.default_directory
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (!(response["error"] === undefined)) {
+                ErrorNotificationFactory(response["error"]);
+            }
+            else {
+                SucessNotificationFactory(response["success"]);
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+
+        }
+    });
+};
+

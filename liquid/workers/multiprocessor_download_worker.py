@@ -11,6 +11,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'liquid_dl.settings')
 django.setup()
 STATIC_QUE = []
 is_py2 = sys.version[0] == '2'
+
+# Backwards Compatibility
 if is_py2:
     from Queue import Queue as queue
 
@@ -24,6 +26,9 @@ logger = logging.getLogger(__name__)
 
 
 class MultiProcessorLogger(object):
+    """
+    Logger logs the information to the console that users may check logs
+    """
     def __init__(self, video_id=None):
         self.video_id = video_id
 
@@ -37,7 +42,7 @@ class MultiProcessorLogger(object):
         print(msg)
 
     def progress(self, msg):
-        print("HMMMMM")
+        print(msg)
 
     def my_hook(self, info):
         assert isinstance(info, dict)
@@ -54,11 +59,17 @@ class MultiProcessorLogger(object):
 
 
 class DownloadWorker(Thread):
+    """
+    Worker that uses youtube-dl pip package to download the video(s) at a given url
+    """
     def __init__(self, download_worker_queue):
         Thread.__init__(self)
         self.queue = download_worker_queue
 
     def run(self):
+        """
+        Executes when put in the queue
+        """
         directory, link, info_dict = self.queue.get()
         # print(link)
         assert isinstance(info_dict, dict)
@@ -88,6 +99,7 @@ def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
     :return:
     """
     if make_dir.get('make_dir'):
+        # Check if Directory Exists or Make Directory
         if not os.path.exists(download_dir + '/' + make_dir.get('directory_name')):
             os.chdir(download_dir)
             os.mkdir(make_dir.get('directory_name'))

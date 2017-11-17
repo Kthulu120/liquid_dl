@@ -7,7 +7,7 @@ to just click on what they need and use the bare minimum commands to get the res
 
 ## Motivation And Notes
 
-Built for users who need simple datahoarding methods whether it be from mobile or prefer a nice gui over command-line. Note that the root or '/' will never be accepted as an input path, so make sure to mount hard drives to some mount points.
+Built for users who need simple datahoarding methods whether it be from mobile or prefer a nice gui over command-line. Note that the root or '/' will never be accepted as an input path unless you have a default directory that you specify on the front-end, so make sure to mount hard drives to some mount points.
 
 ### Prerequisites
 
@@ -37,6 +37,11 @@ sudo pip install --upgrade youtube_dl
   * Finally if troubleshooting fails open an issue
 ## Installation
 
+#### If you're git cloning from the master branch and not downloading from the latest release zip then you will need to cd to the root project folder and run webpack from terminal, this includes dockers and unraid
+```
+./node_modules/.bin/webpack --config webpack.config.js -p
+```
+
 To install first download or git clone this directory (will be the most stable and frequently updated for bug fixes)
 ```
 No real code here just download the latest release and unzip it fam
@@ -46,15 +51,11 @@ No real code here just download the latest release and unzip it fam
 sudo nohup python manage.py runserver your-ip:8000
 ```
 Though you can change the port aka the '8000' to any needed port (try to keep the number high)
+
 #### The server should now be running and connectable by LAN at the selected port
 ## Bugfixes and Features
 
 Feel free to **do pull requests**, open issues with **features you want** and the many bugs that may arise.
-
-#### If you're git cloning from the master branch and not from the latest release then you will need to run webpack from terminal, this includes dockers and unraid
-```
-./node_modules/.bin/webpack --config webpack.config.js -p
-```
 ## Docker
 
 Replace `<local_directory_for_downloads>` with the directory on your local machine. In the UI, use /downloads as the download directory.

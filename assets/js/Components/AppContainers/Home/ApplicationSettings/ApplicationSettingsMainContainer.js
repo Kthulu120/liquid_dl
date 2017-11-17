@@ -6,13 +6,22 @@ import YoutubeDLSettings from "./SettingsComponents/YoutubeDLSettings";
 import CloudCmdSettings from "./SettingsComponents/CloudCmdSettings";
 import {getSettingsForApplication} from "../../../../utility/util";
 
-const renderCorrectComponent = (current_state) => {
-    let system_settings = getSettingsForApplication();
+
+const system_settings = getSettingsForApplication();
+
+
+/**
+ * Chooses the correct component ro render depending on the string passed in by the setting choice in the string
+ * @param current_state The settings
+ * @param default_directory the default directory to download
+ * @returns {XML} The component to be rendered in ApplicationSettingsMain
+ */
+const renderCorrectComponent = (current_state, default_directory) => {
     switch (current_state) {
         case 'liquid-dl':
             return (
                 <LiquidDLSettings onChangeValue={(e) => {
-                }} system_settings={system_settings}/>
+                }} system_settings={system_settings} default_dir={default_directory}/>
             );
         case 'youtube-dl':
             return (
@@ -28,7 +37,7 @@ const renderCorrectComponent = (current_state) => {
 
 const mapStateToProps = state => {
     return {
-        component: renderCorrectComponent(state.global.settings_choice)
+        component: renderCorrectComponent(state.global.settings_choice, state.global.default_directory)
 
     }
 };

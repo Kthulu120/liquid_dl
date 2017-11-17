@@ -406,7 +406,7 @@ def update_default_directory(request):
         json.dump(new_settings, jsonFile)
         jsonFile.close()
 
-    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+    return JsonResponse({"success": "Updated Default Directory"})
 
 
 @login_required
@@ -440,10 +440,14 @@ def update_liquid_dl_settings(request):
     with open("settings.json") as some_settings:
         response = request.GET
         new_settings = json.loads(some_settings.read())
+        new_settings["liquid-dl"]["default_directory"] = response.get("file_path")
         print(some_settings)
         some_settings.close()
+    with open("settings.json", "w") as jsonFile:
+        json.dump(new_settings, jsonFile)
+        jsonFile.close()
 
-    return JsonResponse({"success": "Liquid-dl Successfully Updated"})
+    return JsonResponse({"success": "Liquid-dl Updated"})
 
 
 @login_required
