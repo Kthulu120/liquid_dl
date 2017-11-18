@@ -116,32 +116,38 @@ export const makeDownloadHidden = (url) => {
 
 
 export const getSettingsForApplication = () => {
-    let state = store.getState();
+    //let state = store.getState();
     let data = {};
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/settings/get-settings',
+        url: 'http://' + window.location.host.split(":")[0] + ":" + window.location.host.split(":")[1] + '/liquid-dl/settings/get-settings',
         type: 'GET',
         dataType: 'json',
+        async: false,
         success: function (response) {
             if (!(response["error"] === undefined)) {
                 ErrorNotificationFactory(response["error"]);
             }
             else {
-                console.log(response["data"]);
-                data = JSON.parse(response["data"])
+                data = JSON.parse(response["data"]);
+                console.log(data);
+
             }
         },
         error: function (request, error) {
             alert("Request: " + JSON.stringify(request));
         }
     });
+    console.log(data);
     return data;
 };
 
+/**
+ * Saves the youtube-dl settings
+ * @param settings the settings passed in from the ApplicationSettingsMainContainer
+ */
 export const saveYoutubeDLSettings = (settings) => {
     let state = store.getState();
-    console.log(settings);
     $.ajax({
 
         url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/settings/youtubedl/save',
@@ -171,12 +177,15 @@ export const saveYoutubeDLSettings = (settings) => {
     });
 };
 
+/**
+ * Updates the default directory for all applications requiring an output path allowing you to leave them blank
+ * @param settings
+ */
 export const saveLiquidDLSettings = (settings) => {
     let state = store.getState();
-    console.log(settings);
     $.ajax({
 
-        url: 'http://' + state.global.server_ip + ":" + state.global.server_port + 'settings/youtubedl/save',
+        url: 'http://' + window.location.host.split(":")[0] + ":" + window.location.host.split(":")[1] + '/liquid-dl/settings/liquid-dl/update-default-directory',
         type: 'GET',
         data: {
             file_path: state.global.default_directory

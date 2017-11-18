@@ -16,34 +16,14 @@ const testUrlPath = (url) => {
     }
 };
 
-/**
- * Validates the file path is not empty or not root and if it is then we check if there is a default directory
- * which we can save to instead otherwise we throw a ErrorNotification in UI and EvalError
- * @param state
- * @returns {*}
- */
-const validate = (state) => {
-    if ((['', '/'].indexOf(state.soundcloud.output_path) > -1)) {
-        if ((['', '/'].indexOf(state.global.default_directory) > -1)) {
-            ErrorNotificationFactory("Can't use root ( aka  '/' ) or empty string as input path, also" +
-                " goto settings and define a default direcotry");
-            throw new EvalError("Can't use root ( aka  '/' ) or empty string as input path")
-        }
-        else {
-            state.ffmpeg.input_path = state.global.default_directory;
-        }
-    }
-    return state
-
-};
 
 /**
  * Submits the SCDL form to server so that the server can execute commands
  */
 export const SoundcloudSubmission = () => {
     let state = store.getState();
-    state = validate(state);
     testUrlPath(state.soundcloud.url);
+    const output_path = validateFilePath(state);
     $.ajax({
 
         url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/soundcloud-submit',
@@ -51,7 +31,7 @@ export const SoundcloudSubmission = () => {
         data: {
             operating_system: getOS(),
             url: state.soundcloud.url,
-            output_path: state.soundcloud.output_path,
+            output_path: output_path,
             download_artist: state.soundcloud.download_options.download_artist,
             download_all_tracks_and_reposts: state.soundcloud.download_options.download_all_tracks_and_reposts,
             download_user_uploads: state.soundcloud.download_options.download_user_uploads,
@@ -74,4 +54,22 @@ export const SoundcloudSubmission = () => {
         }
     });
 
+};
+
+
+/**
+ *  Validates that either the output path is specified and if not, check if a default directory exists and if it does then we
+ *  use that as the output path, otherwise notify user and throw error.
+ * @param state the current state of the application
+ * @returns {string} the output path of the application
+ */
+const validateFilePath = (state) => {
+    if (state.soundcloud.output_path !== '' && state.soundcloud.output_path !== "/") {
+        return state.soundcloud.output_path;
+    }
+    if (state.global.default_directory !== '' && state.global.default_directory !== "/") {
+        return state.global.default_directory;
+    }
+    ErrorNotificationFactory("Either Set an Output Path or default directory(in setting panel by clicking logo)");
+    throw EvalError("No Proper Output Path")
 };

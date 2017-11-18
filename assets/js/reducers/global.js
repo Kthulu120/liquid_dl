@@ -3,13 +3,12 @@ import {getSettingsForApplication} from "../utility/util";
 
 /**
  * Initializes the Server Port and the port detection so we can send request to the correct port
- * @type {{operating_system: string, server_port: string, server_ip: string}}
+ * @type function
  */
 const checkLocalStorageExists = () => {
     if (localStorage.getItem("settings") === null) {
 
         const system_settings = getSettingsForApplication();
-
         return system_settings["liquid-dl"].default_directory
     }
     return localStorage.getItem("settings").default_directory;

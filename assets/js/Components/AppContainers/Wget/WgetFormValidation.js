@@ -5,12 +5,13 @@ import $ from "jquery";
 
 export const WgetSubmission = () => {
     const state = store.getState();
+    let output_path = validateFilePath(state);
     $.ajax({
         url: 'http://' + state.global.server_ip + ":" + state.global.server_port + '/liquid-dl/wget-submit',
         type: 'GET',
         data: {
             url: state.wget.url,
-            output_path: state.wget.output_path,
+            output_path: output_path,
             depth_level: state.wget.depth_level,
             recursive: state.wget.download_options.recursive,
             no_parent: state.wget.download_options.no_parent,
@@ -45,4 +46,21 @@ export const makeValueArray = (arrayOfObjects) => {
     });
     console.log(newArray);
     return newArray;
+};
+
+/**
+ *  Validates that either the output path is specifed and if not, check if a default directory exists and if it does then we
+ *  use that as the output path, otherwise notify user and throw error.
+ * @param state the current state of the application
+ * @returns {string} the output path of the application
+ */
+const validateFilePath = (state) => {
+    if (state.wget.output_path !== '' && state.wget.output_path !== "/") {
+        return state.wget.output_path;
+    }
+    if (state.global.default_directory !== '' && state.global.default_directory !== "/") {
+        return state.global.default_directory;
+    }
+    ErrorNotificationFactory("Either Set an Output Path or default directory(in setting panel by clicking logo)");
+    throw EvalError("No Proper Output Path")
 };

@@ -37,7 +37,7 @@ sudo pip install --upgrade youtube_dl
   * Finally if troubleshooting fails open an issue
 ## Installation
 
-#### If you're git cloning from the master branch and not downloading from the latest release zip then you will need to cd to the root project folder and run webpack from terminal, this includes dockers and unraid
+#### If you're git cloning from the master branch and not downloading from the latest release zip then you will need to cd to the root of the project folder and run webpack from terminal, this includes dockers and unraid
 ```
 ./node_modules/.bin/webpack --config webpack.config.js -p
 ```

@@ -2,7 +2,7 @@
   "liquid-dl": {
     "ip": "127.0.0.1",
     "port": "8000",
-    "default_directory": "/"
+    "default_directory": "C:/tmp/"
   },
   "cloudcmd": {
     "username": "admin",

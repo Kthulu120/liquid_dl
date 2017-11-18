@@ -50,6 +50,8 @@ export const YoutubeDLGetFormats = () => {
 };
 export const YoutubeDLCommitDownloads = () => {
     const state = store.getState();
+    const output_path = validateFilePath(state);
+    console.log(output_path);
     SucessNotificationFactory("Sent Commands, you'll be notified when they're finished");
     $.ajax({
 
@@ -57,7 +59,7 @@ export const YoutubeDLCommitDownloads = () => {
         type: 'GET',
         data: {
             url: state.youtube_dl.url,
-            output_path: state.youtube_dl.output_path,
+            output_path: output_path,
             make_folder: state.youtube_dl.make_folder,
             new_folder_name: state.youtube_dl.new_folder_name,
             is_playlist: state.youtube_dl.is_playlist,
@@ -85,4 +87,21 @@ const testUrlPath = (url) => {
         ErrorNotificationFactory("Your URL is not configured properly (note: must start with http:// or https://");
         throw EvalError;
     }
+};
+
+/**
+ *  Validates that either the output path is specifed and if not, check if a default directory exists and if it does then we
+ *  use that as the output path, otherwise notify user and throw error.
+ * @param state the current state of the application
+ * @returns {string} the output path of the application
+ */
+const validateFilePath = (state) => {
+    if (state.youtube_dl.output_path !== '' && state.youtube_dl.output_path !== "/") {
+        return state.youtube_dl.output_path;
+    }
+    if (state.global.default_directory !== '' && state.global.default_directory !== "/") {
+        return state.global.default_directory;
+    }
+    ErrorNotificationFactory("Either Set an Output Path or default directory(in setting panel by clicking logo)");
+    throw EvalError("No Proper Output Path")
 };

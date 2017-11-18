@@ -47,7 +47,12 @@ const initialState = {
 
 };
 
-
+/**
+ * ffmpeg reducer
+ * @param state the current state of the application
+ * @param action the dictionary object with the needed info we need to apply
+ * @returns {*}
+ */
 const ffmpeg = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE_INPUT_PATH':

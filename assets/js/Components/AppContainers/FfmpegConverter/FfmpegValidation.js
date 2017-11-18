@@ -5,7 +5,11 @@ import {ErrorNotificationFactory, SucessNotificationFactory} from "../../../util
 import $ from "jquery";
 import {getOS} from "../../../utility/util";
 
-
+/**
+ * Looks up the category of a given  format categories with all compatible format categories being return in an array
+ * @param formatType  String category of the input file/folder
+ * @returns {array || null}
+ */
 const getValidFormatTypes = (formatType) => {
     let format = null;
     let ifVideo = (formatType === 'video') ? format = ['video', 'audio'] : null;
@@ -14,9 +18,13 @@ const getValidFormatTypes = (formatType) => {
     return format
 };
 
-
+/**
+ *
+ * @param formatTypes
+ * @param listOfFormatChoices
+ * @returns {Array}
+ */
 const filterByCategory = (formatTypes, listOfFormatChoices) => {
-    console.log(listOfFormatChoices);
     let approvedChoices = [];
     for (let i = 0; i < listOfFormatChoices.length; i++) {
         if ((formatTypes.includes(listOfFormatChoices[i]['category']))) {
@@ -32,6 +40,7 @@ export const FFMPEGExportList = (list, formatChoice) => {
 
 };
 
+
 const validateFFMPEG = (state) => {
     console.log(((state.ffmpeg.inputFormat || state.ffmpeg.input_path) === ('' || '/')));
     if ((['', '/'].indexOf(state.ffmpeg.input_path) > -1)) {
@@ -42,11 +51,13 @@ const validateFFMPEG = (state) => {
 
 };
 
-
+/**
+ * Submits the ffmpeg form to be processed on the backend
+ * @constructor
+ */
 export const FFMPEGSubmisison = () => {
     let state = store.getState();
     state = validateFFMPEG(state);
-    console.log(state);
     store.dispatch(notify({
         title: 'SUCCESS',
         message: 'Sent Command, now processing, notification will be sent when completed',
@@ -82,4 +93,22 @@ export const FFMPEGSubmisison = () => {
             alert("Request: " + JSON.stringify(request));
         }
     });
+};
+
+
+/**
+ *  Validates that either the output path is specified and if not, check if a default directory exists and if it does then we
+ *  use that as the output path, otherwise notify user and throw error.
+ * @param state the current state of the application
+ * @returns {string} the output path of the application
+ */
+const validateFilePath = (state) => {
+    if (state.ffmpeg.output_path !== '' && state.ffmpeg.output_path !== "/") {
+        return state.ffmpeg.output_path;
+    }
+    if (state.global.default_directory !== '' && state.global.default_directory !== "/") {
+        return state.global.default_directory;
+    }
+    ErrorNotificationFactory("Either Set an Output Path or default directory(in setting panel by clicking logo)");
+    throw EvalError("No Proper Output Path")
 };
