@@ -1,5 +1,8 @@
-# Liquid-dl
+<h1 align="center"> Liquid-dl </h2>
 
+<p align="center">
+  <img width="205" height="252" src="https://i.imgur.com/auzOJfT.png">
+</p>
 Liquid-dl is a simple tool for utlities such as FFMPEG, youtube-dl, and scdl. It provides a simple framework with simple point and click options allowing users
 to just click on what they need and use the bare minimum commands to get the results needed.
 
@@ -7,13 +10,13 @@ to just click on what they need and use the bare minimum commands to get the res
 
 ## Motivation And Notes
 
-Built for users who need simple datahoarding methods whether it be from mobile or prefer a nice gui over command-line. Note that the root or '/' will never be accepted as an input path unless you have a default directory that you specify on the front-end, so make sure to mount hard drives to some mount points.
+Built for users who need simple datahoarding methods whether it be from mobile or prefer a nice gui over command-line. Note that the root or '/' will never be accepted as an input path unless you have a default directory that you specify in the settings by clicking on the logo, so make sure to mount hard drives to some mount points.
 
 ### Prerequisites
 
 First to use this web-gui you need the technologies(though most are simply supported by python pip) it uses installed so we'll go one-by-one for each program needed:
 
-* Install ffmpeg & wget (though both should be installed by default on most linux distos). Though if ffmpeg isn't working [here's](https://askubuntu.com/questions/691109/how-do-i-install-ffmpeg-and-codecs) a quick stackoverflow that may help
+* Install [ffmpeg](https://www.ffmpeg.org/download.html) & [wget](http://gnuwin32.sourceforge.net/packages/wget.htm) (though both should be installed by default on most linux distos, though windows binaries are available). Though if ffmpeg isn't working [here's](https://askubuntu.com/questions/691109/how-do-i-install-ffmpeg-and-codecs) a quick stackoverflow that may help
 ```
 sudo apt-get install ffmpeg
 ```
@@ -77,7 +80,8 @@ Add `https://github.com/lordchewie/liquid-dl-unraid` to `Template Repositories` 
 
 ## Updating
 
-Cool thing about this is you can just download the latest release and overwrite the existing release since there's no persistence for this application
+Updating requires three simple things: copying you sqlite file; then downloading the latest release; replacing the sqlite file with yours and doing the following command while in the project folder
+` ./manage.py makemigrations ` 
 
 ## Contributors
 
