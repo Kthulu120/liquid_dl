@@ -87,6 +87,11 @@ Updating requires three simple things: copying you sqlite file; then downloading
 
 If you want to contribute please do a pull request with some documentation so others can know why something is implemented a certain way.
 
+## Donations
+Coffee and ramen are dope so aid me in purchasing them
+
+<a href="https://liberapay.com/~18187/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a>
+
 ## License
 
 MIT License do what you want
