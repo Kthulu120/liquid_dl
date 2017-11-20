@@ -8,7 +8,6 @@ import {updateDefaultDownloadDirectory} from "../../../../../actions/global/glob
 import store from "../../../../../store/globalstore"
 import {saveLiquidDLSettings} from "../../../../../utility/util";
 
-
 class LiquidDLSettings extends React.Component {
     constructor(props) {
         super(props);
@@ -35,6 +34,9 @@ class LiquidDLSettings extends React.Component {
                     <Button onClick={(e) => {
                         saveLiquidDLSettings(e.target.value)
                     }}>Save</Button>
+                    <Row><a href="https://liberapay.com/~18187/donate"><img alt="Donate using Liberapay"
+                                                                            src="https://liberapay.com/assets/widgets/donate.svg"/></a>
+                    </Row>
 
                 </div>
             </Col>

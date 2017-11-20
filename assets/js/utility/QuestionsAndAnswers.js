@@ -1,8 +1,14 @@
+/**
+ * The Questions and Answers are simple Q&A questions users may have along with appropriate answers
+ * @type {[*]}
+ */
 export const QuestionAndAnswers = [
+
     {
         question: "Why isn't Liquid-DL launching commands when I attempt to execute them",
         answer: "Open the developer console and try and check the network to make sure requests are going to the correct port"
     },
+
     {
         question: "Hey I looked at the commands being executed and you've formatted them wrong and/or improperly configured them",
         answer: "To be honest this very likely the case as this application has only been tested on one machine, therefore put in a issue with the proper implementation of the command" +
@@ -10,8 +16,8 @@ export const QuestionAndAnswers = [
     },
     {
         question: "For some reason commands are not found",
-        answer: "Well wget must be downloaded for Windows since its standard on most Linux architectures, make sure you have youtube-dl and FFmpeg downloaded." +
-        " These must be in the path so Liquid-DL can execute them; like what Chip Kelly did to the Eagles"
+        answer: "Well wget and ffmpeg must be downloaded for Windows since its standard on most Linux architectures, make sure you have youtube-dl and FFmpeg downloaded." +
+        " These must be in the path so Liquid-DL can execute them"
     },
     {
         question: "Why aren't there more settings and customization for youtube-dl",
@@ -23,8 +29,9 @@ export const QuestionAndAnswers = [
         answer: "We haven't made them work yet"
     },
     {
-        question: "Where's CloudCmd?",
-        answer: "We haven't made it viewable yet, but we're almost done integrating it so expect it September 25th or 26th"
+        question: "Why isn't CloudCmd password protected, you trynna let my PC get borked?",
+        answer: "No, which is why we advise you to edit the setting.json file and modify the port to limit port attacks, more importantly cloudcmd is served by the localhost therefore only Liquid-dl should be able to see it or user's on the network at max. But we plan to " +
+        " up security when it comes to this aspect"
     },
     {
         question: "Will you support (insert application here)?",
@@ -44,21 +51,36 @@ export const QuestionAndAnswers = [
         "improve what you can even if it's syntax, writing documentation or to increase the verbosity of the variables so it's more readable"
     },
     {
-        question: "Why doesn't youtube-dl support non-youtube sites?",
-        answer: "We're addressing that in upcoming commits since each sites response for getting the formats is a little different meaning we have to write custom solutions for these sites"
+        question: "Why doesn't youtube-dl support some non-youtube sites that are officially supported by youtube-dl?",
+        answer: "I'll be adding in the last few sites soon enough"
     },
     {
         question: "Youtube-dl is not working nor are my files downloading",
-        answer: "Well chances are that this is due to us going the multi-thread route due to just wanting to test it out, create an isue with any output logs you may have and we'll help resolve the issue and also address it in upcoming commits"
+        answer: "We moved to a single threaded method of downloading everything due to the fact that we use sqlite and windows file reading and writing locking features were annoying"
+    },
+    {
+        question: "Noticed (insert logo here) in this application",
+        answer: "Only Official Sponsors located in the Github repo endorse this application, all other included logo and their respective entities are not affiliated, sponsor , nor endorse this application. Their logos are merely here as graphic to interpret the application easier allowing for those with disabilities to more easily distinguish things"
     },
     {
         question: "Can we donate to this project for being dope as hell?",
-        answer: "Nah, honestly donate it to actual important things affecting actual people's lives. But please star on Github I appreciate it alot"
+        answer: "Yes I appreciate it alot, recently I've opened up the application to donations simply goto the github the donate button is at the button" +
+        " but I appreciate simple stars on github too"
+    },
+    {
+        question: "Whats the reason for life",
+        answer: "To do dope things. That simple"
+    },
+    {
+        question: "Did you like that new Jaden Smith Album",
+        answer: "I would say Syre is a multi-tiered album in the levels of production and that Jaden Smith encapsulates that sound very well" +
+        "most artist have that initial phase of being bad so you never hear it, like Drake's first couple albums but Jaden has had to deal with people listening to those initial bad albums," +
+        "therefore he gets a bad wrap but to me Syre is his first foray into the wild wild west of music(excuse the pun). So yes its a very nice album to me"
     },
 ];
 
 /**
- * List of providers which we currently have googled logos for (like legit), this list is passed into the
+ * List of providers which we currently have googled logos for (like legit) the sites are from the official youtube-dl site, this list is passed into the
  * SubscriptionCreationModal.
  * @type {[*]}
  */
@@ -105,7 +127,39 @@ export const SubscriptionProvders = [
     {label: "MTV", value: "mtv"},
     {label: "MVA", value: "mva"},
     {label: "MySpace", value: "myspace"},
-    {label: "Vice", value: "vice"}
+    {label: "Vice", value: "vice"},
+    {label: "NatGeo", value: "natgeo"},
+    {label: "NBA", value: "nba"},
+    {label: "NBC", value: "nbc"},
+    {label: "NBC News", value: "nbcnews"},
+    {label: "NFL", value: "nfl"},
+    {label: "NHL", value: "nhl"},
+    {label: "Nick", value: "nick"},
+    {label: "Nintendo", value: "nintendo"},
+    {label: "PBS", value: "pbs"},
+    {label: "Periscope", value: "periscopr"},
+    {label: "Photobucket", value: "photobucket"},
+    {label: "Google+", value: "googleplus"},
+    {label: "Pokemon", value: "pokemon"},
+    {label: "PornCom", value: "porncom"},
+    {label: "Pornhub", value: "pornhub"},
+    {label: "Reddit", value: "reddit"},
+    {label: "RedTube", value: "redtube"},
+    {label: "Reuters", value: "reuters"},
+    {label: "RulePorn", value: "ruleporn"},
+    {label: "SpankBang", value: "spankbang"},
+    {label: "Spankwire", value: "spankwire"},
+    {label: "Spike", value: "spike"},
+    {label: "Sprout", value: "sprout"},
+    {label: "Steam", value: "steam"},
+    {label: "TMZ", value: "tmz"},
+    {label: "Tosh.O", value: "tosh"},
+    {label: "TruTVV", value: "truetv"},
+    {label: "Tumblr", value: "tumblr"},
+    {label: "Twitch", value: "twitch"},
+    {label: "Udemy", value: "udemy"},
+    {label: "VH1", value: "vh1"},
+    {label: "Yahoo", value: "yahoo"},
 
 
 ];

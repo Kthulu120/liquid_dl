@@ -530,17 +530,11 @@ def start_cloudcmd(request):
     :param request: Ajax request
     :return: 
     """
-    cmd = "node node_modules/cloudcmd/bin/cloudcmd --one-panel-mode --auth --port "
+    cmd = "node node_modules/cloudcmd/bin/cloudcmd --one-panel-mode --port "
     with open("settings.json") as some_settings:
         new_settings = json.loads(some_settings.read())
         some_settings.close()
-    if new_settings["cloudcmd"]["initial_random_password_set"] == False:
-        create_new_cloudcmd_password()
-        new_settings["cloudcmd"]["initial_random_password_set"] = True
     cmd += new_settings["cloudcmd"]["port"]
-    with open("settings.json", "w") as jsonFile:
-        json.dump(new_settings, jsonFile)
-        jsonFile.close()
     os.system(cmd)
     return JsonResponse({"success": "Cloudcmd Server Started"})
 
