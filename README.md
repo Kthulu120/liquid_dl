@@ -11,6 +11,7 @@ to just click on what they need and use the bare minimum commands to get the res
 ## Motivation And Notes
 
 Built for users who need simple datahoarding methods whether it be from mobile or prefer a nice gui over command-line. Note that the root or '/' will never be accepted as an input path unless you have a default directory that you specify in the settings by clicking on the logo, so make sure to mount hard drives to some mount points.
+Finally, there is now a [chrome extension](https://github.com/Kthulu120/liquid-dl-chrome) so you don't have continually log into your
 
 ### Prerequisites
 
@@ -24,7 +25,7 @@ sudo apt-get install ffmpeg
 sudo apt-get install wget
 ```
 
-* Install our Soundlcoud-dl
+* Install our Soundlcoud-dl (Note only works with python3, though you can still use youtube-dl for soundcloud)
 ```
 pip install scdl
 ```
@@ -73,15 +74,16 @@ Add `https://github.com/lordchewie/liquid-dl-unraid` to `Template Repositories` 
 
 * This is a hackey way of running the server without gunicorn soon the scripts will be included to run a simple bash script that does the leg work for you
 * Youtube-dl runs the --ignore-errors flag on the back-end so if a video is unavailable then it will simply skip it, also try to upgrade youtube-dl regularly as it may break due to constant need upkeep
-* If your getting an error make sure that your using the entire path to teh file or folder (if its a folder you should have a backslash at the end)
+* If your getting an error make sure that your using the entire path to the file or folder (if its a folder you should have a backslash at the end)
 * soundcloud-dl does not create folders for artists currently though in the upcoming commits liquid-dl will place all new downloaded songs into a folder witth that artists name
+* scdl does not work with python2 but fortunately tht doesn't matter since you can still use youtube-dl to download soundcloud artists and tracks
 * Not optimized for mobile currently but does work
 * Finally just open a issue anytime I'll try and get back to you in a day or two
 
 ## Updating
 
 Updating requires three simple things: copying you sqlite file; then downloading the latest release; replacing the sqlite file with yours and doing the following command while in the project folder
-` ./manage.py makemigrations ` 
+` ./manage.py makemigrations ` then `./manage.py migrate`
 
 ## Contributors
 
