@@ -274,3 +274,6 @@ div.floating-menu-item.floating-menu-main {
     }
 }
 
+#updateApiKeyIcon {
+    cursor: pointer;
+}

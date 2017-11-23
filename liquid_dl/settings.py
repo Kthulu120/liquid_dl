@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [u'*']
 
-
+API_KEY = '123'
 # Application definition
 
 INSTALLED_APPS = [

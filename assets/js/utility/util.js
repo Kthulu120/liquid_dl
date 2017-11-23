@@ -5,6 +5,7 @@
 import $ from 'jquery';
 import {ErrorNotificationFactory, SucessNotificationFactory} from "./NotificationFactories";
 import store from "../store/globalstore";
+import {updateApiKey, updateDefaultDownloadDirectory} from "../actions/global/global";
 
 export const getOS = () => {
     let userAgent = window.navigator.userAgent,
@@ -115,8 +116,11 @@ export const makeDownloadHidden = (url) => {
 };
 
 
+/**
+ * Grabs the settings for the application
+ * @returns {{}}
+ */
 export const getSettingsForApplication = () => {
-    //let state = store.getState();
     let data = {};
     $.ajax({
 
@@ -130,8 +134,8 @@ export const getSettingsForApplication = () => {
             }
             else {
                 data = JSON.parse(response["data"]);
-                console.log(data);
-
+                store.dispatch(updateDefaultDownloadDirectory(data["liquid-dl"]["default_directory"]));
+                store.dispatch(updateApiKey(data["liquid-dl"]["apiKey"]));
             }
         },
         error: function (request, error) {
@@ -140,6 +144,29 @@ export const getSettingsForApplication = () => {
     });
     console.log(data);
     return data;
+};
+
+
+export const resetApiKey = () => {
+    $.ajax({
+
+        url: 'http://' + window.location.host.split(":")[0] + ":" + window.location.host.split(":")[1] + '/liquid-dl/settings/liquid-dl/api-key-reset',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (!(response["error"] === undefined)) {
+                ErrorNotificationFactory(response["error"]);
+            }
+            else {
+                let data = JSON.parse(response["data"]);
+                store.dispatch(updateDefaultDownloadDirectory(data["liquid-dl"]["default_directory"]));
+                store.dispatch(updateApiKey(data["liquid-dl"]["apiKey"]));
+            }
+        },
+        error: function (request, error) {
+            alert("Request: " + JSON.stringify(request));
+        }
+    });
 };
 
 /**

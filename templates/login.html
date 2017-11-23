@@ -5,7 +5,7 @@
 {% block body %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <style>body {
-        background: #A49966;
+        background: #263238;
     }
 
     svg {
@@ -18,19 +18,20 @@
         <h3 style="color: white">Liquid-dl</h3>
         <h5 style="color: white">Adults Only</h5>
     </div>
-    {% include 'pool.html' %}
-
+    <p align="center">
+        <img width="205" height="252" src="{% static 'img/icons/liquid.png' %}">
+    </p>
 
     <div class="container">
         <div class="form">
             <form action="{% url 'login' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
+                <div class="form-group" style="color: white">
                     {{ form.username.label }}
                     {{ form.username }}
                     <span class="separator"> </span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="color: white">
                     {{ form.password.label }}
                     {{ form.password }}
                     <span class="separator"> </span>
@@ -43,7 +44,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="text-center help-text">
+                    <div class="text-center help-text" style="color: white">
                         {{ form.username.errors }}
                         {{ form.password.errors }}
 
@@ -52,70 +53,4 @@
             </form>
         </div>
     </div>
-
-    <script>
-        let ring = document.querySelector('#ring'),
-            smR = document.querySelectorAll('.sm-reflect path'),
-            turb = document.querySelectorAll('#filter-ripple-2 feImage')[0],
-            feD = document.querySelectorAll('#filter-ripple-2 feDisplacementMap')[0];
-
-        TweenLite.set(turb, {
-            attr: {
-                width: 0,
-                height: 0
-            }
-        });
-
-        function sceneOne() {
-            var tl = new TimelineMax();
-
-            tl.add('begin');
-            tl.fromTo(ring, 1, {
-                x: 0,
-                y: 0
-            }, {
-                x: 30,
-                y: 10,
-                ease: Sine.easeOut
-            });
-            tl.to(ring, 12, {
-                x: -170,
-                y: -80,
-                ease: Power1.easeOut
-            });
-            tl.staggerTo('#reflection path', 4, {
-                cycle: {
-                    x: [-45, -40, -50, -30],
-                    y: [15, 20, 25, 30],
-                    skewX: ['-10deg', '10deg', '-20deg', '15deg']
-                },
-                repeat: -1,
-                yoyo: true,
-                ease: Sine.easeInOut
-            }, 0.001, 'begin');
-            tl.to(turb, 8, {
-                attr: {
-                    width: 600,
-                    height: 600,
-                    x: -100,
-                    y: -100
-                }
-            }, 'begin+=0.4');
-            tl.fromTo(feD, 8, {
-                attr: {
-                    scale: 30
-                }
-            }, {
-                attr: {
-                    scale: 0,
-                    transformOrigin: '50% 50%'
-                }
-            }, 'begin+=0.4');
-
-            return tl;
-        }
-
-        const master = new TimelineMax();
-        master.add(sceneOne(), 'scene1');
-    </script>
 {% endblock %}

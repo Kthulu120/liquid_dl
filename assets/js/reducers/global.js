@@ -19,7 +19,8 @@ const initialState = {
     server_port: "" + window.location.host.split(":")[1],
     server_ip: window.location.host.split(":")[0],
     settings_choice: 'liquid-dl',
-    default_directory: checkLocalStorageExists()
+    default_directory: checkLocalStorageExists(),
+    api_key: ''
 
 };
 
@@ -45,6 +46,8 @@ const global = (state = initialState, action) => {
             return new_global_state;
         case 'UPDATE_SETTING_CHOICE':
             return Object.assign({}, state, {settings_choice: action.choice});
+        case 'UPDATE_API_KEY':
+            return Object.assign({}, state, {api_key: action.path});
         default:
             return state
     }

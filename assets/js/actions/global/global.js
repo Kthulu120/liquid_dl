@@ -31,3 +31,10 @@ export const updateDefaultDownloadDirectory = (path) => {
         path: path
     }
 };
+
+export const updateApiKey = (path) => {
+    return {
+        type: 'UPDATE_API_KEY',
+        path: path
+    }
+};

@@ -16,12 +16,12 @@ const system_settings = getSettingsForApplication();
  * @param default_directory the default directory to download
  * @returns {XML} The component to be rendered in ApplicationSettingsMain
  */
-const renderCorrectComponent = (current_state, default_directory) => {
+const renderCorrectComponent = (current_state, default_directory, api_key) => {
     switch (current_state) {
         case 'liquid-dl':
             return (
                 <LiquidDLSettings onChangeValue={(e) => {
-                }} system_settings={system_settings} default_dir={default_directory}/>
+                }} system_settings={system_settings} default_dir={default_directory} api_key={api_key}/>
             );
         case 'youtube-dl':
             return (
@@ -37,7 +37,7 @@ const renderCorrectComponent = (current_state, default_directory) => {
 
 const mapStateToProps = state => {
     return {
-        component: renderCorrectComponent(state.global.settings_choice, state.global.default_directory)
+        component: renderCorrectComponent(state.global.settings_choice, state.global.default_directory, state.global.api_key)
 
     }
 };

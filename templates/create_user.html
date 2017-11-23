@@ -5,7 +5,7 @@
 {% block body %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <style>body {
-        background: #A49966;
+        background: #263238;
     }
 
     svg {
@@ -18,24 +18,26 @@
         <h3 style="color: white">Liquid-dl</h3>
         <h5 style="color: white">Pools Open</h5>
     </div>
-    {% include 'pool.html' %}
+    <p align="center">
+        <img width="205" height="252" src="{% static 'img/icons/liquid.png' %}">
+    </p>
     <div class="container">
         <div class="form">
             <form action="{% url 'initialize_user' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
+                <div class="form-group" style="color: white">
                     {{ form.username.label }}
                     {{ form.username }}
                     {{ form.username.errors }}
                     <span class="separator"> </span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="color: white">
                     {{ form.password1.label }}
                     {{ form.password1 }}
                     {{ form.password1.errors }}
                     <span class="separator"> </span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="color: white">
                     {{ form.password2.label }}
                     {{ form.password2 }}
                     {{ form.password2.errors }}

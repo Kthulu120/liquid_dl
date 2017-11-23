@@ -120,7 +120,7 @@ def youtube_dl_multiprocessor(download_dir, make_dir, info_dict, links=None):
         v, s = YoutubedlVideo.objects.update_or_create(url=link['id'], defaults={
             "download_status": "queued"
         })
-        print(link)
+        # print(link)
         logger.info('Queueing {0}'.format(link))
         # Put the tasks into the queue as a tuple
         worker_queue.put((download_dir, link, info_dict))

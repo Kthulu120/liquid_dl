@@ -1,6 +1,7 @@
 {
   "liquid-dl": {
     "ip": "127.0.0.1",
+    "apiKey": "2WFKICYBL1",
     "port": "8000",
     "default_directory": "C:/tmp/"
   },
