@@ -11,9 +11,9 @@ to just click on what they need and use the bare minimum commands to get the res
 ## Motivation And Notes
 
 Built for users who need simple datahoarding methods whether it be from mobile or prefer a nice gui over command-line. Note that the root or '/' will never be accepted as an input path unless you have a default directory that you specify in the settings by clicking on the logo, so make sure to mount hard drives to some mount points.
-Finally, there is now a [chrome extension](https://github.com/Kthulu120/liquid-dl-chrome) so you don't have continually log into your
+Finally, there is now a [chrome extension](https://github.com/Kthulu120/liquid-dl-chrome) so you don't have continually log into your server.
 
-### Prerequisites
+### Pre-requisites
 
 First to use this web-gui you need the technologies(though most are simply supported by python pip) it uses installed so we'll go one-by-one for each program needed:
 
@@ -41,7 +41,9 @@ sudo pip install --upgrade youtube_dl
   * Finally if troubleshooting fails open an issue
 ## Installation
 
-#### If you're git cloning from the master branch and not downloading from the latest release zip then you will need to cd to the root of the project folder and run webpack from terminal, this includes dockers and unraid
+##### If you're [using debian then check out how to update necessary tools](docs/debian.md)
+
+##### If you're git cloning from the master branch and not downloading from the latest release zip then you will need to cd to the root of the project folder and run webpack from terminal, this includes dockers and unraid
 ```
 ./node_modules/.bin/webpack --config webpack.config.js -p
 ```
@@ -75,10 +77,11 @@ Add `https://github.com/lordchewie/liquid-dl-unraid` to `Template Repositories` 
 * This is a hackey way of running the server without gunicorn soon the scripts will be included to run a simple bash script that does the leg work for you
 * Youtube-dl runs the --ignore-errors flag on the back-end so if a video is unavailable then it will simply skip it, also try to upgrade youtube-dl regularly as it may break due to constant need upkeep
 * If your getting an error make sure that your using the entire path to the file or folder (if its a folder you should have a backslash at the end)
-* soundcloud-dl does not create folders for artists currently though in the upcoming commits liquid-dl will place all new downloaded songs into a folder witth that artists name
+* soundcloud-dl does not create folders for artists currently though in the upcoming commits liquid-dl will place all new downloaded songs into a folder with that artists name
 * scdl does not work with python2 but fortunately tht doesn't matter since you can still use youtube-dl to download soundcloud artists and tracks
 * Not optimized for mobile currently but does work
 * Finally just open a issue anytime I'll try and get back to you in a day or two
+* Due to file locking issues you are only notified when files are finished
 
 ## Updating
 
@@ -88,6 +91,7 @@ Updating requires three simple things: copying you sqlite file; then downloading
 ## Contributors
 
 If you want to contribute please do a pull request with some documentation so others can know why something is implemented a certain way.
+[Here's a contributing guide](docs/contributing.md)
 
 ## Donations
 Coffee and ramen are dope so aid me in purchasing them

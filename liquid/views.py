@@ -24,7 +24,7 @@ from django.shortcuts import render, redirect
 def schedule(request):
     """
     The home view which holds settings and the development schedule
-    :param request: 
+    :param request: The request from a client
     :return: a render of the home page
     """
     context = {}
@@ -32,6 +32,10 @@ def schedule(request):
 
 
 def webtor(request):
+    """
+    :param request:
+    :return:
+    """
     context = {}
     return render(request, 'webtorrent.html', context=context)
 
@@ -39,8 +43,8 @@ def webtor(request):
 def login_user(request):
     """
     Checks if the current username is admin and if so then we redirect them to the the UserCreateForm so that we can secure the application
-    :param request: 
-    :return: 
+    :param request: The request from a client
+    :return: A redirection to the login home
     """
     form = AuthenticationForm()
 
@@ -100,14 +104,21 @@ def update_dependencies(request):
     """
     Updates the dependencies for the entire application (youtube-dl and scdl)
     :param request: Ajax request
-    :return: 
+    :return: Json response notifying user their application has updated
     """
+    # TODO: Add in try/catch returning error and reason if updating dependencies fails
     update_requirement_dependencies()
     return JsonResponse({"success": "Successfully Updated"})
 
 
 @ajax_request
 def update_default_directory(request):
+    """
+    Updates the default directory for the user where downloads goto
+    :param request: Ajax Request
+    :return: Notification of whether the default directory was properly updated
+    """
+    # TODO: Add in try/catch returning error and reason if updating fails
     with open("settings.json") as some_settings:
         response = request.GET
         new_settings = json.loads(some_settings.read())
@@ -127,7 +138,7 @@ def get_liquid_dl_settings(request):
     """
     Updates the dependencies for the entire application (youtube-dl and scdl)
     :param request: Ajax request
-    :return: 
+    :return: Returns the settings json file in a jsonResponse
     """
 
     with open("settings.json") as some_settings:
@@ -146,7 +157,7 @@ def update_liquid_dl_settings(request):
     """
     Updates the dependencies for the entire application (youtube-dl and scdl)
     :param request: Ajax request
-    :return: 
+    :return: Update the iquid-dl settings
     """
 
     with open("settings.json") as some_settings:
@@ -163,6 +174,11 @@ def update_liquid_dl_settings(request):
 
 @ajax_request
 def api_key_rejection(request):
+    """
+    Changes and Updates the api key
+    :param request:
+    :return:
+    """
     generate_new_apikey()
     with open("settings.json") as some_settings:
         response = request.GET
@@ -176,6 +192,7 @@ def api_key_rejection(request):
 # Utility Views
 
 # Torrent Views
+# TODO: Finish the torrent views
 def update_torrent(request):
     print (request.GET)
     return JsonResponse({"success": "Liquid-dl Successfully Updated"})

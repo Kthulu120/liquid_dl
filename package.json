@@ -4,7 +4,11 @@
   "description": "A front-end  downloader for liquid-dl",
   "main": "src.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "install-req": "python pip install -r requirements.txt",
+    "install-req3": "python pip3 install -r requirements.txt",
+    "linux-fresh": "python ./manage.py flush --noinput",
+    "win-fresh": "manage.py flush --noinput"
   },
   "author": "",
   "license": "MIT",

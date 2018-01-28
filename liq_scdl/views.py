@@ -9,9 +9,14 @@ from liquid.workers.soundcloud import SoundcloudDLWorker
 
 @ajax_request
 def soundcloud_submit(request):
+    """
+    Tells the liquid-dl to download from soundcloud using sc-dl with the given url and output path.
+    :param request: The client ajax request
+    :return: The soundcloud submit
+    """
     try:
         response = request.GET
-        print(response)
+        # TODO: Clean Up and Get rid of unnecessary code
         variable_dictionary = {
             "url": response.get('url'),
             "output_path": response.get('output_path'),
@@ -26,8 +31,6 @@ def soundcloud_submit(request):
             "download_like_and_owned_playlists": response.get('url') in ['true'],
             "downloaded_commented_tracks": response.get('downloaded_commented_tracks') in ['true']
         }
-        print (variable_dictionary)
-
         soundcloud_dl = SoundcloudDLWorker(url=variable_dictionary["url"],
                                            output_path=variable_dictionary["output_path"],
                                            is_playlist_or_song=variable_dictionary["is_playlist_or_song"],
