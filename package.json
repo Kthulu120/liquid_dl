@@ -33,7 +33,7 @@
     "babel-core": "^6.25.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "body-parser": "^1.18.2",
-    "cloudcmd": "^7.7.0",
+    "cloudcmd": "^9.1.6",
     "create-react-class": "^15.6.0",
     "css-loader": "^0.28.4",
     "express": "^4.15.5",
