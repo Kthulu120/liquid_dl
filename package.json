@@ -41,7 +41,7 @@
     "font-awesome": "^4.7.0",
     "react-contexify": "^2.1.4",
     "react-data-grid": "^2.0.60",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.1",
     "react-materialize": "^1.0.8",
     "react-notification-system": "^0.2.15",
     "react-redux": "^5.0.6",
