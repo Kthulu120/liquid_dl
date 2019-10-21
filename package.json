@@ -59,6 +59,6 @@
     "requestify": "^0.2.5",
     "style-loader": "^0.18.2",
     "webpack": "^2.3.3",
-    "webtorrent": "^0.98.19"
+    "webtorrent": "^0.107.16"
   }
 }
