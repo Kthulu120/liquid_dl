@@ -1,7 +1,7 @@
 youtube_dl
 certifi==2017.7.27.1
 chardet==3.0.4
-Django==1.11.4
+Django==1.11.29
 django-annoying==0.10.3
 django-webpack-loader==0.5.0
 idna==2.6
